@@ -1,42 +1,23 @@
-<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
-	<div class="container">
-		<!-- Brand and toggle get grouped for better mobile display -->
-		<div class="navbar-header">
-			<button type="button" class="navbar-toggle" data-toggle="collape" data-target="#navbar">
-				<span class="sr-only">Toggle Navigation</span>
-				<span class="icon-bar">1</span>
-        <span class="icon-bar">2</span>
-        <span class="icon-bar">3</span>
-			</button>
-			<a class="navbar-brand" href="index.html">Tripshare</a>
-		</div>
-
-		<!-- Collect the nav links, forms, and other content for toggling -->
-		<div class="collapse navbar-collapse" id="navbar">
+{{> new_user this}}
+<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/">Tripshare</a>
+    </div>
+    <div class="collapse navbar-collapse navbar-ex1-collapse">
       <ul class="nav navbar-nav">
-        <li class="active"><a href="#">Other Trips</a></li>
-        <li><a href="#">My Trips</a></li>
-        {{!-- <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
-          <ul class="dropdown-menu">
-            <li><a href="#">Action</a></li>
-            <li><a href="#">Another action</a></li>
-            <li><a href="#">Something else here</a></li>
-            <li class="divider"></li>
-            <li><a href="#">Separated link</a></li>
-            <li class="divider"></li>
-            <li><a href="#">One more separated link</a></li>
-          </ul>
-        </li> --}}
+        <li><a href="/trips">Other Trips</a></li>
+        <li><a href="/user">My Trips</a></li>
+        <li><a href="/followers">Followers</a></li>
       </ul>
-      {{!-- <form class="navbar-form navbar-left" role="search">
-        <div class="form-group">
-          <input type="text" class="form-control" placeholder="Search">
-        </div>
-        <button type="submit" class="btn btn-default">Submit</button>
-      </form> --}}
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="#">Link</a></li>
+        <li><a id="trigger" href="#" data-toggle="modal" data-target="#new_user_modal">TRIGGER FOR NEW USER</a></li>
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">FULL NAME <b class="caret"></b></a>
           <ul class="dropdown-menu">
@@ -49,6 +30,6 @@
           </ul>
         </li>
       </ul>
-    </div><!-- /.navbar-collapse -->
-	</div>
-</nav>
+    </div>
+  </div>
+</div>
