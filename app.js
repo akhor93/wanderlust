@@ -63,19 +63,9 @@ if ('development' == app.get('env')) {
   app.use(express.errorHandler());
 }
 
-var index = require('./routes/index');
-var users = require('./routes/users');
-var search = require('./routes/search');
 
-// Add routes here
-app.get('/', index.home);
-app.get('/trips', index.trips);
-app.get('/user', users.show);
-app.get('/followers', index.followers);
-app.get('/search', search.search);
+require("./config/routes")(app);
 
-// Example route
-// app.get('/users', user.list);
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
