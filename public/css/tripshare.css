@@ -80,7 +80,7 @@ have a fixed width and height (but it's not required).
 
 .jcarousel-control-prev,
 .jcarousel-control-next {
-     z-index: 9999;
+     z-index: 101;
      position: absolute;
      top: 50%;
      margin-top: -15px;
