@@ -1,5 +1,5 @@
 exports.home = function(req, res){
-  res.render('index');
+	res.render('index');
 };
 
 exports.trips = function(req, res){
