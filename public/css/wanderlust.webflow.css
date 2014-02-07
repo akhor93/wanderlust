@@ -1,0 +1,190 @@
+body {
+  background-color: #f2f2f2;
+  font-family: Arial, Helvetica, sans-serif;
+  color: #333;
+  font-size: 14px;
+  line-height: 20px;
+}
+h1 {
+  margin: 10px 0px;
+  font-size: 38px;
+  line-height: 44px;
+  font-weight: 700;
+}
+h2 {
+  margin: 10px 0px;
+  font-size: 32px;
+  line-height: 36px;
+  font-weight: 700;
+}
+h3 {
+  margin: auto 0px auto auto;
+  padding-left: 0px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 24px;
+  line-height: 30px;
+  font-weight: 700;
+}
+h4 {
+  margin: 10px 0px;
+  font-size: 18px;
+  line-height: 24px;
+  font-weight: 700;
+}
+h5 {
+  margin: auto 0px;
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 500;
+}
+h6 {
+  margin: auto 0px;
+  color: #828282;
+  font-size: 12px;
+  line-height: 18px;
+  font-weight: 500;
+}
+p {
+  margin-bottom: 5px;
+}
+.button {
+  display: block;
+  width: auto;
+  margin: 4px 5px 3px;
+  padding: 4px 15px;
+  border: 1px solid #919191;
+  border-radius: 6px;
+  background-color: #527bc7;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+}
+.trip {
+  width: 250px;
+  height: auto;
+  margin: 7px;
+  padding-right: 0px;
+  padding-left: 0px;
+  float: left;
+  border: 1px solid #ccc6c6;
+  border-radius: 5px;
+  background-color: white;
+}
+.trip_cover_photo {
+  position: static;
+  left: 0px;
+  top: 0px;
+  right: 0px;
+  width: 250px;
+  height: auto;
+  float: none;
+}
+.trip_box_info {
+  margin-right: 5px;
+  margin-left: 5px;
+}
+.social_buttons {
+  width: 20px;
+  margin-right: 5px;
+  margin-left: 0px;
+  float: left;
+}
+.social {
+  position: static;
+  left: 0px;
+  top: 0px;
+  bottom: 0px;
+  overflow-x: visible;
+  overflow-y: visible;
+  width: auto;
+  margin-top: 5px;
+  margin-right: 10px;
+  margin-bottom: 5px;
+  float: left;
+  clear: none;
+}
+.social_num {
+  position: static;
+  left: 0px;
+  top: 0px;
+  width: auto;
+  margin-right: 5px;
+  float: left;
+}
+.column {
+  position: relative;
+  width: 250px;
+  margin: 7px 7px 6px;
+  padding-right: 0px;
+  padding-left: 0px;
+}
+.trip_pane {
+  display: block;
+  width: 1070px;
+  margin-right: auto;
+  margin-left: auto;
+  float: none;
+}
+.info_pane {
+  position: static;
+  left: 0px;
+  top: 100px;
+  right: 0px;
+  width: 270px;
+  margin: 15px 0px 10px 10px;
+  float: left;
+}
+.prof_pic {
+  position: static;
+  left: 0px;
+  top: 0px;
+  bottom: 0px;
+  width: 140px;
+  height: 140px;
+  float: left;
+}
+.prof_info {
+  position: static;
+  left: 0px;
+  top: 0px;
+  bottom: 0px;
+  width: 600px;
+  margin-right: 10px;
+  margin-left: 10px;
+  float: left;
+}
+.prof_box {
+  position: static;
+  left: 0px;
+  top: 0px;
+  bottom: 0px;
+  display: block;
+  width: 910px;
+  margin-top: 10px;
+  margin-right: auto;
+  margin-left: auto;
+  float: none;
+  clear: none;
+  border: 1px solid #ccc6c6;
+  border-radius: 5px;
+  background-color: white;
+}
+.about_me {
+  height: 45px;
+  margin-left: 0px;
+}
+.content {
+  display: block;
+  width: 1350px;
+  margin-right: auto;
+  margin-left: auto;
+}
+.prof_stats {
+  width: 140px;
+  float: right;
+}
+.social_media {
+  height: 30px;
+}
+@media (max-width: 479px) {
+}
