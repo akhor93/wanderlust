@@ -268,7 +268,8 @@ p {
 }
 .search_result {
   position: relative;
-  width: auto;
+  /*FIX MEEEEE HACK!!*/
+  width: 110%;
   margin: 10px auto;
   padding-top: 0px;
   padding-right: 0px;
