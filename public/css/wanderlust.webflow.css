@@ -1,15 +1,19 @@
 body {
+  margin-right: 10px;
+  padding-right: 0px;
   background-color: #f2f2f2;
   font-family: Arial, Helvetica, sans-serif;
   color: #333;
   font-size: 14px;
   line-height: 20px;
+  font-weight: 500;
 }
 h1 {
-  margin: 10px 0px;
+  margin: 0px;
+  float: none;
   font-size: 38px;
   line-height: 44px;
-  font-weight: 700;
+  font-weight: 400;
 }
 h2 {
   margin: 10px 0px;
@@ -26,10 +30,11 @@ h3 {
   font-weight: 700;
 }
 h4 {
-  margin: 10px 0px;
+  margin: 0px;
+  border-bottom: 1px solid #363636;
   font-size: 18px;
   line-height: 24px;
-  font-weight: 700;
+  font-weight: 400;
 }
 h5 {
   margin: auto 0px;
@@ -84,10 +89,16 @@ p {
   margin-left: 5px;
 }
 .social_buttons {
+  position: static;
+  left: 0px;
+  top: 0px;
   width: 20px;
   margin-right: 5px;
   margin-left: 0px;
   float: left;
+}
+.social_buttons.float-right {
+  float: right;
 }
 .social {
   position: static;
@@ -109,7 +120,7 @@ p {
   top: 0px;
   width: auto;
   margin-right: 5px;
-  float: left;
+  float: right;
 }
 .column {
   position: relative;
@@ -185,6 +196,103 @@ p {
 }
 .social_media {
   height: 30px;
+}
+.num_results {
+  position: absolute;
+  right: 0px;
+  bottom: 0px;
+  margin: 10px 20px 20px 10px;
+  float: right;
+}
+.search_text {
+  margin-top: 1px;
+  margin-bottom: 0px;
+}
+.search_header {
+  position: relative;
+  margin: 0px;
+}
+.search_header.margin-10 {
+  margin: 10px;
+  background-color: white;
+}
+.fliters {
+  width: 200px;
+  float: left;
+}
+.search_content {
+  position: relative;
+}
+.filter_headings {
+  margin-top: 10px;
+  margin-bottom: 0px;
+  font-weight: 700;
+}
+.relative {
+  position: relative;
+}
+.relative.filter_option {
+  margin-top: 3px;
+  margin-bottom: 3px;
+}
+.container {
+  border-bottom-color: transparent;
+  background-color: transparent;
+}
+.margin-10 {
+  margin: 10px;
+}
+.float-left {
+  float: left;
+}
+.float-left.result_content {
+  position: relative;
+  width: 390px;
+  height: auto;
+  margin: 5px 10px;
+  float: left;
+}
+.float-left.result_content.margin-horizontal {
+  margin-right: 10px;
+  margin-left: 10px;
+}
+.search_result {
+  position: relative;
+  width: 710px;
+  margin: 10px 0px;
+  padding-right: 0px;
+  float: left;
+  background-color: white;
+}
+.result_img {
+  width: 300px;
+  float: left;
+}
+.padding-10 {
+  height: auto;
+  margin-top: 10px;
+  margin-right: 0px;
+  padding: 15px;
+  border-radius: 5px;
+  background-color: white;
+}
+.float_bottom {
+  position: absolute;
+  left: 309px;
+  top: 0px;
+  float: left;
+}
+.search_social {
+  position: absolute;
+  left: 0px;
+  right: 0px;
+  bottom: 5px;
+  min-width: 75px;
+  margin-right: 5px;
+}
+.column-right {
+  padding-right: 0px;
+  padding-left: 0px;
 }
 @media (max-width: 479px) {
 }
