@@ -1,5 +1,10 @@
+var CT = require("../modules/country-list");
+
 exports.home = function(req, res){
-	res.render('index');
+	res.render('index', {
+    title: 'signup',
+    countries: CT
+	});
 };
 
 exports.trips = function(req, res){

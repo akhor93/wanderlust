@@ -1,3 +1,28 @@
+<div class="modal-alert modal hide fade">
+  <div class="modal-header">
+    <button data-dismiss="modal" class="close">x</button>
+    <h3></h3>
+  </div>
+  <div class="modal-body">
+    <p></p>
+  </div>
+  <div class="modal-footer">
+    <button data-dismiss="modal" id="signup_ok" class="btn btn-warning">OK</button>
+  </div>
+</div>
+<div class="modal-form-errors modal hide fade">
+  <div class="modal-header">
+    <button data-dismiss="modal" class="close">x</button>
+    <h3>Whoops</h3>
+  </div>
+  <div class="modal-body">
+    <p class="subheading">It looks like there was a problem</p>
+    <ul></ul>
+  </div>
+  <div class="modal-footer">
+    <button data-dismiss="modal" class="btn btn-warning">OK</button>
+  </div>
+</div>
 <div class="modal fade" id="new_user_modal" tabindex="-1" role="dialog">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -7,31 +32,52 @@
       </div>
       <div class="modal-body">
         <div class="contianer-fluid">
-          <form action="/users" class="form-horizontal" method="post" style="">
-            <div class="form-group">
+          <form id="account-form" class="form-horizontal" method="post">
+            <h1>Signup</h1>
+            <p id="sub1">TODO</p>
+            <div id="name-cg" class="form-group">
               <label class="control-label col-sm-3">Name</label>
               <div class="col-sm-9">
-                <input class="form-control" name="name" type="text">
+                <input id="name-tf" class="form-control" name="name" type="text">
               </div>
             </div>
-            <div class="form-group">
+            <div id="email-cg" class="form-group">
               <label class="control-label col-sm-3">Email</label>
               <div class="col-sm-9">
-                <input class="form-control" name="email" type="text">
+                <input id="email-tf" class="form-control" name="email" type="text">
               </div>
             </div>
-            <div class="form-group">
+            <div id="country-cg" class="form-group">
+              <label class="control-label col-sm-3">Location</label>
+              <div class="col-sm-9">
+                <select id="country-list" class="form-control" name="country" type="text">
+                  <option>Please select a country</option>
+                  {{#each countries}}
+                    <option>{{name}}</option>
+                  {{/each}}
+                </select>
+              </div>
+            </div>
+            <hr />
+            <p class="subheading">Choose your username & password</p>
+            <div id="username-cg" class="form-group">
+              <label class="control-label col-sm-3">Username</label>
+              <div class="col-sm-9">
+                <input id="username-tf" class="form-control" name="username" type="text">
+              </div>
+            </div>
+            <div id="password-cg" class="form-group">
               <label class="control-label col-sm-3">Password</label>
               <div class="col-sm-9">
-                <input class="form-control" name="password" type="password">
+                <input id="password-tf" class="form-control" name="password" type="password">
               </div>
             </div>
             <div class="form-group">
               <div class="col-sm-offset-7 col-sm-2">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button id="signup_close_btn" type="button" class="btn btn-default" data-dismiss="modal">Close</button>
               </div>
               <div class="col-sm-2">
-                <button type="button" class="btn btn-primary">Save changes</button>
+                <button id="signup_submit_btn" type="submit" class="btn btn-primary">Submit</button>
               </div>
             </div>
           </form>

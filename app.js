@@ -9,7 +9,6 @@ var path = require('path');
 var mongoose = require('mongoose');
 var fs = require('fs');
 var handlebars = require('express3-handlebars')
-var hbs = require('express3-handlebars').create();
 
 // Example route
 // var user = require('./routes/user');
@@ -27,13 +26,13 @@ var theport = process.env.PORT || 5000;
 
 // Makes connection asynchronously.  Mongoose will queue up database
 // operations and release them when the connection is complete.
-var db = mongoose.connect(uristring, function (err, res) {
-  if (err) {
-  console.log ('ERROR connecting to: ' + uristring + '. ' + err);
-  } else {
-  console.log ('Succeeded connected to: ' + uristring);
-  }
-});
+// var db = mongoose.connect(uristring, function (err, res) {
+//   if (err) {
+//   console.log ('ERROR connecting to: ' + uristring + '. ' + err);
+//   } else {
+//   console.log ('Succeeded connected to: ' + uristring);
+//   }
+// });
 
 // Bootstrap models
 var models_path = __dirname + '/models'

@@ -8,8 +8,9 @@ var Schema = mongoose.Schema;
  	* User Schema
  	*/
 var UserSchema = mongoose.Schema({
-	name: { type: String, default: '' },
-	email: { type: String, default: '' }
+	username: { type: String, default: '' },
+	email: { type: String, default: '' },
+  name: {type: String}
 })
 
 /**
@@ -27,7 +28,7 @@ UserSchema
 /**
  * Validations
  */
- UserSchema.path('name').required(true, 'Name cannot be blank');
+ UserSchema.path('name').required(true, 'Username cannot be blank');
  UserSchema.path('email').required(true, 'Email cannot be blank');
 
 /**
