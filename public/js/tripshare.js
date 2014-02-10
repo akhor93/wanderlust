@@ -15,7 +15,7 @@ function initializePage() {
 }
 
 function initializeListeners() {
-	$('#trigger').click(function(event) {
+	$('.trigger').click(function(event) {
 		event.preventDefault();
 	});
 }

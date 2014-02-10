@@ -3,8 +3,9 @@ var AM = require("../modules/account-manager");
 
 //Controllers
 var index = require('../routes/index');
-var users = require('../routes/users');
 var search = require('../routes/search');
+var sessions = require('../routes/sessions');
+var users = require('../routes/users');
 
 // var helpers = require('../helpers/handlebar_helpers');
 
@@ -17,7 +18,10 @@ module.exports = function (app) {
 
 	//USERS
 	app.get('/user', users.show);
-	app.post('/signup', users.signup);
+
+	//Session
+	app.post('/signup', sessions.signup);
+	app.post('/login', sessions.login);
 
 	//Followers
 	app.get('/followers', index.followers);

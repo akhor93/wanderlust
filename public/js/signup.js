@@ -3,14 +3,16 @@ $(document).ready(function() {
 	var sc = new SignupController();
 
 	$('#account-form').ajaxForm({
-		url: '/signup/',
+		url: '/signup',
 		beforeSubmit: function(formData, jqForm, options) {
 			return av.validateForm();
 		},
 		success: function(responseText, status, xhr, $form) {
-			if (status == 'status') //$('.modal-alert').modal('show');
-			console.log("success");
-			console.log('??');
+			if (status == 'success') {
+				$('#signup_alert_container').html('');
+				$('#signup_alert_container').append('<div class="alert alert-success">Account created</div>');
+				setTimeout(location.reload(),1000);
+			}
 		},
 		error: function(e) {
 			console.log("error: " + e.responseText);
@@ -25,8 +27,6 @@ $(document).ready(function() {
 	$('#name-tf').focus();
 
 	//Customize signup form
-	$('#account-form h1').text('Signup');
-	$('#account-form #sub1').text('Please tell us a little about yourself');
 	$('#account-form #sub2').text('Choose you\'re username & password');
 	$('#signup_close_btn').html('Cancel');
 	$('#signup_submit_btn').html('Submit');

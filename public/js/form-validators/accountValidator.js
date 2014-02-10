@@ -2,8 +2,8 @@ function AccountValidator(){
 
 // build array maps of the form inputs & control groups //
 
-	this.formFields = [$('#name-tf'), $('#email-tf'), $('#username-tf'), $('#password-tf'), $('#country-list')];
-	this.controlGroups = [$('#name-cg'), $('#email-cg'), $('#username-cg'), $('#password-cg'), $('#country-cg')];
+	this.formFields = [$('#name-tf'), $('#email-tf'), $('#signup-username-tf'), $('#signup-password-tf'), $('#country-list')];
+	this.controlGroups = [$('#name-cg'), $('#email-cg'), $('#signup-username-cg'), $('#signup-password-cg'), $('#country-cg')];
 	
 	this.validateName = function(s)
 	{
@@ -46,6 +46,7 @@ AccountValidator.prototype.showInvalidUserName = function()
 AccountValidator.prototype.validateForm = function()
 {
 	var e = [];
+	$('#signup_alert_container').html('');
 	for (var i=0; i < this.controlGroups.length; i++) this.controlGroups[i].removeClass('has-error');
 	if (this.validateName(this.formFields[0].val()) == false) {
 		this.controlGroups[0].addClass('has-error'); e.push('Please Enter Your Name');
@@ -61,6 +62,9 @@ AccountValidator.prototype.validateForm = function()
 	}
 	if(this.validateCountry(this.formFields[4].val()) == false) {
 		this.controlGroups[4].addClass('has-error'); e.push('Please Choose A Country');
+	}
+	if(e.length != 0) {
+		$('#signup_alert_container').append('<div class="alert alert-danger" style="margin-bottom: 5px;"><b>' + e[0] + '</b></div>');
 	}
 	return e.length === 0;
 }

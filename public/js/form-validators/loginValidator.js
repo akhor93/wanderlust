@@ -1,26 +1,15 @@
 function LoginValidator(){
 
-// bind a simple alert window to this controller to display any errors //
-
-	this.loginErrors = $('.modal-alert');
-	this.loginErrors.modal({ show : false, keyboard : true, backdrop : true });
-
-	this.showLoginError = function(t, m)
-	{
-		$('.modal-alert .modal-header h3').text(t);
-		$('.modal-alert .modal-body p').text(m);
-		this.loginErrors.modal('show');
-	}
-
 }
 
 LoginValidator.prototype.validateForm = function()
 {
-	if ($('#user-tf').val() == ''){
-		this.showLoginError('Whoops!', 'Please enter a valid username');
+	$('#login_alert_container').html('');
+	if ($('#login-username-tf').val() == ''){
+		$('#login_alert_container').append('<div class="alert alert-danger">Please enter username</div>');
 		return false;
-	}	else if ($('#pass-tf').val() == ''){
-		this.showLoginError('Whoops!', 'Please enter a valid password');
+	}	else if ($('#login-password-tf').val() == ''){
+		$('#login_alert_container').append('<div class="alert alert-danger">Please enter password</div>');
 		return false;
 	}	else{
 		return true;
