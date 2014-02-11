@@ -62,8 +62,21 @@ exports.addNewAccount = function(newData, callback)
 				if (o){
 					callback('email-taken');
 				}	else{
+					//bootstrap creation of admins
+					if(newData.username == 'akhor') {
+						saltAndHash(newData.pass, function(hash){
+						newData.pass = hash;
+						newData.admin = true;
+					// append date stamp when record was created //
+						newData.date = moment().format('MMMM Do YYYY, h:mm:ss a');
+						accounts.insert(newData, {safe: true}, callback);
+					});
+					} else {
+
+					}
 					saltAndHash(newData.pass, function(hash){
 						newData.pass = hash;
+						newData.admin = false;
 					// append date stamp when record was created //
 						newData.date = moment().format('MMMM Do YYYY, h:mm:ss a');
 						accounts.insert(newData, {safe: true}, callback);

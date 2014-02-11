@@ -1,15 +1,7 @@
+var SH = require("../lib/session_helper");
+
 exports.show = function(req, res){
-	var andrew = new User({ name: 'Andrew Khor', email: 'akhor93@stanford.edu'} );
-  // andrew.save(function( err, andrew) {
-  // 	if(err) {
-  // 		console.log('error saving user');
-  // 	}
-  // 	andrew.test();
-  // });
-  console.log(andrew);
-  res.render('users/show', {
-  	name: andrew.name,
-  	email: andrew.email,
-  	user: andrew
-  });
+	data = {};
+  data = SH.getSessionData(req.session.user, data);
+  res.render('users/show', data);
 };

@@ -20,9 +20,6 @@ exports.signup = function(req, res) {
 }
 
 exports.login = function(req, res) {
-  console.log('params');
-  console.log(req.param('username'));
-  console.log(req.param('password'));
   AM.manualLogin(req.param('username'), req.param('password'), function(e, o){
     if (!o){
       res.send(e, 400);
@@ -35,4 +32,14 @@ exports.login = function(req, res) {
       res.send(o, 200);
     }
   });
+}
+
+exports.signout = function(req, res) {
+  if(req.param('logout') == 'true') {
+    res.clearCookie('user');
+    res.clearCookie('pass');
+    req.session.destroy(function(e) {
+      res.send('ok', 200);
+    });
+  }
 }

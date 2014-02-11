@@ -22,6 +22,7 @@ module.exports = function (app) {
 	//Session
 	app.post('/signup', sessions.signup);
 	app.post('/login', sessions.login);
+	app.post('/signout', sessions.signout);
 
 	//Followers
 	app.get('/followers', index.followers);
@@ -31,11 +32,28 @@ module.exports = function (app) {
 
 	//Testing
 	app.get('/print', function(req, res) {
-		AM.getAllRecords( function(e, accounts){
-			console.log(accounts);
-		});
-		AM.getAllRecords( function(e, accounts){
-			res.render('print', { title : 'Account List', accts : accounts });
-		});
+		if(req.session.user != null) {
+			if(req.session.user.admin) {
+				AM.getAllRecords( function(e, accounts){
+					res.render('print', { title : 'Account List', accts : accounts });
+				});
+			}
+		}
+		else {
+			res.redirect('/');
+		}
+		
+	});
+	app.get('/dbreset', function(req, res) {
+		if(req.session.user != null) {
+			if(req.session.user.admin) {
+				AM.delAllRecords(function() {
+					console.log('dropped accounts db');
+				});
+			}
+		}
+		else {
+			res.redirect('/');
+		}
 	});
 };

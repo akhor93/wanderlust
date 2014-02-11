@@ -11,7 +11,7 @@ $(document).ready(function() {
 			if (status == 'success') {
 				$('#signup_alert_container').html('');
 				$('#signup_alert_container').append('<div class="alert alert-success">Account created</div>');
-				setTimeout(location.reload(),1000);
+				setTimeout(location.reload(true),1000);
 			}
 		},
 		error: function(e) {

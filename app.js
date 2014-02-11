@@ -2,23 +2,20 @@
 /**
  * Module dependencies.
  */
-
 var express = require('express');
 var http = require('http');
 var path = require('path');
 var mongoose = require('mongoose');
 var fs = require('fs');
-var handlebars = require('express3-handlebars')
-
-// Example route
-// var user = require('./routes/user');
+var handlebars = require('express3-handlebars');
+var helpers = require('./lib/helpers');
 
 // Here we find an appropriate database to connect to, defaulting to
 // localhost if we don't find one.
-var uristring =
-process.env.MONGOLAB_URI ||
-process.env.MONGOHQ_URL ||
-'mongodb://localhost/database';
+// var uristring =
+// process.env.MONGOLAB_URI ||
+// process.env.MONGOHQ_URL ||
+// 'mongodb://localhost/database';
 
 // The http server will listen to an appropriate port, or default to
 // port 5000.
@@ -62,22 +59,10 @@ if ('development' == app.get('env')) {
   app.use(express.errorHandler());
 }
 
-
+//Routes
 require("./config/routes")(app);
 
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
 });
-
-//Databases
-var users = {
-	0: {
-		name: 'Web Developer',
-		admin: true
-	},
-	1: {
-		name: 'John Smith',
-		admin: false
-	}
-}

@@ -1,28 +1,20 @@
-var CT = require("../modules/country-list");
+var SH = require("../lib/session_helper");
 
 exports.home = function(req, res){
-	var username;
-	if(req.session.user == null) {
-		console.log("not logged in");
-		username = "NOT LOGGED IN"
-	}
-	else {
-		console.log(req.session.user);
-		console.log(req.session.user['name']);
-		username = req.session.user.name
-	}
-
-	res.render('index', {
-    title: 'signup',
-    countries: CT,
-    user: req.session.user
-	});
+	data = {};
+	data = SH.getSessionData(req.session.user, data);
+	//data.key = value
+	res.render('index', data);
 };
 
 exports.trips = function(req, res){
-  res.render('trips');
+  data = {};
+	data = SH.getSessionData(req.session.user, data);
+	res.render('trips', data);
 };
 
 exports.followers = function(req, res){
-  res.render('followers');
+  data = {};
+	data = SH.getSessionData(req.session.user, data);
+	res.render('followers', data);
 };

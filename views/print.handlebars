@@ -8,16 +8,24 @@
 				<td style="width:200px">Location</td>
 				<td style="width:180px">Username</td>
 				<td>Account Created</td>
+				<td>Admin</td>
 			</tr>
 		</thead>
 		{{#each accts}}
 			<tr>
-				<td>#</td>
+				<td>{{@index}}</td>
 				<td>{{name}}</td>
 				<td>{{email}}</td>
 				<td>{{country}}</td>
 				<td>{{username}}</td>
 				<td>{{date}}</td>
+				<td>
+					{{#if admin}}
+						True
+					{{else}}
+						False
+					{{/if}}
+				</td>
 			</tr>
 		{{/each}}
 	</table>
