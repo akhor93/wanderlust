@@ -13,6 +13,7 @@ $(document).ready(function() {
 				$('#signup_alert_container').append('<div class="alert alert-success">Account created</div>');
 				setTimeout(location.reload(true),1000);
 			}
+			console.log(status);
 		},
 		error: function(e) {
 			console.log("error: " + e.responseText);

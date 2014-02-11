@@ -7,6 +7,10 @@ var search = require('../routes/search');
 var sessions = require('../routes/sessions');
 var users = require('../routes/users');
 
+//Models
+var mongoose = require('mongoose');
+var User = mongoose.model('User');
+
 // var helpers = require('../helpers/handlebar_helpers');
 
 module.exports = function (app) {
@@ -32,28 +36,28 @@ module.exports = function (app) {
 
 	//Testing
 	app.get('/print', function(req, res) {
-		if(req.session.user != null) {
+		if(req.session.user) {
 			if(req.session.user.admin) {
-				AM.getAllRecords( function(e, accounts){
-					res.render('print', { title : 'Account List', accts : accounts });
+				User.find({}, function (err, users) {
+					if(err) console.log(err);
+					else {
+						res.render('print', { users: users});
+					}
 				});
 			}
 		}
 		else {
 			res.redirect('/');
 		}
-		
 	});
 	app.get('/dbreset', function(req, res) {
-		if(req.session.user != null) {
+		if(req.session.user) {
 			if(req.session.user.admin) {
-				AM.delAllRecords(function() {
-					console.log('dropped accounts db');
+				User.remove({}, function(err) {
+					console.log("Removed users");
 				});
 			}
 		}
-		else {
-			res.redirect('/');
-		}
+		res.redirect('/');
 	});
 };

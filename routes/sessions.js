@@ -1,35 +1,40 @@
 var CT = require("../modules/country-list");
-var AM = require("../modules/account-manager");
-var EM = require("../modules/email-dispatcher");
+// var AM = require("../modules/account-manager");
+// var EM = require("../modules/email-dispatcher");
+
+var mongoose = require('mongoose');
+var User = mongoose.model('User');
 
 exports.signup = function(req, res) {
-  AM.addNewAccount({
+  var user = new User({
     name      : req.param('name'),
     email     : req.param('email'),
     username  : req.param('username'),
-    pass      : req.param('password'),
+    password  : req.param('password'),
     country   : req.param('country')
-  }, function(e) {
-    if(e) {
-      res.send(e, 400);
+  });
+  user.save(function(err) {
+    if(err) {
+      console.log("ERROR SAVING USER: " + err);
+      res.send("Error saving user", 400);
     }
-    else {
-      res.send('ok', 200);
-    }
+    req.session.user = user;
+    res.send('ok', 200);
   });
 }
 
 exports.login = function(req, res) {
-  AM.manualLogin(req.param('username'), req.param('password'), function(e, o){
-    if (!o){
-      res.send(e, 400);
-    } else{
-        req.session.user = o;
-      if (req.param('remember-me') == 'true'){
-        res.cookie('username', o.user, { maxAge: 900000 });
-        res.cookie('password', o.pass, { maxAge: 900000 });
-      }
-      res.send(o, 200);
+  var user = User.findOne({ username: req.param('username') }, function(err, user) {
+    if(err) console.log(err);
+    if(!user) {
+      return res.send("User not found", 400);
+    }
+    if(user.authenticate(req.param('password'))) {
+      req.session.user = user;
+      res.send("ok", 200);
+    }
+    else {
+      res.send("Password invalid", 400);
     }
   });
 }
