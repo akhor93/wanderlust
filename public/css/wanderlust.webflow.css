@@ -230,7 +230,7 @@ p {
   margin: 10px;
   background-color: white;
 }
-.fliters {
+.filters {
   width: 200px;
   float: left;
 }
@@ -388,10 +388,18 @@ p {
   padding-top: 10px;
   padding-left: 10px;
   background-color: white;
+  width: 950px;
+  overflow: auto;
 }
 .search_filter {
   display: inline-block;
 }
+
+.search_container {
+  width: 920px;
+  overflow: auto;
+}
+
 .inline_block {
   display: inline-block;
 }

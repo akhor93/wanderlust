@@ -1,0 +1,43 @@
+// {
+// 	"trips": [
+// 		{
+// 			"user": "lucywang",
+// 			"title": "San Francisco",
+// 			"description": "Loved my trip to the bay!",
+// 			"images": [
+// 				"images/goldengate.jpg", "images/fishermans-wharf.jpg", "painted_ladies.jpg", "clarion_alley.jpg"
+// 			],
+// 			"tags": [
+// 				""
+// 			],
+// 			"num_likes": 0,
+// 			"num_favorites": 0,
+// 			"comments": [
+// 			],
+// 		}
+// 		{
+// 			"user": "lucywang",
+// 			"title": "Venice",
+// 			"description": "My summer of art, music, and gelato.",
+// 			"images": [
+// 				"images/venice.jpg"
+// 			],
+// 			"num_likes": 0,
+// 			"num_favorites": 0,
+// 			"comments": [
+// 			],
+// 		}
+// 		{
+// 			"user": "lucywang",
+// 			"title": "Greece",
+// 			"description": "Study abroad, Spring 2013 -- couldn't have asked for more.",
+// 			"images": [
+// 				"images/greece.jpg"
+// 			],
+// 			"num_likes": 0,
+// 			"num_favorites": 0,
+// 			"comments": [
+// 			],
+// 		}
+// 	]
+// }
