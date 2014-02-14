@@ -1,40 +1,58 @@
 {
 	"trips": [
 		{
+			"id": 1,
 			"user": "lucywang",
 			"title": "San Francisco",
-			"description": "Loved my trip to the bay!",
+			"date": "July 9, 2014",
+			"location": "San Francisco, CA",
+			"description": "Loved my trip to the Bay!",
 			"images": [
-				"images/goldengate.jpg", "images/fishermans-wharf.jpg", "painted_ladies.jpg", "clarion_alley.jpg"
+				"images/goldengate.jpg", "images/fishermans-wharf.jpg", "images/painted_ladies.jpg", "images/clarion_alley.jpg", "images/lands_end.jpg"
 			],
 			"tags": [
+				"adventure", "arts"
 			],
 			"num_likes": 0,
-			"num_favorites": 0,
+			"num_fav": 0,
 			"comments": [
 			]
 		},
 		{
+			"id": 2,
 			"user": "lucywang",
 			"title": "Venice",
+			"user": "lucywang",
+			"title": "Venice",
+			"date": "June 6, 2013",		
+			"location": "Venice, Italy",
 			"description": "My summer of art, music, and gelato.",
 			"images": [
 				"images/venice.jpg"
 			],
 			"num_likes": 0,
-			"num_favorites": 0,
+			"num_fav": 0,
+			"tags": [
+				"arts", "relaxation"
+			],
 			"comments": [
 			]
 		},
 		{
+			"id": 3,
 			"user": "lucywang",
 			"title": "Greece",
-			"description": "Study abroad, Spring 2013 -- could not have asked for more.",
+			"date": "April 4, 2013",
+			"location": "Greece",
+			"description": "Study abroad, Spring 2013 -- couldn't have asked for more.",
 			"images": [
 				"images/greece.jpg"
 			],
+			"tags": [
+				"arts", "relaxation", "paradise"
+			],			
 			"num_likes": 0,
-			"num_favorites": 0,
+			"num_fav": 0,
 			"comments": [
 			]
 		}

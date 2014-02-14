@@ -1,7 +1,7 @@
 var SH = require("../lib/session_helper");
 var mongoose = require('mongoose');
 var User = mongoose.model('User');
-// var trip_data = require('../data.json');
+var trip_data = require('../data.json');
 
 var login = function (req, res) {
   var redirectTo = req.session.returnTo ? req.session.returnTo : '/'
@@ -13,9 +13,9 @@ exports.show = function(req, res){
 	data = {};
   data = SH.getSessionData(req.session.user, data);
   var user_trips;
-  // for (var i = 0; i < trip_data.trips.length; i++) {
-
-  // }
+  for (var i = 0; i < trip_data.trips.length; i++) {
+    
+  }
   res.render('users/show', data);
 };
 

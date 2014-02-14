@@ -1,8 +1,11 @@
 <table class="table table-striped">
 	<th>
 		<tr>
+			<td>ID</td>
 			<td>User</td>
 			<td>Title</td>
+			<td>Date</td>
+			<td>Location</td>
 			<td>Description</td>
 			<td>Image URLs</td>
 			<td>tags</td>
@@ -13,8 +16,11 @@
 	</th>
 	{{#each trips}}
 		<tr>
+			<td>{{id}}</td>
 			<td>{{user}}</td>
 			<td>{{title}}</td>
+			<td>{{date}}</td>
+			<td>{{location}}</td>
 			<td>{{description}}</td>
 			<td>
 				{{#images}}
@@ -27,7 +33,7 @@
 				{{/tags}}
 			</td>
 			<td>{{num_likes}}</td>
-			<td>{{num_favorites}}</td>
+			<td>{{num_fav}}</td>
 			<td>
 				{{#comments}}
 					{{this}},
