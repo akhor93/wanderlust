@@ -29,13 +29,18 @@
       <h3>{{location}}</h3>
       <div>{{description}}</div>
       <div class="w-clearfix social_bar">
+        <div class="trip_id" style="display: none;">{{id}}</div>
         <div class="w-clearfix social">
           <div class="social_num">{{num_likes}}</div>
-          <img class="social_buttons" id="like-button" src="images/icon_822.png" alt="like-button">
+          <a href="#" class="like-button">
+            <img class="social_buttons" src="images/icon_822.png" alt="like-button">
+          </a>
         </div>
         <div class="w-clearfix social">
           <div class="social_num">{{num_fav}}</div>
-          <img class="social_buttons" id="fav-button" src="images/star.png" alt="favorite-button">
+          <a href="#" class="fav-button">
+            <img class="social_buttons" src="images/star.png" alt="favorite-button">
+          </a>
         </div>
         <div class="w-clearfix social">
           <div class="social_num">{{comments.length}}</div>
