@@ -1,7 +1,7 @@
   <div class="w-container container">
     <div class="search_header padding-10 search_container">
-      <h1 class="search_text">Search results for "San Francisco"</h1>
-      <div class="num_results">Showing 1-10 of 203</div>
+      <h1 class="search_text">Search results for "{{prevQuery}}"</h1>
+      <div class="num_results">Showing 1-10 of {{numTrips}}</div>
     </div>
   </div>
   <div class="w-container container">
@@ -67,7 +67,10 @@
       </div>
       <div class="w-col w-col-9 column-right">
         <div class="relative">
-          <div class="w-clearfix search_result">
+          {{#each trips}}
+            {{>trip/search_result this}}
+          {{/each}}
+          {{!-- <div class="w-clearfix search_result">
             <img class="result_img" src="images/painted_ladies.jpg" alt="52f47740bc0395d971000647_painted_ladies.jpg">
             <div class="float-left result_content">
               <h3>Painted Ladies</h3>
@@ -123,7 +126,7 @@
               <img class="social_buttons" src="images/icon_822.png" alt="52f34cb6593f6edf4100093d_icon_822.png">
             </div>
           </div>
-        </div>
+        </div> --}}
       </div>
     </div>
   </div>

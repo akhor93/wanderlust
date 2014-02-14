@@ -48,7 +48,7 @@ var hbs = handlebars.create({defaultLayout: 'main', helpers: helpers});
 // all environments
 app.set('port', process.env.PORT || 3000);
 app.set('views', path.join(__dirname, 'views'));
-app.engine('handlebars', hbs.engine);
+app.engine('handlebars', handlebars({defaultLayout: 'main', helpers: helpers}));
 app.set('view engine', 'handlebars');
 app.use(express.favicon());
 app.use(express.logger('dev'));
