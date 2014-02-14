@@ -39,6 +39,12 @@ fs.readdirSync(models_path).forEach(function (file) {
 
 var app = express();
 
+// Handlebars.registerHelper('moduloIf', function(index_count, mod, remainder, block) {
+// 	if (parseInt(index_count)%(mod) === remainder) return block(this);
+// });
+var hbs = handlebars.create({defaultLayout: 'main', helpers: helpers});
+
+
 // all environments
 app.set('port', process.env.PORT || 3000);
 app.set('views', path.join(__dirname, 'views'));
@@ -61,6 +67,10 @@ if ('development' == app.get('env')) {
 
 //Routes
 require("./config/routes")(app);
+
+//AJAX
+var index = require('./routes/index');
+app.get('/index/:id', index.incrementLikes);
 
 
 http.createServer(app).listen(app.get('port'), function(){

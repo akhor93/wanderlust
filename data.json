@@ -1,7 +1,7 @@
 {
 	"trips": [
 		{
-			"id": 1,
+			"id": 0,
 			"user": "lucywang",
 			"title": "San Francisco",
 			"date": "July 9, 2014",
@@ -19,7 +19,7 @@
 			]
 		},
 		{
-			"id": 2,
+			"id": 1,
 			"user": "lucywang",
 			"title": "Venice",
 			"date": "June 6, 2013",		
@@ -37,7 +37,7 @@
 			]
 		},
 		{
-			"id": 3,
+			"id": 2,
 			"user": "lucywang",
 			"title": "Greece",
 			"date": "April 4, 2013",
@@ -55,41 +55,39 @@
 			]
 		},
 		{
-			"id": 4,
+			"id": 3,
 			"user": "akhor",
-			"title": "TITLE",
-			"date": "March 13, 2012",
-			"location": "Venice, Italy",
-			"description": "Study abroad, Spring 2014 -- couldn't have asked for more.",
+			"title": "Tahiti",
+			"date": "December 15, 2012",
+			"location": "Tahiti",
+			"description": "Vacation with the fam.",
 			"images": [
-				"images/greece.jpg"
+				"images/tahiti.jpg"
 			],
 			"tags": [
-				"arts", "relaxation", "paradise"
+				"relaxation", "paradise"
 			],			
-			"num_likes": 38,
-			"num_fav": 11,
+			"num_likes": 0,
+			"num_fav": 0,
 			"comments": [
-				"Pretty"
 			]
 		},
 		{
-			"id": 5,
+			"id": 4,
 			"user": "akhor",
-			"title": "TITLE",
-			"date": "March 13, 2012",
-			"location": "Tahiti",
-			"description": "Study abroad, Spring 2014 -- couldn't have asked for more.",
+			"title": "Paris",
+			"date": "June 13, 2012",
+			"location": "Paris, France",
+			"description": "Backpacking in France!",
 			"images": [
-				"images/greece.jpg"
+				"images/Paris_Large.jpg"
 			],
 			"tags": [
-				"arts", "relaxation", "paradise"
+				"arts", "relaxation", "adventure"
 			],			
-			"num_likes": 38,
-			"num_fav": 11,
+			"num_likes": 0,
+			"num_fav": 0,
 			"comments": [
-				"Pretty"
 			]
 		}
 	]
