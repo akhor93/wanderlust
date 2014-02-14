@@ -16,7 +16,7 @@ exports.signup = function(req, res) {
   user.save(function(err) {
     if(err) {
       console.log("ERROR SAVING USER: " + err);
-      res.send("Error saving user", 400);
+      return res.send("Error saving user", 400);
     }
     req.session.user = user;
     res.send('ok', 200);
@@ -24,11 +24,10 @@ exports.signup = function(req, res) {
 }
 
 exports.login = function(req, res) {
-  console.log('test');
   var user = User.findOne({ username: req.param('username') }, function(err, user) {
     if(err) console.log(err);
     if(!user) {
-      res.send("User not found", 400);
+      return res.send("User not found", 400);
     }
     if(user.authenticate(req.param('password'))) {
       req.session.user = user;
