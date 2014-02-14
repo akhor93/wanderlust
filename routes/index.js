@@ -2,7 +2,7 @@ var SH = require("../lib/session_helper");
 
 exports.home = function(req, res){
 	data = {};
-	data = SH.getSessionData(req.session.user);
+	data = SH.getSessionData(req.session.user, true);
 	//data.key = value
 	res.render('index', data);
 };

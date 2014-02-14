@@ -11,7 +11,7 @@ var login = function (req, res) {
 
 exports.show = function(req, res){
 	data = {};
-  data = SH.getSessionData(req.session.user);
+  data = SH.getSessionData(req.session.user, false);
   res.render('users/show', data);
 };
 
