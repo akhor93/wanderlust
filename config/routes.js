@@ -3,6 +3,7 @@ var AM = require("../modules/account-manager");
 
 //Controllers
 var index = require('../routes/index');
+var trip = require('../routes/trip');
 var search = require('../routes/search');
 var sessions = require('../routes/sessions');
 var users = require('../routes/users');
@@ -19,7 +20,10 @@ module.exports = function (app) {
 	app.get('/', index.home);
 
 	//TRIPS
+	app.get('/trip/:id', trip.show);
+	app.post('/trip', trip.create);
 	app.get('/trips', index.trips);
+
 
 	//USERS
 	app.get('/user', users.show);

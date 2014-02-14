@@ -1,5 +1,5 @@
 {{#if user}}
-  
+  {{> trip/new this}}
 {{else}}
   {{> new_user this}}
   {{> login this}}
@@ -19,16 +19,17 @@
       <ul class="nav navbar-nav">
         <li><a href="/trips">Other Trips</a></li>
         <li><a href="/user">My Trips</a></li>
-        <li><a href="/followers">Followers</a></li>
+        {{!-- <li><a href="/followers">Followers</a></li> --}}
       </ul>
-      <form class="navbar-form navbar-left" action="/search" role="search">
+      <form class="navbar-form navbar-left" method="get" action="/search" role="search">
         <div class="form-group">
-          <input type="text" class="form-control" placeholder="San Francisco">
+          <input type="text" class="form-control" name="query" placeholder="San Francisco">
         </div>
         <button type="submit" class="btn btn-default">Search</button>
       </form>
       <ul class="nav navbar-nav navbar-right">
         {{#if user}}
+          <li><a class="trigger" href="#" data-toggle="modal" data-target="#new_trip_modal">Create New Trip</a></li>
           <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{user.username}}<b class="caret"></b></a>
             <ul class="dropdown-menu">

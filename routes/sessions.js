@@ -24,10 +24,11 @@ exports.signup = function(req, res) {
 }
 
 exports.login = function(req, res) {
+  console.log('test');
   var user = User.findOne({ username: req.param('username') }, function(err, user) {
     if(err) console.log(err);
     if(!user) {
-      return res.send("User not found", 400);
+      res.send("User not found", 400);
     }
     if(user.authenticate(req.param('password'))) {
       req.session.user = user;
