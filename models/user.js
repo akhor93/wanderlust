@@ -16,7 +16,10 @@ var UserSchema = new Schema({
   hashed_password: {type: String, default: '' },
   salt: { type: String, default: '' },
   admin: {type: Boolean, default: false},
-  createdAt: { type: Date, default: Date.now}
+  createdAt: { type: Date, default: Date.now},
+  aboutMe: {type: String, default: ''},
+  following: {type: Array, default: []},
+  followers: {type: Array, default: []}
 })
 
 /**

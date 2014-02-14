@@ -12,10 +12,6 @@ var login = function (req, res) {
 exports.show = function(req, res){
 	data = {};
   data = SH.getSessionData(req.session.user, data);
-  var user_trips;
-  for (var i = 0; i < trip_data.trips.length; i++) {
-    
-  }
   res.render('users/show', data);
 };
 

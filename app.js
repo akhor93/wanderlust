@@ -39,10 +39,16 @@ fs.readdirSync(models_path).forEach(function (file) {
 
 var app = express();
 
+// Handlebars.registerHelper('moduloIf', function(index_count, mod, remainder, block) {
+// 	if (parseInt(index_count)%(mod) === remainder) return block(this);
+// });
+var hbs = handlebars.create({defaultLayout: 'main', helpers: helpers});
+
+
 // all environments
 app.set('port', process.env.PORT || 3000);
 app.set('views', path.join(__dirname, 'views'));
-app.engine('handlebars', handlebars({defaultLayout: 'main'}));
+app.engine('handlebars', hbs.engine);
 app.set('view engine', 'handlebars');
 app.use(express.favicon());
 app.use(express.logger('dev'));
