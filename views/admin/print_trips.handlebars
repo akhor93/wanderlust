@@ -1,0 +1,38 @@
+<table class="table table-striped">
+	<th>
+		<tr>
+			<td>User</td>
+			<td>Title</td>
+			<td>Description</td>
+			<td>Image URLs</td>
+			<td>tags</td>
+			<td>Likes</td>
+			<td>Favorites</td>
+			<td>Comments</td>
+		</tr>
+	</th>
+	{{#each trips}}
+		<tr>
+			<td>{{user}}</td>
+			<td>{{title}}</td>
+			<td>{{description}}</td>
+			<td>
+				{{#images}}
+					{{this}},
+				{{/images}}
+			</td>
+			<td>
+				{{#tags}}
+					{{this}},
+				{{/tags}}
+			</td>
+			<td>{{num_likes}}</td>
+			<td>{{num_favorites}}</td>
+			<td>
+				{{#comments}}
+					{{this}},
+				{{/comments}}
+			</td>
+		</tr>
+	{{/each}}
+</table>

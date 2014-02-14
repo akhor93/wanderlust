@@ -38,5 +38,6 @@ module.exports = function (app) {
 	//Testing/Admin
 	app.get('/admin', admin.dashboard);
 	app.get('/print', admin.print);
+	app.get('/print_trips', admin.print_trips);
 	app.get('/reset', admin.reset);
 };
