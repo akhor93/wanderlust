@@ -1,7 +1,7 @@
 {
 	"trips": [
 		{
-			"id": 1,
+			"id": 0,
 			"user": "lucywang",
 			"title": "San Francisco",
 			"date": "July 9, 2014",
@@ -19,7 +19,7 @@
 			]
 		},
 		{
-			"id": 2,
+			"id": 1,
 			"user": "lucywang",
 			"title": "Venice",
 			"date": "June 6, 2013",		
@@ -37,7 +37,7 @@
 			]
 		},
 		{
-			"id": 3,
+			"id": 2,
 			"user": "lucywang",
 			"title": "Greece",
 			"date": "April 4, 2013",
@@ -55,7 +55,7 @@
 			]
 		},
 		{
-			"id": 4,
+			"id": 3,
 			"user": "akhor",
 			"title": "Tahiti",
 			"date": "December 15, 2012",
@@ -73,7 +73,7 @@
 			]
 		},
 		{
-			"id": 5,
+			"id": 4,
 			"user": "akhor",
 			"title": "Paris",
 			"date": "June 13, 2012",
