@@ -23,7 +23,11 @@
       </ul>
       <form class="navbar-form navbar-left" method="get" action="/search" role="search">
         <div class="form-group">
-          <input type="text" class="form-control" name="query" placeholder="San Francisco">
+          {{#if prevQuery}}
+            <input type="text" class="form-control" name="query" value="{{prevQuery}}">
+          {{else}}
+            <input type="text" class="form-control" name="query" placeholder="Search Trips">
+          {{/if}}
         </div>
         <button type="submit" class="btn btn-default">Search</button>
       </form>
