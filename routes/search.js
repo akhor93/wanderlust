@@ -12,7 +12,7 @@ exports.search = function(req, res){
 	var pattern = new RegExp(query, 'i');
 	if(query) {
 		for(var i = 0; i < trips.length; i++) {
-			if(pattern.test(trips[i].username) || pattern.test(trips[i].title) || pattern.test(trips[i].location)) {
+			if(pattern.test(trips[i].user) || pattern.test(trips[i].title) || pattern.test(trips[i].location)) {
 				filteredTrips.push(trips[i]);
 			}
 		}
