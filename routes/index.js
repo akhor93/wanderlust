@@ -21,11 +21,14 @@ exports.followers = function(req, res){
 };
 
 exports.incrementLikes = function(req, res) {
+	console.log("reached controller");
 	var tripID = req.params.id;
-	var newNum = data[trips][tripID]['num_likes'] + 1;
-	data[trips][tripID]['num_likes'] = newNum;
+	console.log(tripID);
+	var newNum = data['trips'][tripID]['num_likes'] + 1;
+	data['trips'][tripID]['num_likes'] = newNum;
 	var dataToPass = {
-		num_likes: newNum
+		num_likes: newNum,
+		trip_id: tripID
 	}
 	res.json(dataToPass);
 }

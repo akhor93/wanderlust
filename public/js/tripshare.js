@@ -26,15 +26,19 @@ function likeButtonClicked(e) {
 	e.preventDefault();
 	console.log("like button clicked");
 	//get the trip ID
-	var tripID = $(this).closest('.social_bar').find('.trip_id').html();
+	var tripID = $(this).closest('.social_bar').find('.trip_id').attr('id');
 	console.log("Trip id: " + tripID);
 	var url = "/index/" + tripID;
 	$.get(url, incrementLikes);
 }
 
-function incrementLikes(numLikes) {
-	console.log("Num likes passed from data: " + numLikes);
-
+function incrementLikes(data) {
+	console.log("Num likes passed from data: " + data['num_likes']);
+	var id = ".trip_id" + "#" + data['trip_id'];
+	console.log(id);
+	console.log($(id));
+	console.log($(id).next().closest(".social_num").html());
+	$(id).next().closest(".social_num").html(data['num_likes']);
 }
 
 function favButtonClicked(e) {
