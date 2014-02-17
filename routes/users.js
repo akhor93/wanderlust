@@ -12,7 +12,19 @@ var login = function (req, res) {
 exports.show = function(req, res){
 	data = {};
   data = SH.getSessionData(req.session.user, false);
-  res.render('users/show', data);
+
+  var userID = req.params.id;
+  User.findById(userID, function(err, user) {
+    if(err) {
+      console.log("Could not find user: " + userID);
+      res.redirect('/');
+    }
+    else {
+      data.user = user;
+      res.render('users/show', data);
+    }
+  });
+  
 };
 
 exports.signin = function(req, res) {}
