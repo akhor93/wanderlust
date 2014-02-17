@@ -24,7 +24,7 @@ exports.signup = function(req, res) {
 }
 
 exports.login = function(req, res) {
-  var user = User.findOne({ username: req.param('username') }, function(err, user) {
+  User.findOne({ username: req.param('username') }, function(err, user) {
     if(err) console.log(err);
     if(!user) {
       return res.send("User not found", 400);

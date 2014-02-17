@@ -19,7 +19,8 @@ var UserSchema = new Schema({
   createdAt: { type: Date, default: Date.now},
   aboutMe: {type: String, default: ''},
   following: {type: Array, default: []},
-  followers: {type: Array, default: []}
+  followers: {type: Array, default: []},
+  tripd: [{type: Schema.ObjectId, ref: 'Trip' }]
 })
 
 /**

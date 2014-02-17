@@ -18,7 +18,11 @@
     <div class="collapse navbar-collapse navbar-ex1-collapse">
       <ul class="nav navbar-nav">
         {{!-- <li><a href="/trips">Other Trips</a></li> --}}
-        <li><a href="/user">My Trips</a></li>
+        {{#if user}}
+        <li><a href="/user/{{user._id}}">My Trips</a></li>
+        {{else}}
+        {{!-- <li><a href="/user/1">My Trips</a></li> --}}
+        {{/if}}
         {{!-- <li><a href="/followers">Followers</a></li> --}}
       </ul>
       <form class="navbar-form navbar-left" method="get" action="/search" role="search">

@@ -47,7 +47,31 @@ exports.reset = function(req, res){
 			Trip.remove({}, function (err) {
 				if(err) console.log(err);
 			});
+			initialize();
 		}
 	}
 	res.redirect('/');
 };
+
+function initialize() {
+	var andrew = new User({
+    name      : 'Andrew Khor',
+    email     : 'akhor93@stanford.edu',
+    username  : 'akhor',
+    password  : 'gloving',
+    country   : 'United States'
+  });
+  andrew.save(function(err) {
+  	if(err) console.log("error initializing andrew");
+  });
+  var lucy = new User({
+    name      : 'Lucy Wang',
+    email     : 'lucyywang@stanford.edu',
+    username  : 'lucywang',
+    password  : 'password',
+    country   : 'United States'
+  });
+  lucy.save(function(err) {
+  	if(err) console.log("error initializing lucy");
+  });
+}
