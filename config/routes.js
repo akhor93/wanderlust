@@ -26,7 +26,7 @@ module.exports = function (app) {
 
 
 	//USERS
-	app.get('/user', users.show);
+	app.get('/user/:id', users.show);
 
 	//Session
 	app.post('/signup', sessions.signup);

@@ -1,6 +1,7 @@
 //Models
 var mongoose = require('mongoose');
 var User = mongoose.model('User');
+var Trip = mongoose.model('Trip');
 
 var trips = require('../data.json');
 
@@ -25,22 +26,28 @@ exports.print = function(req, res){
 };
 
 exports.print_trips = function(req, res) {
-	console.log(trips);
-	res.render('admin/print_trips', trips);
+	Trip.find({}, function(err, trips) {
+		if(err) {
+			console.log(err);
+			res.redirect('/');
+		}
+		else {
+			console.log(trips);
+			res.render('admin/print_trips', trips);
+		}
+	});
 }
 
 exports.reset = function(req, res){
 	if(req.session.user) {
 		if(req.session.user.admin) {
-			User.find({}, function (err, users) {
+			User.remove({}, function (err) {
 				if(err) console.log(err);
-				else {
-					res.render('admin/print', { users: users});
-				}
+			});
+			Trip.remove({}, function (err) {
+				if(err) console.log(err);
 			});
 		}
 	}
-	else {
-		res.redirect('/');
-	}
+	res.redirect('/');
 };
