@@ -34,11 +34,11 @@ function likeButtonClicked(e) {
 
 function incrementLikes(data) {
 	console.log("Num likes passed from data: " + data['num_likes']);
-	var id = ".trip_id" + "#" + data['trip_id'];
+	var id = "#" + data['trip_id'];
 	console.log(id);
 	console.log($(id));
-	console.log($(id).next().closest(".social_num").html());
-	$(id).next().closest(".social_num").html(data['num_likes']);
+	console.log($(id).next().find(".social_num").html());
+	$(id).next().find(".social_num").html(data['num_likes']);
 }
 
 function favButtonClicked(e) {

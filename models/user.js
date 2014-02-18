@@ -18,8 +18,8 @@ var UserSchema = new Schema({
   admin: {type: Boolean, default: false},
   createdAt: { type: Date, default: Date.now},
   aboutMe: {type: String, default: ''},
-  following: {type: Array, default: []},
-  followers: {type: Array, default: []}
+  following: [{ type: Schema.ObjectId, ref: 'User' }],
+  followers: [{ type: Schema.ObjectId, ref: 'User' }]
 })
 
 /**
