@@ -67,7 +67,7 @@ function initialize() {
   });
   var lucy = new User({
     name      : 'Lucy Wang',
-    email     : 'lucyywang@stanford.edu',
+    email     : 'lucywang@stanford.edu',
     username  : 'lucywang',
     password  : 'password',
     country   : 'United States'
@@ -81,9 +81,28 @@ function initialize() {
   	date: "July 9, 2014",
   	location: "San Francisco, CA",
   	description: "Loved my trip to the Bay!",
-  	images: ["images/goldengate.jpg", "images/fishermans-wharf.jpg", "images/painted_ladies.jpg", "images/clarion_alley.jpg", "images/lands_end.jpg"]
+  	images: ["images/goldengate.jpg", "images/fishermans-wharf.jpg", "images/painted_ladies.jpg", "images/clarion_alley.jpg", "images/lands_end.jpg"
+  	likes: [],
+  	favorites: [],
+  	tags: [],
+  	comments: []
   });
   t1.save(function(err) {
-  	if(err) console.log("error saving trip");
-  })
+  	if(err) console.log("error saving trip 1");
+  });
+  var t2 = new Trip({
+  	user: lucy._id,
+  	title: "Paris, Je t'aime",
+  	date: "June 13, 2012",
+  	location: "Paris, France"
+  	description: "Backpacking in France!", 	
+  	images: ["images/Paris_Large.jpg"],
+  	likes: [],
+  	favorites: [],
+  	tags: [],
+  	comments: []  	
+  });
+  t2.save(function(err) {
+  	if(err) console.log("error saving trip 2");
+  });
 }

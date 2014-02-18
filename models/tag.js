@@ -8,7 +8,6 @@ var Schema = mongoose.Schema;
  	* Trip Schema
  	*/
 var TagSchema = new Schema({
-	user: { type: Schema.ObjectId, ref: 'User' },
   trips: [{ type: Schema.ObjectId, ref: 'Trip'}],
   text: { type: String, required: true}
 })

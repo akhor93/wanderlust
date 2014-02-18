@@ -68,11 +68,6 @@ if ('development' == app.get('env')) {
 //Routes
 require("./config/routes")(app);
 
-//AJAX
-var index = require('./routes/index');
-app.get('/index/:id', index.incrementLikes);
-
-
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
 });

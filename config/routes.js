@@ -19,6 +19,9 @@ module.exports = function (app) {
 	//HOME
 	app.get('/', index.home);
 
+	//NEWS FEED
+	app.get('/index/:id', index.incrementLikes);
+
 	//TRIPS
 	app.get('/trip/:id', trip.show);
 	app.post('/trip', trip.create);
