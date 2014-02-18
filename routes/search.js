@@ -1,37 +1,32 @@
 var SH = require("../lib/session_helper");
+var mongoose = require('mongoose');
+var Trip = mongoose.model('Trip');
 
 exports.search = function(req, res){
   data = {};
 	data = SH.getSessionData(req.session.user);
 	var query = req.query.query;
 	data.prevQuery = query;
-	data.numTrips = trips.length;
+
 	var filteredTrips = [];
 	var pattern = new RegExp(query, 'i');
 
 	if(query) {
-		Trip.find({'user': { $regex: pattern }}, { 'title': {$regex: pattern }}, { 'location': {$regex: pattern}})
-	}
-	else {
-		Trip.find({}, function(err, trips) {
+		Trip.find([{'user': { $regex: pattern }}, { 'title': {$regex: pattern }}, { 'location': {$regex: pattern}}])
+		.populate("user")
+		.exec(function(err, trips) {
+			data.numTrips = trips.length;
 			data.trips = trips;
+			return res.render('search/search', data);
 		});
 	}
-
-	Trip.find({}, function(err, trips) {
-		if(query) {
-			for(var i = 0; i < trips.length; i++) {
-				if(pattern.test(trips[i].user) || pattern.test(trips[i].title) || pattern.test(trips[i].location)) {
-					filteredTrips.push(trips[i]);
-				}
-			}
-			data.trips = filteredTrips;
-		}
-		else {
+	else {
+		Trip.find({})
+		.populate("user")
+		.exec(function(err, trips) {
+			data.numTrips = trips.length;
 			data.trips = trips;
-		}
-	});
-	
-	
-	res.render('search/search', data);
+			return res.render('search/search', data);
+		});
+	}
 };
