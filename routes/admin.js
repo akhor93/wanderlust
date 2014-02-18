@@ -81,7 +81,7 @@ function initialize() {
   	date: "July 9, 2014",
   	location: "San Francisco, CA",
   	description: "Loved my trip to the Bay!",
-  	images: ["images/goldengate.jpg", "images/fishermans-wharf.jpg", "images/painted_ladies.jpg", "images/clarion_alley.jpg", "images/lands_end.jpg"
+  	images: ["images/goldengate.jpg", "images/fishermans-wharf.jpg", "images/painted_ladies.jpg", "images/clarion_alley.jpg", "images/lands_end.jpg"],
   	likes: [],
   	favorites: [],
   	tags: [],
@@ -94,7 +94,7 @@ function initialize() {
   	user: lucy._id,
   	title: "Paris, Je t'aime",
   	date: "June 13, 2012",
-  	location: "Paris, France"
+  	location: "Paris, France",
   	description: "Backpacking in France!", 	
   	images: ["images/Paris_Large.jpg"],
   	likes: [],
