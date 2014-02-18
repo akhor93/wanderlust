@@ -32,8 +32,9 @@ exports.print_trips = function(req, res) {
 			res.redirect('/');
 		}
 		else {
-			console.log(trips);
-			res.render('admin/print_trips', trips);
+			alltrips = {};
+			alltrips.trips = trips;
+			res.render('admin/print_trips', alltrips);
 		}
 	});
 }
