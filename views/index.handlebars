@@ -3,9 +3,68 @@
 </div>
 
 <div class="w-container">
-  {{#each trips}}
-  {{> trip/update this}}
-  {{/each}}
+    {{#each trips}}
+    <div class="w-clearfix news-item">
+        <img class="prof_pic-small float-left" src="images/blank-profile.jpg" alt="prof-pic">
+        <div class="float-left">
+            <h5 class="status"><strong>{{user}}</strong> added a new album.</h5>
+            <div class="w-clearfix pictures">        
+                <img class="album-preview_large" src="{{images.[0]}}" alt="album-preview_large">
+                {{#if images.[1]}}
+                <img class="album-preview_small" src="{{images.[1]}}" alt="album-preview-small">
+                {{/if}}
+                {{#if images.[2]}}
+                <img class="album-preview_small" src="{{images.[2]}}" alt="album-preview-small">
+                {{/if}}
+                {{#if images.[3]}}
+                <img class="album-preview_small" src="{{images.[3]}}" alt="album-preview-small">
+                {{/if}}
+                {{#if images.[4]}}
+                <img class="album-preview_small" src="{{images.[4]}}" alt="album-preview-small">
+                {{/if}}                
+               {{!--  <img class="album-preview_small" src="images/lands_end.jpg" alt="52f49817bc0395d97100076a_lands_end.jpg">
+                <img class="album-preview_small" src="images/painted_ladies.jpg" alt="52f47740bc0395d971000647_painted_ladies.jpg">
+                <img class="album-preview_small" src="images/clarion_alley.jpg" alt="52f498a02b5f8139190008c0_clarion_alley.jpg"> --}}
+            </div>
+            <h3>{{location}}</h3>
+            <div>{{description}}</div>
+            <div class="w-clearfix social_bar">
+                <div class="trip_id" id="{{id}}"></div>
+                <div class="w-clearfix social">
+                  <div class="social_num">{{num_likes}}</div>
+                  <a href="#" class="like-button">
+                    <img class="social_buttons" src="images/icon_822.png" alt="like-button">
+                  </a>
+                </div>
+                <div class="w-clearfix social">
+                    <div class="social_num">{{num_fav}}</div>
+                    <a href="#" class="fav-button">
+                        <img class="social_buttons" src="images/star.png" alt="favorite-button">
+                    </a>
+                </div>
+                <div class="w-clearfix social">
+                    <div class="social_num">{{comments.length}}</div>
+                    <img class="social_buttons" src="images/comment.png" alt="comments-button">
+                </div>
+            </div>
+            <div class="w-clearfix comment_box">
+                <img class="prof_pic-xsmall" src="images/blank-profile.jpg" alt="prof-pic">
+                <div class="w-form comment_form">
+                    <form name="email-form" data-name="Email Form">
+                        <input class="w-input" type="text" placeholder="Write a comment..." name="comment" data-name="Comment"></input>
+                    </form>
+                    <div class="w-form-done">
+                        <p>Thank you! Your submission has been received!</p>
+                    </div>
+                    <div class="w-form-fail">
+                        <p>Oops! Something went wrong while submitting the form :(</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {{/each}}
+</div>
 {{!--   <div class="w-clearfix news-item">
     <img class="prof_pic-small float-left" src="images/profpic_venice_square.jpeg" alt="52f360f6593f6edf41000a4c_profpic_venice_square.jpeg">
     <div class="float-left">
@@ -49,4 +108,3 @@
       </div>
     </div>
   </div> --}}
-</div>

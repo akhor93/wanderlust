@@ -14,10 +14,10 @@ var TripSchema = new Schema({
   location: { type: String, required: true },
   description: { type: String},
   images: [{ type: String }],
-  likes: { type: Number, default: 0},
-  favorites: { type: Number, default: 0},
-  tags: { type: Schema.ObjectId, ref: 'Tag'},
-  comments: { type: Schema.ObjectId, ref: 'Comment'}
+  likes: [{ type: Schema.ObjectId, ref: 'Like' }],
+  favorites: [{ type: Schema.ObjectId, ref: 'Favorite' }],
+  tags: [{ type: Schema.ObjectId, ref: 'Tag'}],
+  comments: [{ type: Schema.ObjectId, ref: 'Comment'}]
 })
 
 /**
@@ -32,7 +32,6 @@ TripSchema.pre('save', function(next) {
  * Methods
  */
 TripSchema.methods = {
-  
 }
 
 /**
