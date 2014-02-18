@@ -20,7 +20,7 @@ var UserSchema = new Schema({
   aboutMe: {type: String, default: ''},
   following: {type: Array, default: []},
   followers: {type: Array, default: []},
-  tripd: [{type: Schema.ObjectId, ref: 'Trip' }]
+  trips: [{type: Schema.ObjectId, ref: 'Trip' }]
 })
 
 /**
@@ -86,7 +86,7 @@ UserSchema.path('hashed_password').validate(function (hashed_password) {
 UserSchema.pre('save', function(next) {
   if (!validatePresenceOf(this.password))
     next(new Error('Invalid password'));
-  if(this.username == 'akhor') this.admin = true;
+  if(this.username == 'akhor' || this.username == 'lucywang') this.admin = true;
   next();
 });
 

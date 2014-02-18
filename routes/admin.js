@@ -74,4 +74,15 @@ function initialize() {
   lucy.save(function(err) {
   	if(err) console.log("error initializing lucy");
   });
+  var t1 = new Trip({
+  	user: lucy._id,
+  	title: "San Francisco",
+  	date: "July 9, 2014",
+  	location: "San Francisco, CA",
+  	description: "Loved my trip to the Bay!",
+  	images: ["images/goldengate.jpg", "images/fishermans-wharf.jpg", "images/painted_ladies.jpg", "images/clarion_alley.jpg", "images/lands_end.jpg"]
+  });
+  t1.save(function(err) {
+  	if(err) console.log("error saving trip");
+  })
 }
