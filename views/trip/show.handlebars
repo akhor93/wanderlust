@@ -1,4 +1,56 @@
-<h2>{{trip.title}}</h1>
-<br />
-Location: {{trip.location}}
-<br />
+<div id="single_trip">
+	<span class="title">{{trip.title}}</span><span> @ {{trip.location}}</span>
+	<div id="trip_images" class="w-clearfix pictures">
+		{{#if trip.image_large}}
+			<img src="{{trip.image_large}}" class="album-preview_large" />
+		{{else}}
+			<img src="/images/300x180tripfiller.jpg" class="album-preview_large" />
+		{{/if}}
+		{{#if trip.image_small}}
+			<img src="{{trip.image_small.[0]}}" class="album-preview_small" />{{#if trip.image_small.[1]}}
+				<img src="{{trip.image_small.[1]}}" class="album-preview_small" />
+			{{else}}
+				<img src="/images/180x125tripfiller.jpg" class="album-preview_small" />
+			{{/if}}
+			{{#if trip.image_small.[2]}}
+				<img src="{{trip.image_small.[2]}}" class="album-preview_small"  style="margin-bottom:0px;" />
+			{{else}}
+				<img src="/images/180x125tripfiller.jpg" class="album-preview_small" style="margin-bottom:0px;"/>
+			{{/if}}
+			{{#if trip.image_small.[3]}}
+				<img src="{{trip.image_small.[3]}}" class="album-preview_small"  style="margin-bottom:0px;" />
+			{{else}}
+				<img src="/images/180x125tripfiller.jpg" class="album-preview_small" style="margin-bottom:0px;" />
+			{{/if}}
+		{{/if}}
+	</div>
+	<div class="social_buttons_container">
+		<img class="social_buttons" src="/images/icon_822.png" />
+		&nbsp;<span id="likes_counter">{{trip.num_likes}}</span>&nbsp;&nbsp;
+		<img class="social_buttons" src="/images/star.png" />
+		&nbsp;<span id="favorites_counter">{{trip.num_favorites}}</span>&nbsp;&nbsp;
+		<img class="social_buttons" src="/images/comment.png" />
+		&nbsp;<span id="comments_counter">{{trip.num_comments}}</span>&nbsp;&nbsp;
+	</div>
+	<div class="description_container">
+		{{trip.description}}
+	</div>
+	{{#if trip.comments}}
+		<div class="comment_container">
+			sdc
+		</div>
+	{{/if}}
+	<div class="add_comment_container">
+		<div class="row">
+			<div class="col-sm-1" style="padding-right: 0px;">
+				<img src="{{trip.user.profile_image}}" class="prof_pic-small" />
+			</div>
+			<div class="col-sm-11" style="padding-right: 0px; padding-left: 0px;">
+				<textarea id="add_comment_ta" class="form-control">Write a comment...</textarea>
+			</div>
+			<div class="col-sm-1" style="padding-left: 0px;">
+				<button type="button" class="btn btn-primary">Comment</button>
+			</div>
+		</div>
+	</div>
+</div>

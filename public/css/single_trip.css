@@ -1,0 +1,48 @@
+#single_trip {
+	width: 800px;
+	margin: 0 auto;
+}
+
+#single_trip .title {
+	/*borrowed from h2*/
+	font-size: 32px;
+	line-height: 36px;
+	font-weight: 700;
+}
+
+#trip_images {
+	background: white;
+	padding: 10px;
+	border-radius: 12px;
+}
+
+#single_trip .album-preview_large {
+	max-width: 390px;
+}
+
+#single_trip .social_buttons_container {
+	margin-top: 10px;
+}
+
+#single_trip .description_container {
+	margin-top: 10px;
+	background: white;
+	border-radius: 12px;
+	padding: 5px;
+}
+
+#single_trip .comment_container {
+	margin-top: 10px;
+	background: white;
+	border-radius: 12px;
+}
+
+#single_trip .add_comment_container {
+	margin-top: 10px;
+	background: white;
+	border-radius: 12px;
+}
+
+#single_trip .add_comment_container img {
+	width: 70px;
+}

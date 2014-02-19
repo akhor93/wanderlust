@@ -9,15 +9,22 @@ exports.show = function(req, res) {
 	var tripID = req.params.id;
 	data = {};
   data = SH.getSessionData(req.session.user);
-  Trip.findById(tripID, function(err, trip) {
-  	if(err) {
-  		console.log("Could not find trip: " + tripID);
-  		res.redirect('/');
-  	}
-  	else {
-  		data.trip = trip;
-  		res.render('trip/show', data);
-  	}
+  Trip.findById(tripID)
+  .populate('user likes favorites tags comments')
+  .lean()
+  .exec(function(err, trip) {
+    if(err) {
+      console.log("Could not find trip: " + tripID);
+      res.redirect('/');
+    }
+    else {
+      data.trip = trip;
+      trip.num_likes = trip.likes.length;
+      trip.num_favorites = trip.favorites.length;
+      trip.num_tags = trip.tags.length;
+      trip.num_comments = trip.comments.length;
+      res.render('trip/show', data);
+    }
   });
 }
 

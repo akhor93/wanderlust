@@ -11,13 +11,14 @@ var crypto = require('crypto');
 var UserSchema = new Schema({
 	name: { type: String, default: '' },
 	email: { type: String, default: '' },
-  country: {type: String, default: ''},
-  username: {type: String, default: ''},
+  country: {type: String, default: '' },
+  username: {type: String, default: '' },
   hashed_password: {type: String, default: '' },
   salt: { type: String, default: '' },
-  admin: {type: Boolean, default: false},
-  createdAt: { type: Date, default: Date.now},
-  aboutMe: {type: String, default: ''},
+  admin: {type: Boolean, default: false },
+  createdAt: { type: Date, default: Date.now },
+  aboutMe: {type: String, default: '' },
+  profile_image: {type: String, default: '/images/blank-profile.jpg' },
   following: [{ type: Schema.ObjectId, ref: 'User' }],
   followers: [{ type: Schema.ObjectId, ref: 'User' }]
 })

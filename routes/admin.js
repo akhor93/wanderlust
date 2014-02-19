@@ -1,3 +1,6 @@
+//Utils
+var async = require("async");
+
 //Models
 var mongoose = require('mongoose');
 var User = mongoose.model('User');
@@ -42,16 +45,34 @@ exports.print_trips = function(req, res) {
 exports.reset = function(req, res){
 	if(req.session.user) {
 		if(req.session.user.admin) {
-			User.remove({}, function (err) {
-				if(err) console.log(err);
-			});
-			Trip.remove({}, function (err) {
-				if(err) console.log(err);
-			});
-			initialize();
+      async.parallel([
+        function(cb) {
+          User.remove({}, function (err) {
+            if(err) console.log(err);
+            else cb();
+          });
+        },
+        function(cb) {
+          Trip.remove({}, function (err) {
+            if(err) console.log(err);
+            else cb();
+          });
+        }
+      ], function(err) {
+        initialize();
+        //Log out
+        res.clearCookie('user');
+        res.clearCookie('pass');
+        req.session.destroy(function(e) {});
+        console.log("End of Initialization");
+        res.redirect('/');
+      });
 		}
+    else res.redirect('/');
 	}
-	res.redirect('/');
+  else {
+    res.redirect('/');
+  }
 };
 
 function initialize() {
@@ -81,7 +102,8 @@ function initialize() {
   	date: "July 9, 2014",
   	location: "San Francisco, CA",
   	description: "Loved my trip to the Bay!",
-  	images: ["images/goldengate.jpg", "images/fishermans-wharf.jpg", "images/painted_ladies.jpg", "images/clarion_alley.jpg", "images/lands_end.jpg"],
+    image_large: "/images/goldengate.jpg",
+  	image_small: ["/images/fishermans-wharf.jpg", "/images/painted_ladies.jpg", "/images/clarion_alley.jpg", "/images/lands_end.jpg"],
   	likes: [],
   	favorites: [],
   	tags: [],
@@ -95,8 +117,10 @@ function initialize() {
   	title: "Paris, Je t'aime",
   	date: "June 13, 2012",
   	location: "Paris, France",
-  	description: "Backpacking in France!", 	
-  	images: ["images/Paris_Large.jpg"],
+  	description: "Backpacking in France!", 
+    image_large: "/images/Paris_Large.jpg",
+    // update below line
+    image_small: ["/images/fishermans-wharf.jpg", "/images/painted_ladies.jpg", "/images/clarion_alley.jpg", "/images/lands_end.jpg"],
   	likes: [],
   	favorites: [],
   	tags: [],
@@ -104,20 +128,5 @@ function initialize() {
   });
   t2.save(function(err) {
   	if(err) console.log("error saving trip 2");
-  });
-  var t3 = new Trip({
-    user: lucy._id,
-    title: "Paris, Je t'aime2",
-    date: "June 13, 2012",
-    location: "Paris, France",
-    description: "Backpacking in France!",  
-    images: ["images/Paris_Large.jpg"],
-    likes: [],
-    favorites: [],
-    tags: [],
-    comments: []
-  });
-  t3.save(function(err) {
-    if(err) console.log("error saving trip 3");
   });
 }

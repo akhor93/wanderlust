@@ -4,6 +4,11 @@
 $(document).ready(function() {
 	initializePage();
 	initializeListeners();
+
+	//Move later. For single trip view
+	$('#add_comment_ta').focus(function() {
+		$(this).val('');
+	});
 })
 
 /*
@@ -44,3 +49,4 @@ function incrementLikes(data) {
 function favButtonClicked(e) {
 
 }
+
