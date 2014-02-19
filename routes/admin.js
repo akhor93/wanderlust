@@ -63,7 +63,7 @@ function initialize() {
     country   : 'United States'
   });
   andrew.save(function(err) {
-  	if(err) console.log("error initializing andrew");
+  	if(err) console.log("error initializing andrew: " + err);
   });
   var lucy = new User({
     name      : 'Lucy Wang',
@@ -100,9 +100,24 @@ function initialize() {
   	likes: [],
   	favorites: [],
   	tags: [],
-  	comments: []  	
+  	comments: []
   });
   t2.save(function(err) {
   	if(err) console.log("error saving trip 2");
+  });
+  var t3 = new Trip({
+    user: lucy._id,
+    title: "Paris, Je t'aime2",
+    date: "June 13, 2012",
+    location: "Paris, France",
+    description: "Backpacking in France!",  
+    images: ["images/Paris_Large.jpg"],
+    likes: [],
+    favorites: [],
+    tags: [],
+    comments: []
+  });
+  t3.save(function(err) {
+    if(err) console.log("error saving trip 3");
   });
 }
