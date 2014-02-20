@@ -8,6 +8,7 @@ var search = require('../routes/search');
 var sessions = require('../routes/sessions');
 var users = require('../routes/users');
 var admin = require('../routes/admin');
+var comments = require('../routes/comments');
 
 //Models
 var mongoose = require('mongoose');
@@ -27,9 +28,11 @@ module.exports = function (app) {
 	app.post('/trip', trip.create);
 	app.get('/trips', index.trips);
 
-
 	//USERS
 	app.get('/user/:id', users.show);
+
+	//Comments
+	app.post('/add_comment', comments.create);
 
 	//Session
 	app.post('/signup', sessions.signup);

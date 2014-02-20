@@ -7,8 +7,9 @@
 			<td>Date</td>
 			<td>Location</td>
 			<td>Description</td>
-			<td>Image URLs</td>
-			<td>tags</td>
+			<td>Large Image</td>
+			<td>Small Images</td>
+			<td>Tags</td>
 			<td>Likes</td>
 			<td>Favorites</td>
 			<td>Comments</td>
@@ -17,27 +18,36 @@
 	{{#each trips}}
 		<tr>
 			<td><a href="trip/{{id}}">{{id}}</a></td>
-			<td>{{user}}</td>
+			<td>{{user.username}}</td>
 			<td>{{title}}</td>
 			<td>{{date}}</td>
 			<td>{{location}}</td>
 			<td>{{description}}</td>
+			<td>{{image_large}}</td>
 			<td>
-				{{#images}}
+				{{#each image_small}}
 					{{this}},
-				{{/images}}
+				{{/each}}
 			</td>
 			<td>
-				{{#tags}}
+				{{#each tags}}
 					{{this}},
-				{{/tags}}
+				{{/each}}
 			</td>
-			<td>{{num_likes}}</td>
-			<td>{{num_fav}}</td>
 			<td>
-				{{#comments}}
+				{{#each likes}}
 					{{this}},
-				{{/comments}}
+				{{/each}}
+			</td>
+			<td>
+				{{#each favorites}}
+					{{this}},
+				{{/each}}
+			</td>
+			<td>
+				{{#each comments}}
+					{{this.text}},
+				{{/each}}
 			</td>
 		</tr>
 	{{/each}}

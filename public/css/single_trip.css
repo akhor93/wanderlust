@@ -46,3 +46,24 @@
 #single_trip .add_comment_container img {
 	width: 70px;
 }
+
+#single_trip .comment_container img {
+	width: 70px;
+}
+
+#single_trip .comment_container {
+	padding: 5px;
+}
+
+
+#single_trip .comment_container a {
+	font-weight: 700;
+}
+
+#single_trip .comment {
+	padding-bottom: 10px;
+}
+
+#single_trip .comment_bottom_border {
+	border-bottom: 1px solid #CCCCCC;
+}

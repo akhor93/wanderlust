@@ -5,6 +5,7 @@ var async = require("async");
 var mongoose = require('mongoose');
 var User = mongoose.model('User');
 var Trip = mongoose.model('Trip');
+var Comment = mongoose.model('Comment');
 
 var trips = require('../data.json');
 
@@ -29,17 +30,18 @@ exports.print = function(req, res){
 };
 
 exports.print_trips = function(req, res) {
-	Trip.find({}, function(err, trips) {
-		if(err) {
-			console.log(err);
-			res.redirect('/');
-		}
-		else {
-			alltrips = {};
-			alltrips.trips = trips;
-			res.render('admin/print_trips', alltrips);
-		}
-	});
+  Trip.find({})
+  .populate('user tags comments likes favorites')
+  .exec(function(err, trips) {
+    if(err) {
+      console.log(err);
+      res.redirect('/');
+    }
+    console.log(trips);
+    alltrips = {};
+    alltrips.trips = trips;
+    res.render('admin/print_trips', alltrips);
+  });
 }
 
 exports.reset = function(req, res){
@@ -54,6 +56,12 @@ exports.reset = function(req, res){
         },
         function(cb) {
           Trip.remove({}, function (err) {
+            if(err) console.log(err);
+            else cb();
+          });
+        },
+        function(cb) {
+          Comment.remove({}, function (err) {
             if(err) console.log(err);
             else cb();
           });

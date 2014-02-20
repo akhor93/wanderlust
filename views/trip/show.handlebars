@@ -1,4 +1,4 @@
-<div id="single_trip">
+<div id="single_trip" class="container">
 	<span class="title">{{trip.title}}</span><span> @ {{trip.location}}</span>
 	<div id="trip_images" class="w-clearfix pictures">
 		{{#if trip.image_large}}
@@ -35,22 +35,71 @@
 	<div class="description_container">
 		{{trip.description}}
 	</div>
-	{{#if trip.comments}}
-		<div class="comment_container">
-			sdc
-		</div>
-	{{/if}}
+	<div class="comment_container" style="display: none">
+		{{#each trip.comments}}
+			{{> comment this}}
+		{{/each}}
+	</div>
 	<div class="add_comment_container">
-		<div class="row">
-			<div class="col-sm-1" style="padding-right: 0px;">
-				<img src="{{trip.user.profile_image}}" class="prof_pic-small" />
+		<form id="add_comment_form" class="form-horizontal" method="post">
+			<input type="hidden" name="trip_id" value="{{trip._id}}" />
+			<div class="row">
+				<div class="col-sm-1" style="padding-right: 0px;">
+					<img src="{{trip.user.profile_image}}" class="prof_pic-small" />
+				</div>
+				<div class="col-sm-9" style="padding-right: 0px; padding-left: 0px;">
+					<textarea id="add_comment_ta" name="text" class="form-control">Write a comment...</textarea>
+				</div>
+				<div class="col-sm-1" style="padding-left: 0px;">
+					<button id="add_comment_button" type="submit" class="btn btn-primary">Comment</button>
+				</div>
 			</div>
-			<div class="col-sm-11" style="padding-right: 0px; padding-left: 0px;">
-				<textarea id="add_comment_ta" class="form-control">Write a comment...</textarea>
-			</div>
-			<div class="col-sm-1" style="padding-left: 0px;">
-				<button type="button" class="btn btn-primary">Comment</button>
-			</div>
-		</div>
+		</form>
 	</div>
 </div>
+
+<script type="text/javascript">
+$(document).ready(function() {
+	$('#add_comment_form').ajaxForm({
+		url: '/add_comment',
+		success: function(responseText, status, xhr, $form) {
+			if (status == 'success') append_comment(responseText);
+		},
+		error: function(e) {
+			console.log("error: " + e.responseText);
+		}
+	});
+
+	function append_comment(comment) {
+		$('.comment_container').show();
+		var existing = $('.comment_container').html();
+		var comment_box_html = '<div class="comment row">';
+		if($('.comment').length > 0) {
+			comment_box_html += '<hr style="margin-bottom: 2px; margin-top:2px;"/>';
+		}
+		comment_box_html += '<div class="col-md-1">';
+		comment_box_html += '<img src="' + comment.user.profile_image + '" class="prof_pic-small" />';
+		comment_box_html += '</div>';
+		comment_box_html += '<div class="col-md-10">';
+		comment_box_html += '<a href="user/' + comment.user._id + '">' + comment.user.username + '</a> ' + comment.text;
+		comment_box_html += '<br /> X hours ago';
+		comment_box_html += '</div>';
+		comment_box_html += '</div>';
+		existing += comment_box_html;
+		$('.comment_container').html(existing);
+
+		var num_comments = parseInt($('#comments_counter').html(), 10);
+		num_comments += 1;
+		$('#comments_counter').html(num_comments);
+		
+	}
+
+	$('#add_comment_ta').focus(function() {
+		$(this).val('');
+	});
+
+	if($('.comment').length > 0) {
+		$('.comment_container').show();
+	}
+});
+</script>
