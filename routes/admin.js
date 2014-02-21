@@ -114,11 +114,11 @@ function initialize() {
       andrew = new User({
         name      : 'Andrew Khor',
         email     : 'akhor93@stanford.edu',
-        username  : 'akhor',
+        username  : 'andrew',
         password  : 'gloving',
         country   : 'United States',
         profile_image: '/images/andrew.jpg',
-        aboutMe: "Vivian's Mitch. I loooove One Direction."
+        aboutMe: "Dog goes woof, cat goes meow. Bird goes tweet, and mouse goes squeak. Cow goes moo. Frog goes croak, and the elephant goes toot. Ducks say quack and fish go blub, and the seal goes OW OW OW. But there's one sound that no one knows... WHAT DOES THE FOX SAY?"
       });
       andrew.save(function(err) {
         if(err) console.log("error initializing andrew: " + err);
