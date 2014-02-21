@@ -132,11 +132,11 @@ function initialize() {
         username  : 'Adrian',
         password  : 'pass',
         country   : 'United States',
-        profile_image: '/images/Adrian.JPG',
+        profile_image: '/images/adrian.jpg',
         aboutMe: "Single handedly coded this entire website."
       });
       adrian.save(function(err) {
-        if(err) console.log("error initializing andrew: " + err);
+        if(err) console.log("error initializing adrian: " + err);
         else cb();
       });
     },
@@ -144,7 +144,7 @@ function initialize() {
       lucy = new User({
         name      : 'Lucy Wang',
         email     : 'lucywang@stanford.edu',
-        username  : 'lucywang',
+        username  : 'Lucy',
         password  : 'password',
         country   : 'United States',
         profile_image: '/images/profpic_venice_square.jpeg',
@@ -156,11 +156,11 @@ function initialize() {
       });
     }
   ], function(err) {
-    createTrips(lucy, andrew);
+    createTrips(lucy, andrew, adrian);
   });
 }
 
-function createTrips(lucy, andrew) {
+function createTrips(lucy, andrew, adrian) {
   var t1 = new Trip({
     user: lucy._id,
     title: "San Francisco",
@@ -268,7 +268,7 @@ function createTrips(lucy, andrew) {
   });
   featMaldives.save(function(err, trip) {
     if(err) console.log("error saving featured Maldives");
-    User.update({"_id": adr._id}, {$push: { trips: trip._id } }, {upsert: true})
+    User.update({"_id": adrian._id}, {$push: { trips: trip._id } }, {upsert: true})
       .exec(function(err) {});
   }); 
   var featTahoe = new Trip({
@@ -302,10 +302,10 @@ function createTrips(lucy, andrew) {
       .exec(function(err) {});
   }); 
   var featRio = new Trip({
-    user: ad._id,
+    user: adrian._id,
     title: "Rio",
     date: "March, 2012",
-    location: "Rio de Janeiro, France",
+    location: "Rio de Janeiro, Brazil",
     description: "The ultimate South American Adventure.", 
     image_large: "/images/Rio_Small.jpg",
     image_small: ["/images/RioPic1.jpg", "/images/RioPic2.jpg", "/images/RioPic3.jpg", "/images/RioPic4.jpg"],
