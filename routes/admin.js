@@ -120,10 +120,6 @@ function initialize() {
   	description: "Loved my trip to the Bay!",
     image_large: "/images/goldengate.jpg",
   	image_small: ["/images/fishermans-wharf.jpg", "/images/painted_ladies.jpg", "/images/clarion_alley.jpg", "/images/lands_end.jpg"]
-  	// likes: [],
-  	// favorites: [],
-  	// tags: [],
-  	// comments: []
   });
   t1.save(function(err) {
   	if(err) console.log("error saving trip 1");
@@ -136,10 +132,6 @@ function initialize() {
   	description: "My summer of art, music, and gelato.", 
     image_large: "/images/venice.jpg",
     image_small: ["/images/venice-gondola.jpg", "/images/venice_piazza.jpg", "/images/venice_flooded.jpg", "/images/venice_rialto-bridge.jpg"]
-  	// likes: [],
-  	// favorites: [],
-  	// tags: [],
-  	// comments: []
   });
   t2.save(function(err) {
   	if(err) console.log("error saving trip 2");
@@ -152,10 +144,6 @@ function initialize() {
     description: "Study abroad, Spring 2013 -- couldn't have asked for more.", 
     image_large: "/images/greece_sunset.jpg",
     image_small: ["/images/greece.jpg", "/images/greece_pier", "/images/greece_ocean", "/images/greece_athens"]
-    // likes: [],
-    // favorites: [],
-    // tags: [],
-    // comments: []
   });
   t3.save(function(err) {
     if(err) console.log("error saving trip 3");
@@ -168,10 +156,6 @@ function initialize() {
     description: "Vacation with the fam.", 
     image_large: "/images/tahiti.jpg",
     image_small: ["/images/tahiti_resort.jpg", "/images/tahiti_swimming.jpg", "/images/tahiti_turtle", "/images/tahiti_islanders"]
-    // likes: [],
-    // favorites: [],
-    // tags: [],
-    // comments: []
   });
   t4.save(function(err) {
     if(err) console.log("error saving trip 4");
@@ -184,10 +168,6 @@ function initialize() {
     description: "Backpacking in France!", 
     image_large: "/images/Paris_Large.jpg",
     image_small: ["/images/paris_arc.jpg", "/images/paris_bridge", "/images/paris_locks", "/images/paris_cafe"]
-    // likes: [],
-    // favorites: [],
-    // tags: [],
-    // comments: []
   });
   t5.save(function(err) {
     if(err) console.log("error saving trip 5");
@@ -199,97 +179,123 @@ function initialize() {
   var tag2 = new Tag({
     text: "Arts"
   });
+  var tag3 = new Tag({
+    text: "Relaxation"
+  });  
+  var tag4 = new Tag({
+    text: "Paradise"
+  });
 
   tag1.save(function(err, tag1) {
     if(err) console.log("error saving tag 1 - adventure");
-    Trip.update(t1, {$push: { tags: tag1._id } })
+    Trip.update({"_id": t1._id}, {$push: { tags: tag1._id } }, {upsert: true})
       .exec(function(err) {
         if(err) console.log("error adding tag 1 to trip");
       });
-    Trip.update(t5, {$push: { tags: tag1._id } })
+    Trip.update({"_id": t5}, {$push: { tags: tag1._id } }, {upsert: true})
       .exec(function(err) {
         if(err) console.log("error adding tag 1 to trip");
       });  
-    Tag.update(tag1, {$push: {trips: t1._id}})
+    Tag.update({"_id": tag1}, {$push: {trips: t1._id}}, {upsert: true})
       .exec(function(err, tag) {
-        if(err) console.log("error adding trips to tag");
+        if(err) console.log("error adding trip to tag");
     });  
-    Tag.update(tag1, {$push: {trips: t5._id}})
+    Tag.update({"_id": tag1}, {$push: {trips: t5._id}}, {upsert: true})
       .exec(function(err, tag) {
-        if(err) console.log("error adding trips to tag");
+        if(err) console.log("error adding trip to tag");
     });        
-  });
-
+  });      
 
   tag2.save(function(err, tag2) {
     if(err) console.log("error saving tag 2 - arts");
-    Trip.update(t1, {$push: { tags: tag2._id } })
-      .exec(function(err) {
+    Trip.update({"_id": t1}, {$push: { tags: tag2._id } }, {upsert: true})
+      .exec(function(err, t) {
         if(err) console.log("error adding tag 2 to trip");
       });
-    Trip.update(t2, {$push: { tags: tag2._id } })
-      .exec(function(err) {
-        if(err) console.log("error adding tag 2 to trip");
-      });  
-    Trip.update(t3, {$push: { tags: tag2._id } })
-      .exec(function(err) {
+    Trip.update({"_id": t2}, {$push: { tags: tag2._id } }, {upsert: true})
+      .exec(function(err, t) {
         if(err) console.log("error adding tag 2 to trip");
       });
-    Trip.update(t5, {$push: { tags: tag2._id } })
-      .exec(function(err) {
+    Trip.update({"_id": t3}, {$push: { tags: tag2._id } }, {upsert: true})
+      .exec(function(err, t) {
         if(err) console.log("error adding tag 2 to trip");
-      });           
-    Tag.update(tag2, {$push: {trips: t1._id}})
+      });
+    Trip.update({"_id": t5}, {$push: { tags: tag2._id } }, {upsert: true})
+      .exec(function(err, t) {
+        if(err) console.log("error adding tag 2 to trip");
+      });      
+    Tag.update({"_id": tag2}, {$push: {trips: t1._id}}, {upsert: true})
       .exec(function(err, tag) {
-        if(err) console.log("error adding trips to tag");
+        if(err) console.log("error adding trip to tag");
     });  
-    Tag.update(tag2, {$push: {trips: t2._id}})
+    Tag.update({"_id": tag2}, {$push: {trips: t2._id}}, {upsert: true})
       .exec(function(err, tag) {
-        if(err) console.log("error adding trips to tag");
-    });       
-    Tag.update(tag2, {$push: {trips: t3._id}})
-      .exec(function(err, tag) {
-        if(err) console.log("error adding trips to tag");
+        if(err) console.log("error adding trip to tag");
     });  
-    Tag.update(tag2, {$push: {trips: t5._id}})
+    Tag.update({"_id": tag2}, {$push: {trips: t3._id}}, {upsert: true})
       .exec(function(err, tag) {
-        if(err) console.log("error adding trips to tag");
-    });                       
+        if(err) console.log("error adding trip to tag");
+    });  
+    Tag.update({"_id": tag2}, {$push: {trips: t5._id}}, {upsert: true})
+      .exec(function(err, tag) {
+        if(err) console.log("error adding trip to tag");
+    });                      
   });
-  // var tag3 = new Tag({
-  //   text: "Relaxation"
-  // });
-  // tag3.save(function(err) {
-  //   if(err) console.log("error saving tag 3 - relaxation");
-  //   Trip.update(t2, {$push: { tags: tag3._id } })
-  //     .exec(function(err) {
-  //       if(err) console.log("error adding tag 3 to trip");
-  //     });
-  //   Trip.update(t3, {$push: { tags: tag3._id } })
-  //     .exec(function(err) {
-  //       if(err) console.log("error adding tag 3 to trip");
-  //     });  
-  //   Trip.update(t4, {$push: { tags: tag3._id } })
-  //     .exec(function(err) {
-  //       if(err) console.log("error adding tag 3 to trip");
-  //     }); 
-  //   Trip.update(t5, {$push: { tags: tag3._id } })
-  //     .exec(function(err) {
-  //       if(err) console.log("error adding tag 3 to trip");
-  //     });              
-  // });
-  // var tag1 = new Tag({
-  //   text: "Paradise"
-  // });
-  // tag1.save(function(err) {
-  //   if(err) console.log("error saving tag 4 - paradise");
-  //   Trip.update(t3, {$push: { tags: tag1._id } })
-  //     .exec(function(err) {
-  //       if(err) console.log("error adding tag 4 to trip");
-  //     });
-  //   Trip.update(t4, {$push: { tags: tag1._id } })
-  //     .exec(function(err) {
-  //       if(err) console.log("error adding tag 4 to trip");
-  //     });  
-  // });  
+
+  tag3.save(function(err, tag3) {
+    if(err) console.log("error saving tag 3 - relaxation");
+    Trip.update({"_id": t2}, {$push: { tags: tag3._id } }, {upsert: true})
+      .exec(function(err) {
+        if(err) console.log("error adding tag 3 to trip");
+      });
+    Trip.update({"_id": t3}, {$push: { tags: tag3._id } }, {upsert: true})
+      .exec(function(err) {
+        if(err) console.log("error adding tag 3 to trip");
+      });  
+    Trip.update({"_id": t4}, {$push: { tags: tag3._id } }, {upsert: true})
+      .exec(function(err) {
+        if(err) console.log("error adding tag 3 to trip");
+      }); 
+    Trip.update({"_id": t5}, {$push: { tags: tag3._id } }, {upsert: true})
+      .exec(function(err) {
+        if(err) console.log("error adding tag 3 to trip");
+      });      
+    Tag.update({"_id": tag3}, {$push: {trips: t2._id}}, {upsert: true})
+      .exec(function(err, tag) {
+        if(err) console.log("error adding trip to tag");
+    });  
+    Tag.update({"_id": tag3}, {$push: {trips: t3._id}}, {upsert: true})
+      .exec(function(err, tag) {
+        if(err) console.log("error adding trip to tag");
+    });  
+    Tag.update({"_id": tag3}, {$push: {trips: t4._id}}, {upsert: true})
+      .exec(function(err, tag) {
+        if(err) console.log("error adding trip to tag");
+    });  
+    Tag.update({"_id": tag3}, {$push: {trips: t5._id}}, {upsert: true})
+      .exec(function(err, tag) {
+        if(err) console.log("error adding trip to tag");
+    });                                    
+  });
+
+  tag4.save(function(err, tag4) {
+    if(err) console.log("error saving tag 4 - paradise");
+    Trip.update({"_id": t3}, {$push: { tags: tag4._id } }, {upsert: true})
+      .exec(function(err) {
+        if(err) console.log("error adding tag 4 to trip");
+      });
+    Trip.update({"_id": t4}, {$push: { tags: tag4._id } }, {upsert: true})
+      .exec(function(err) {
+        if(err) console.log("error adding tag 4 to trip");
+      });  
+    Tag.update({"_id": tag4}, {$push: {trips: t3._id}}, {upsert: true})
+      .exec(function(err, tag) {
+        if(err) console.log("error adding trip to tag");
+    });  
+    Tag.update({"_id": tag4}, {$push: {trips: t4._id}}, {upsert: true})
+      .exec(function(err, tag) {
+        if(err) console.log("error adding trip to tag");
+    });        
+  });  
+
 }
