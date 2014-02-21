@@ -18,7 +18,8 @@ var TripSchema = new Schema({
   likes: [{ type: Schema.ObjectId, ref: 'Like' }],
   favorites: [{ type: Schema.ObjectId, ref: 'Favorite' }],
   tags: [{ type: Schema.ObjectId, ref: 'Tag' }],
-  comments: [{ type: Schema.ObjectId, ref: 'Comment' }]
+  comments: [{ type: Schema.ObjectId, ref: 'Comment' }],
+  featured: { type: Boolean, default: false}
 })
 
 /**
