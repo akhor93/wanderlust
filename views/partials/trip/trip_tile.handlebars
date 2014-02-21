@@ -7,11 +7,19 @@
     <div class="social_bar">
       <div class="social">
         <div class="social_num like_counter">{{likes.length}}</div>
-        <img class="social_buttons like_icon" src="/images/icon_822.png" alt="like-button" data-trip="{{this._id}}">
+        {{#if logged_in}}
+          <img class="social_buttons like_icon" src="/images/icon_822.png" alt="like-button" data-trip="{{this._id}}">
+        {{else}}
+          <img class="social_buttons like_icon" title="Login to like trips" src="/images/icon_822.png" alt="like-button" data-trip="{{this._id}}">
+        {{/if}}
       </div>
       <div class="social">
         <div class="social_num favorite_counter">{{favorites.length}}</div>
-        <img class="social_buttons favorite_icon" src="/images/better-pin.png" width="25" alt="favorite-button" data-trip="{{this._id}}">
+        {{#if logged_in}}
+          <img class="social_buttons favorite_icon" src="/images/better-pin.png" width="25" alt="favorite-button" data-trip="{{this._id}}">
+        {{else}}
+          <img class="social_buttons favorite_icon" title="Login to pin trips" src="/images/better-pin.png" width="25" alt="favorite-button" data-trip="{{this._id}}">
+        {{/if}}
       </div>
       <div class="social">
         <div class="social_num comment_counter">{{comments.length}}</div>
