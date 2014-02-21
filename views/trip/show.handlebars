@@ -1,3 +1,23 @@
+<div class="w-container">
+  <div class="margin-10">
+      <div class="w-clearfix prof_box">
+        <img class="prof_pic" src="{{user.profile_image}}" width="140" height="140" alt="prof-pic">
+        <div class="prof_info">
+          <h2>{{user.name}}</h2>
+          <p class="about_me">{{user.aboutMe}}</p>
+          <div class="social_bar">
+            <img class="social_buttons" src="/images/icon_1832.png" alt="52f38673ba5496e141000d86_icon_1832.png">
+            <div class="location">{{user.country}}&nbsp;&nbsp;</div>
+            <img class="social_buttons" src="/images/facebook.png" alt="52f38687593f6edf41000d09_facebook.png">
+            <img class="social_buttons" src="/images/twitter.png" alt="52f386ca5d8eed2b6b000e09_twitter.png">
+          </div>
+        </div>
+        <div class="prof_stats"><a class="button" href="#">Follow</a><a class="button" href="#">{{user.followers.length}} Followers</a><a class="button" href="#">{{user.following.length}} Following</a><a class="button" href="#">{{user.trips.length}} Trips</a>
+        </div>
+      </div>
+    </div>
+</div>  
+
 <div id="single_trip" class="container">
 	<span class="title">{{trip.title}}</span><span> @ {{trip.location}}</span>
 	<div id="trip_images" class="w-clearfix pictures">

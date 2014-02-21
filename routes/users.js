@@ -3,6 +3,7 @@ var SH = require("../lib/session_helper");
 var mongoose = require('mongoose');
 var User = mongoose.model('User');
 var CT = require("../modules/country-list");
+var Trip = mongoose.model('Trip');
 
 exports.edit = function(req, res) {
   SH.getSessionData(req.session.user, function(data) {
@@ -22,40 +23,53 @@ exports.edit = function(req, res) {
 }
 
 exports.show = function(req, res) {
-  SH.getSessionData(req.session.user, function(data) {
-    console.log("Starting data:");
-    console.log(data);
-    var all_trips = data.trips;
-    var user_trips = {
-      col0: [],
-      col1: [],
-      col2: [],
-      col3: [],
-      totalTrips: 0
-    };
-    var username = data.curuser.username;
-    var count = 0;
-    console.log("Username on users database: " + username);
-    for (var i = 0; i < all_trips.length; i++) {
-      var trip_username = all_trips[i].user.username;
-      // console.log("Username on trips database: " + trip_username);
-      if (trip_username == username) {
-        var col_name = "col" + (count % 4).toString();
-        var totalImages = all_trips[i]["image_small"].length + 1;
-        // console.log(totalImages);
-        all_trips[i]["totalImages"] = totalImages;
-        all_trips[i]["date"] = formatDate(all_trips[i]["date"]);
-        // console.log(all_trips[i]);
-        user_trips[col_name].push(all_trips[i]);
-        count++;
-      }
+  var userID = req.params.id;
+  var data = {};
+  async.parallel([
+    function(cb) {
+      User.findById(userID)
+        .populate('followers following')
+        .lean()
+        .exec(function(err, user) {
+          if(err) {
+            console.log("error couldn't find user: " + err);
+          } else {
+            data.user = user;
+            cb();      
+          }
+      });
+    },
+    function(cb) {
+      Trip.find({user: userID})
+        .populate('user likes favorites tags comments')
+        .lean()
+        .exec(function(err, trips) {
+          if(err) {
+            console.log("error couldn't find trips" + err);
+          } else {
+            var user_trips = {
+              col0: [],
+              col1: [],
+              col2: [],
+              col3: [],
+            };
+            for (var i = 0; i < trips.length; i++) {
+              var col_name = "col" + (i % 4).toString();
+              var totalImages = trips[i]["image_small"].length + 1;
+              trips[i]["totalImages"] = totalImages;
+              trips[i]["date"] = formatDate(trips[i]["date"]);
+              user_trips[col_name].push(trips[i]);
+            }
+            data.trips = user_trips;  
+            cb();          
+          }
+      }); 
     }
-    user_trips["totalTrips"] = count;
-    data.trips = user_trips;
-    console.log("Final data:");
+  ], function(err) {
     console.log(data);
     res.render('users/show', data);
   });
+
 }
 
 function formatDate(date) {
