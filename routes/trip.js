@@ -38,6 +38,7 @@ exports.show = function(req, res) {
         trip.num_favorites = trip.favorites.length;
         trip.num_tags = trip.tags.length;
         trip.num_comments = trip.comments.length;
+        if(trip.user._id == req.session.user._id) data.isowner = true;
         res.render('trip/show', data);
       });
     });
