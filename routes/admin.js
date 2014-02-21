@@ -106,51 +106,76 @@ exports.reset = function(req, res){
 };
 
 function initialize() {
-	var andrew = new User({
-    name      : 'Andrew Khor',
-    email     : 'akhor93@stanford.edu',
-    username  : 'akhor',
-    password  : 'gloving',
-    country   : 'United States',
-    profile_image: '/images/andrew.jpg'
+  var andrew;
+  var lucy;
+  async.parallel([
+    function(cb) {
+      andrew = new User({
+        name      : 'Andrew Khor',
+        email     : 'akhor93@stanford.edu',
+        username  : 'akhor',
+        password  : 'gloving',
+        country   : 'United States',
+        profile_image: '/images/andrew.jpg',
+        aboutMe: "Vivian's Mitch. I loooove One Direction."
+      });
+      andrew.save(function(err) {
+        if(err) console.log("error initializing andrew: " + err);
+        else cb();
+      });
+    },
+    function(cb) {
+      lucy = new User({
+        name      : 'Lucy Wang',
+        email     : 'lucywang@stanford.edu',
+        username  : 'lucywang',
+        password  : 'password',
+        country   : 'United States',
+        profile_image: '/images/profpic_venice_square.jpeg',
+        aboutMe: "Imperfection is beauty, madness is genius and it's better to be absolutely ridiculous than absolutely boring."
+      });
+      lucy.save(function(err) {
+        if(err) console.log("error initializing lucy" + err);
+        else cb();
+      });
+    }
+  ], function(err) {
+    createTrips(lucy, andrew);
   });
-  andrew.save(function(err) {
-  	if(err) console.log("error initializing andrew: " + err);
-  });
-  var lucy = new User({
-    name      : 'Lucy Wang',
-    email     : 'lucywang@stanford.edu',
-    username  : 'lucywang',
-    password  : 'password',
-    country   : 'United States',
-    profile_image: '/images/profpic_venice_square.jpeg'
-  });
-  lucy.save(function(err) {
-  	if(err) console.log("error initializing lucy");
-  });
+}
+
+function createTrips(lucy, andrew) {
   var t1 = new Trip({
-  	user: lucy._id,
-  	title: "San Francisco",
-  	date: "July 9, 2014",
-  	location: "San Francisco, CA",
-  	description: "Loved my trip to the Bay!",
+    user: lucy._id,
+    title: "San Francisco",
+    date: "July 9, 2014",
+    location: "San Francisco, CA",
+    description: "Loved my trip to the Bay!",
     image_large: "/images/goldengate.jpg",
-  	image_small: ["/images/fishermans-wharf.jpg", "/images/painted_ladies.jpg", "/images/clarion_alley.jpg", "/images/lands_end.jpg"]
+    image_small: ["/images/fishermans-wharf.jpg", "/images/painted_ladies.jpg", "/images/clarion_alley.jpg", "/images/lands_end.jpg"]
   });
-  t1.save(function(err) {
-  	if(err) console.log("error saving trip 1");
+  t1.save(function(err, t1) {
+    if(err) console.log("error saving trip 1");
+    User.update({"_id": lucy._id}, {$push: { trips: t1._id } }, {upsert: true})
+      .exec(function(err) {
+        if(err) console.log("error adding trip 1 to user lucy: " + err);
+      });    
   });
   var t2 = new Trip({
-  	user: lucy._id,
-  	title: "Venice",
-  	date: "June 6, 2013",
-  	location: "Venice, Italy",
-  	description: "My summer of art, music, and gelato.", 
+    user: lucy._id,
+    title: "Venice",
+    date: "June 6, 2013",
+    location: "Venice, Italy",
+    description: "My summer of art, music, and gelato.", 
     image_large: "/images/venice.jpg",
     image_small: ["/images/venice-gondola.jpg", "/images/venice_piazza.jpg", "/images/venice_flooded.jpg", "/images/venice_rialto-bridge.jpg"]
   });
-  t2.save(function(err) {
-  	if(err) console.log("error saving trip 2");
+  t2.save(function(err, t2) {
+    if(err) console.log("error saving trip 2");
+    User.update({"_id": lucy._id}, {$push: { trips: t2._id } }, {upsert: true})
+      .exec(function(err) {
+        if(err) console.log("error adding trip 2 to user lucy: " + err);
+      });     
   });
   var t3 = new Trip({
     user: lucy._id,
@@ -158,11 +183,15 @@ function initialize() {
     date: "April 4, 2013",
     location: "Greece",
     description: "Study abroad, Spring 2013 -- couldn't have asked for more.", 
-    image_large: "/images/greece_sunset.jpeg",
+    image_large: "/images/greece_sunset.jpg",
     image_small: ["/images/greece.jpg", "/images/greece_pier.jpeg", "/images/greece_ocean.jpeg", "/images/greece_athens.jpg"]
   });
-  t3.save(function(err) {
+  t3.save(function(err, t3) {
     if(err) console.log("error saving trip 3");
+    User.update({"_id": lucy._id}, {$push: { trips: t3._id } }, {upsert: true})
+      .exec(function(err) {
+        if(err) console.log("error adding trip 3 to user lucy: " + err);
+      });     
   });
   var t4 = new Trip({
     user: andrew._id,
@@ -173,8 +202,12 @@ function initialize() {
     image_large: "/images/tahiti.jpg",
     image_small: ["/images/tahiti_resort.jpg", "/images/tahiti_swimming.jpg", "/images/tahiti_turtle.jpg", "/images/tahiti_islanders.jpg"]
   });
-  t4.save(function(err) {
+  t4.save(function(err, t4) {
     if(err) console.log("error saving trip 4");
+    User.update({"_id": andrew._id}, {$push: { trips: t4._id } }, {upsert: true})
+      .exec(function(err) {
+        if(err) console.log("error adding trip 4 to user andrew: " + err);
+      });     
   });  
   var t5 = new Trip({
     user: andrew._id,
@@ -185,9 +218,13 @@ function initialize() {
     image_large: "/images/Paris_Large.jpg",
     image_small: ["/images/paris_arc.jpg", "/images/paris_bridge.jpg", "/images/paris_locks.jpg", "/images/paris_cafe.jpg"]
   });
-  t5.save(function(err) {
+  t5.save(function(err, t5) {
     if(err) console.log("error saving trip 5");
-  }); 
+    User.update({"_id": andrew._id}, {$push: { trips: t5._id } }, {upsert: true})
+      .exec(function(err) {
+        if(err) console.log("error adding trip 5 to user andrew: " + err);
+    });
+  });
   var featParis = new Trip({
     user: andrew._id,
     title: "French Adventure",
@@ -198,8 +235,10 @@ function initialize() {
     image_small: ["/images/ParisPic1.jpg", "/images/ParisPic2.jpg", "/images/ParisPic3.jpg", "/images/ParisPic4.jpg"],
     featured: true
   });
-  featParis.save(function(err) {
+  featParis.save(function(err, trip) {
     if(err) console.log("error saving featured Paris");
+    User.update({"_id": andrew._id}, {$push: { trips: trip._id } }, {upsert: true})
+      .exec(function(err) {});
   }); 
   var featMaldives = new Trip({
     user: andrew._id,
@@ -211,8 +250,10 @@ function initialize() {
     image_small: ["/images/MaldivesPic1.jpg", "/images/MaldivesPic2.jpg", "/images/MaldivesPic3.jpg", "/images/MaldivesPic4.jpg"],
     featured: true
   });
-  featMaldives.save(function(err) {
-    if(err) console.log("error saving featured maldives");
+  featMaldives.save(function(err, trip) {
+    if(err) console.log("error saving featured Maldives");
+    User.update({"_id": andrew._id}, {$push: { trips: trip._id } }, {upsert: true})
+      .exec(function(err) {});
   }); 
   var featTahoe = new Trip({
     user: andrew._id,
@@ -224,8 +265,10 @@ function initialize() {
     image_small: ["/images/TahoePic1.jpg", "/images/TahoePic2.jpg", "/images/TahoePic3.jpg", "/images/TahoePic4.jpg"],
     featured: true
   });
-  featTahoe.save(function(err) {
+  featTahoe.save(function(err, trip) {
     if(err) console.log("error saving featured Tahoe");
+    User.update({"_id": andrew._id}, {$push: { trips: trip._id } }, {upsert: true})
+      .exec(function(err) {});
   }); 
   var featEgypt = new Trip({
     user: andrew._id,
@@ -237,8 +280,10 @@ function initialize() {
     image_small: ["/images/EgyptPic1.jpg", "/images/EgyptPic2.jpg", "/images/EgyptPic3.jpg", "/images/EgyptPic4.jpg"],
     featured: true
   });
-  featEgypt.save(function(err) {
+  featEgypt.save(function(err, trip) {
     if(err) console.log("error saving featured Egypt");
+    User.update({"_id": andrew._id}, {$push: { trips: trip._id } }, {upsert: true})
+      .exec(function(err) {});
   }); 
   var featRio = new Trip({
     user: andrew._id,
@@ -250,10 +295,11 @@ function initialize() {
     image_small: ["/images/RioPic1.jpg", "/images/RioPic2.jpg", "/images/RioPic3.jpg", "/images/RioPic4.jpg"],
     featured: true
   });
-  featRio.save(function(err) {
+  featRio.save(function(err, trip) {
     if(err) console.log("error saving featured Rio");
+    User.update({"_id": andrew._id}, {$push: { trips: trip._id } }, {upsert: true})
+      .exec(function(err) {});
   }); 
-
 
   var tag1 = new Tag({
     text: "Adventure"
@@ -378,6 +424,5 @@ function initialize() {
       .exec(function(err, tag) {
         if(err) console.log("error adding trip to tag");
     });        
-  });  
-
+  });    
 }

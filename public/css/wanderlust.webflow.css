@@ -369,12 +369,13 @@ p {
   width: 40px;
   float: left;
 }
-.comment_box {
+.addcomment_box {
   position: static;
   width: 550px;
   height: 50px;
   padding: 5px;
   background-color: #e0e0e0;
+  margin-bottom: 10px;
 }
 .comment_form {
   position: static;
@@ -405,6 +406,14 @@ p {
 
 .inline_block {
   display: inline-block;
+}
+.title {
+  font-size: 24px;
+  line-height: 30px;
+  font-weight: 700;
+}
+.margin_top {
+  margin: 5px 0px 0px 0px;
 }
 @media (max-width: 767px) {
 }

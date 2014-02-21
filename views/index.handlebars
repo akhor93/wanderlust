@@ -3,97 +3,169 @@
 </div>
 
 <div class="w-container">
-    {{#each trips}}
-    <div class="w-clearfix news-item" id="trip_{{this._id}}">
-        <img class="prof_pic-small float-left" src="{{this.user.profile_image}}" alt="prof-pic">
-        <div class="float-left">
-            <h5 class="status"><strong>{{this.user.username}}</strong> added a new trip.</h5>
-            <div class="w-clearfix pictures">
-                <div class="row" style="max-height: 300px;">
-                    <div class="col-md-5">
-                        <img class="album-preview_large img-responsive" src="{{this.image_large}}" alt="album-preview_large">
-                    </div>
-                    <div class="col-md-7">
-                        {{#if this.image_small.[0]}}
-                            <img class="album-preview_small" src="{{this.image_small.[0]}}" alt="album-preview-small">
-                        {{/if}}
-                        {{#if this.image_small.[1]}}
-                            <img class="album-preview_small" src="{{this.image_small.[1]}}" alt="album-preview-small">
-                        {{/if}}
-                        {{#if this.image_small.[2]}}
-                            <img class="album-preview_small" src="{{this.image_small.[2]}}" alt="album-preview-small">
-                        {{/if}}
-                        {{#if this.image_small.[3]}}
-                            <img class="album-preview_small" src="{{this.image_small.[3]}}" alt="album-preview-small">
-                        {{/if}}
-                    </div>
-                </div>       
-                
-                              
-            </div>
-            <h3>{{this.location}}</h3>
-            <div>{{this.description}}</div>
-            <div class="w-clearfix social_bar">
-                <div class="trip_id" id="trip_{{this._id}}"></div>
-                <div class="w-clearfix social">
-                    <img class="social_buttons like_icon" src="images/icon_822.png" alt="like-button" data-trip="{{this._id}}">
-                  <div class="social_num">{{this.num_likes}}</div>
-                </div>
-                <div class="w-clearfix social">
-                    <a href="#" class="fav-button">
-                        <img class="social_buttons favorite_icon" src="images/better-pin.png" alt="favorite-button">
-                    </a>
-                    <div class="social_num">{{this.num_favorites}}</div>
-                </div>
-                <div class="w-clearfix social">
-                    <img class="social_buttons" src="images/comment.png" alt="comments-button">
-                    <div class="social_num">{{this.num_comments}}</div>
-                </div>
-            </div>
-            <div class="w-clearfix comment_box">
-                <img class="prof_pic-xsmall" src="images/blank-profile.jpg" alt="prof-pic">
-                <div class="w-form comment_form">
-                    <form name="email-form" data-name="Email Form">
-                        <input class="w-input" type="text" placeholder="Write a comment..." name="comment" data-name="Comment"></input>
-                    </form>
-                    <div class="w-form-done">
-                        <p>Thank you! Your submission has been received!</p>
-                    </div>
-                    <div class="w-form-fail">
-                        <p>Oops! Something went wrong while submitting the form :(</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    {{/each}}
+	{{#each trips}}
+		<div class="w-clearfix news-item" id="trip_{{_id}}">
+			<a href="user/{{user._id}}"><img class="prof_pic-small float-left" src="{{user.profile_image}}" alt="prof-pic"></a>
+			<div class="float-left">
+				<a href="user/{{user._id}}"><h5 class="status"><strong>{{user.username}}</strong></a> added a new trip.</h5>
+				<div class="w-clearfix pictures">
+					<div class="row" style="max-height: 300px;">
+						<div class="col-md-5">
+							<a class="fancybox" rel="group{{_id}}" href="{{image_large}}">
+                                <img class="album-preview_large img-responsive" src="{{image_large}}" alt="album-preview_large">
+                            </a>
+						</div>
+						<div class="col-md-7">
+							{{#if image_small.[0]}}
+								<a class="fancybox" rel="group{{_id}}" href="{{image_small.[0]}}">
+                                    <img class="album-preview_small" src="{{image_small.[0]}}" alt="album-preview-small">
+                                </a>
+							{{/if}}
+							{{#if image_small.[1]}}
+                                <a class="fancybox" rel="group{{_id}}" href="{{image_small.[1]}}">
+								    <img class="album-preview_small" src="{{image_small.[1]}}" alt="album-preview-small">
+                                </a>
+							{{/if}}
+							{{#if image_small.[2]}}
+                                <a class="fancybox" rel="group{{_id}}" href="{{image_small.[2]}}">
+								    <img class="album-preview_small" src="{{image_small.[2]}}" alt="album-preview-small">
+                                </a>
+							{{/if}}
+							{{#if image_small.[3]}}
+                                <a class="fancybox" rel="group{{_id}}" href="{{image_small.[3]}}">
+                                    <img class="album-preview_small" src="{{image_small.[3]}}" alt="album-preview-small">
+                                </a>
+							{{/if}}
+						</div>
+					</div>             
+				</div>
+				<div class="margin_top"><span class="title">{{title}}</span><span> @ {{location}}</span></div>
+				<div>{{description}}</div>
+				<div class="w-clearfix social_bar">
+					<div class="trip_id" id="trip_{{_id}}"></div>
+					<div class="w-clearfix social">
+						<img class="social_buttons like_icon" src="images/icon_822.png" alt="like-button" data-trip="{{_id}}">
+						<div class="social_num like_counter">{{num_likes}}</div>
+					</div>
+					<div class="w-clearfix social">
+						<img class="social_buttons favorite_icon" src="images/star.png" alt="favorite-button" data-trip="{{this._id}}">
+						<div class="social_num favorite_counter">{{this.num_favorites}}</div>
+					</div>
+					<div class="w-clearfix social">
+						<img class="social_buttons" src="images/comment.png" alt="comments-button">
+						<div class="social_num comment_counter">{{num_comments}}</div>
+					</div>
+				</div>
+				{{#if comments.[0]}}
+				<div class="comment_box">
+					{{#each comments}}
+						{{> comment this}}
+					{{/each}}
+				</div>
+				{{/if}}
+				<div class="w-clearfix addcomment_box">
+					{{#if ../curuser}}
+						<img class="prof_pic-xsmall" src="{{../../curuser.profile_image}}" alt="prof-pic">
+						<div class="w-form comment_form">
+							<form class="comment_form" method="post">
+								<input type="hidden" name="trip_id" value="{{_id}}" />
+								<input class="w-input" type="text" placeholder="Write a comment..." name="text"></input>
+							</form>
+						</div>
+					{{else}}
+						<input class="w-input" type="text" placeholder="Login to write a comment..." disabled></input>
+					{{/if}}
+				</div>
+			</div>
+		</div>
+	{{/each}}
 </div>
 
 <script type="text/javascript">
 $(document).ready(function() {
-    function incrementLikes(tripID) {
-        var num_likes = parseInt($('#trip_' + tripID + ' .like_icon').html(), 10);
-        num_likes += 1;
-        $('#trip_' + tripID + ' .like_icon').html(num_likes);
-        }
+    $('a.fancybox').fancybox();
+	$('.comment_form').ajaxForm({
+		url: '/add_comment',
+		success: function(responseText, status, xhr, $form) {
+			if (status == 'success') append_comment(responseText);
+		},
+		error: function(e) {
+			console.log("error: " + e.responseText);
+		}
+	});
 
-        $('.like_icon').click(function() {
+	function append_comment(comment) {
+		var trip_id = comment.trip._id;
+		var tripdiv = '#trip_' + trip_id;
+		console.log(tripdiv);
+		var comment_box_html = '<div class="comment row">';
+		if($(tripdiv + ' .comment_box .comment').length > 0) {
+			comment_box_html += '<hr style="margin-bottom: 2px; margin-top:2px;"/>';
+		}
+		comment_box_html += '<div class="col-md-1">';
+		comment_box_html += '<img src="' + comment.user.profile_image + '" class="prof_pic-small" />';
+		comment_box_html += '</div>';
+		comment_box_html += '<div class="col-md-10">';
+		comment_box_html += '<a href="user/' + comment.user._id + '">' + comment.user.username + '</a> ' + comment.text;
+		comment_box_html += '<br /> X hours ago';
+		comment_box_html += '</div>';
+		comment_box_html += '</div>';
+		$(tripdiv + ' .comment_box').append(comment_box_html);
+
+		var num_comments = parseInt($(tripdiv + ' .comments_counter').html(), 10);
+		num_comments += 1;
+		$(tripdiv + ' .comments_counter').html(num_comments);
+	}
+
+	function incrementLikes(tripID) {
+		var num_likes = parseInt($('#trip_' + tripID + ' .like_counter').html(), 10);
+		num_likes += 1;
+		$('#trip_' + tripID + ' .like_counter').html(num_likes);
+	}
+
+	$('.like_icon').click(function() {
+		var tripID = $(this).attr("data-trip");
+		var data = {
+			"tripID": tripID
+		};
+		var options = {
+			type: "POST",
+			url: "/like_trip",
+			data: data
+		};
+		$.ajax(options)
+		.done(function(data) {
+			incrementLikes(data);
+		})
+		.fail(function(msg) {
+			console.log(msg.responseText);
+		});
+	});
+
+    function incrementFavorites(tripID) {
+        var num_favorites = parseInt($('#trip_' + tripID + ' .favorite_counter').html(), 10);
+        num_favorites += 1;
+        $('#trip_' + tripID + ' .favorite_counter').html(num_favorites);
+    }
+
+    $('.favorite_icon').click(function() {
+        var tripID = $(this).attr("data-trip");
         var data = {
-            "tripID": "{{trip._id}}"
+          "tripID": tripID
         };
         var options = {
-            type: "POST",
-            url: "/like_trip",
-            data: data
+          type: "POST",
+          url: "/favorite_trip",
+          data: data
         };
         $.ajax(options)
         .done(function(data) {
-            console.log("success" + data);
-            incrementLikes();
+          incrementFavorites(data);
         })
         .fail(function(msg) {
-            console.log("fail" + msg.responseText);
+          console.log(msg.responseText);
         });
     });
-}
+
+});
 </script>

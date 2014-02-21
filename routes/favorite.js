@@ -46,6 +46,6 @@ exports.create = function(req, res) {
 		})
 	}
 	else {
-		res.send("must be logged in to like", 400);
+		res.send("must be logged in to favorite", 400);
 	}
 }

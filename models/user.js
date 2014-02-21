@@ -19,8 +19,14 @@ var UserSchema = new Schema({
   createdAt: { type: Date, default: Date.now },
   aboutMe: {type: String, default: '' },
   profile_image: {type: String, default: '/images/blank-profile.jpg' },
+  trips: [{type: Schema.ObjectId, ref: 'Trip'}],
+  likes: [{type: Schema.ObjectId, ref: 'Like'}],
+  favorites: [{type: Schema.ObjectId, ref: 'Favorite'}],
+  comments: [{type: Schema.ObjectId, ref: 'Comment'}],
   following: [{ type: Schema.ObjectId, ref: 'User' }],
-  followers: [{ type: Schema.ObjectId, ref: 'User' }]
+  followers: [{ type: Schema.ObjectId, ref: 'User' }],
+  created_at: { type: Date },
+  updated_at: { type: Date }
 })
 
 /**
@@ -87,9 +93,12 @@ UserSchema.pre('save', function(next) {
   if (!validatePresenceOf(this.password))
     next(new Error('Invalid password'));
   if(this.username == 'akhor' || this.username == 'lucywang') this.admin = true;
+  this.updated_at = new Date;
+  if ( !this.created_at ) {
+    this.created_at = new Date;
+  }
   next();
 });
-
 
 /**
  * Methods

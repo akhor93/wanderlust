@@ -166,3 +166,11 @@ have a fixed width and height (but it's not required).
     -moz-box-shadow: 0 0 2px #F0EFE7;
     box-shadow: 0 0 2px #F0EFE7;
 }
+
+.like_icon:hover {
+    cursor: pointer;
+}
+
+.favorite_icon:hover {
+    cursor: pointer;
+}

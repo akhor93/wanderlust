@@ -4,7 +4,7 @@ var mongoose = require('mongoose');
 // var Comment = mongoose.model('Comment');
 var User = mongoose.model('User');
 var Trip = mongoose.model('Trip');
-var Like = mongoose.model('Like');
+var Favorite = mongoose.model('Favorite');
 
 exports.create = function(req, res) {
 	if(req.session.user) {
@@ -12,27 +12,27 @@ exports.create = function(req, res) {
 		var userID = req.session.user._id;
 		async.parallel([
 			function(cb) {
-				Like.find({user: userID, trip: tripID}, function(err, like) {
-					if(like.length > 0) {
-						return cb("Already liked");
+				Favorite.find({user: userID, trip: tripID}, function(err, favorite) {
+					if(favorite.length > 0) {
+						return cb("Already favorited");
 					}
 					cb();
 				})
 			}
 		], function(err) {
 			if(err) return res.send(err, 400);
-			var like = new Like({
+			var favorite = new Favorite({
 				user: userID,
 				trip: tripID,
 			});
-			like.save(function(err, saved_like) {
-				if(err) return res.send("unable to save like", 400);
+			favorite.save(function(err, saved_favorite) {
+				if(err) return res.send("unable to save favorite", 400);
 				async.parallel([
 					function(cb) {
-						Trip.update({_id: tripID}, {$push: { 'likes': saved_like._id}})
+						Trip.update({_id: tripID}, {$push: { 'favorites': saved_favorite._id}})
 						.exec(function(err, trip){
 							if(err) {
-								console.log('Could not update trip with like: ' + err);
+								console.log('Could not update trip with favorite: ' + err);
 								return cb(err);
 							}
 							cb();
@@ -46,6 +46,6 @@ exports.create = function(req, res) {
 		})
 	}
 	else {
-		res.send("must be logged in to like", 400);
+		res.send("must be logged in to favorite", 400);
 	}
 }

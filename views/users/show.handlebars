@@ -1,293 +1,98 @@
-{{#if user}}
 <div class="w-container">
   <div class="margin-10">
       <div class="w-clearfix prof_box">
-        <img class="prof_pic" src="images/blank-profile.jpg" width="140" height="140" alt="prof-pic">
+        <img class="prof_pic" src="{{user.profile_image}}" width="140" height="140" alt="prof-pic">
         <div class="prof_info">
           <h2>{{user.name}}</h2>
-          <p class="about_me">Add your "About Me".</p>
+          <p class="about_me">{{user.aboutMe}}</p>
           <div class="social_bar">
-            <img class="social_buttons" src="images/icon_1832.png" alt="52f38673ba5496e141000d86_icon_1832.png">
+            <img class="social_buttons" src="/images/icon_1832.png" alt="52f38673ba5496e141000d86_icon_1832.png">
             <div class="location">{{user.country}}&nbsp;&nbsp;</div>
-            <img class="social_buttons" src="images/facebook.png" alt="52f38687593f6edf41000d09_facebook.png">
-            <img class="social_buttons" src="images/twitter.png" alt="52f386ca5d8eed2b6b000e09_twitter.png">
+            <img class="social_buttons" src="/images/facebook.png" alt="52f38687593f6edf41000d09_facebook.png">
+            <img class="social_buttons" src="/images/twitter.png" alt="52f386ca5d8eed2b6b000e09_twitter.png">
           </div>
         </div>
-        <div class="prof_stats"><a class="button" href="#">Follow</a><a class="button" href="#">{{user.followers.length}} Followers</a><a class="button" href="#">{{user.following.length}} Following</a><a class="button" href="#">{{trips.totalTrips}} Trips</a>
+        <div class="prof_stats"><a class="button" href="#">Follow</a><a class="button" href="#">{{user.followers.length}} Followers</a><a class="button" href="#">{{user.following.length}} Following</a><a class="button" href="#">{{user.trips.length}} Trips</a>
         </div>
       </div>
     </div>
 </div>  
+
 <div class="w-row trip_pane">
   <div class="w-col w-col-3 w-clearfix column">
-  {{#each trips.col0}}
-    <div class="trip">
-      <img class="trip_cover_photo" src="{{images.[0]}}" alt="trip-cover-photo">
-      <div class="trip_box_info">
-        <h3>{{location}}</h3>
-        <h5>{{date}}</h5>
-        <h6>{{images.length}} photos</h6>
-        <div class="social_bar">
-          <div class="social">
-            <div class="social_num">{{num_likes}}</div>
-            <img class="social_buttons" class="like-button" src="images/icon_822.png" alt="like-button">
-          </div>
-          <div class="social">
-            <div class="social_num">{{num_fav}}</div>
-            <img class="social_buttons" class="fav-button" src="images/star.png" width="25" alt="favorite-button">
-          </div>
-          <div class="social">
-            <div class="social_num">{{comments.length}}</div>
-            <img class="social_buttons" src="images/comment.png" alt="comments-button">
-          </div>
-        </div>
-      </div>
-    </div>
+    {{#each trips.col0}}
+      {{> trip/trip_tile this}}
     {{/each}}
   </div>
 
   <div class="w-col w-col-3 column">
-  {{#each trips.col1}}
-    <div class="trip">
-      <img class="trip_cover_photo" src="{{images.[0]}}" alt="trip-cover-photo">
-      <div class="trip_box_info">
-        <h3>{{location}}</h3>
-        <h5>{{date}}</h5>
-        <h6>{{images.length}} photos</h6>
-        <div class="social_bar">
-          <div class="social">
-            <div class="social_num">{{num_likes}}</div>
-            <img class="social_buttons" class="like-button" src="images/icon_822.png" alt="like-button">
-          </div>
-          <div class="social">
-            <div class="social_num">{{num_fav}}</div>
-            <img class="social_buttons" class="fav-button" src="images/star.png" width="25" alt="favorite-button">
-          </div>
-          <div class="social">
-            <div class="social_num">{{comments.length}}</div>
-            <img class="social_buttons" src="images/comment.png" alt="comments-button">
-          </div>
-        </div>
-      </div>
-    </div>
+    {{#each trips.col1}}
+      {{> trip/trip_tile this}}
     {{/each}}
   </div>
 
   <div class="w-col w-col-3 column">
-  {{#each trips.col2}}
-    <div class="trip">
-      <img class="trip_cover_photo" src="{{images.[0]}}" alt="trip-cover-photo">
-      <div class="trip_box_info">
-        <h3>{{location}}</h3>
-        <h5>{{date}}</h5>
-        <h6>{{images.length}} photos</h6>
-        <div class="social_bar">
-          <div class="social">
-            <div class="social_num">{{num_likes}}</div>
-            <img class="social_buttons" class="like-button" src="images/icon_822.png" alt="like-button">
-          </div>
-          <div class="social">
-            <div class="social_num">{{num_fav}}</div>
-            <img class="social_buttons" class="fav-button" src="images/star.png" width="25" alt="favorite-button">
-          </div>
-          <div class="social">
-            <div class="social_num">{{comments.length}}</div>
-            <img class="social_buttons" src="images/comment.png" alt="comments-button">
-          </div>
-        </div>
-      </div>
-    </div>
+    {{#each trips.col2}}
+      {{> trip/trip_tile this}}
     {{/each}}
   </div>
 
   <div class="w-col w-col-3 column">
-  {{#each trips.col3}}
-    <div class="trip">
-      <img class="trip_cover_photo" src="{{images.[0]}}" alt="trip-cover-photo">
-      <div class="trip_box_info">
-        <h3>{{location}}</h3>
-        <h5>{{date}}</h5>
-        <h6>{{images.length}} photos</h6>
-        <div class="social_bar">
-          <div class="social">
-            <div class="social_num">{{num_likes}}</div>
-            <img class="social_buttons" class="like-button" src="images/icon_822.png" alt="like-button">
-          </div>
-          <div class="social">
-            <div class="social_num">{{num_fav}}</div>
-            <img class="social_buttons" class="fav-button" src="images/star.png" width="25" alt="favorite-button">
-          </div>
-          <div class="social">
-            <div class="social_num">{{comments.length}}</div>
-            <img class="social_buttons" src="images/comment.png" alt="comments-button">
-          </div>
-        </div>
-      </div>
-    </div>
+    {{#each trips.col3}}
+      {{> trip/trip_tile this}}
     {{/each}}
   </div>
 
- {{!--     <div class="trip">
-      <img class="trip_cover_photo" src="images/greece.jpg" alt="52f3520d593f6edf4100096b_greece.jpg">
-      <div class="trip_box_info">
-        <h3>Greece</h3>
-        <h5>March 13, 2012</h5>
-        <h6>65 photos</h6>
-        <div class="social_bar">
-          <div class="social">
-            <div class="social_num">38</div>
-            <img class="social_buttons" src="images/icon_822.png" alt="52f34cb6593f6edf4100093d_icon_822.png">
-          </div>
-          <div class="social">
-            <div class="social_num">7</div>
-            <img class="social_buttons" src="images/star.png" width="25" alt="52f34cbfba5496e1410009ac_star.png">
-          </div>
-          <div class="social">
-            <div class="social_num">11</div>
-            <img class="social_buttons" src="images/comment.png" alt="52f34cccba5496e1410009ad_comment.png">
-          </div>
-        </div>
-      </div>
-    </div>
-  </div> --}}
-{{!--     <div class="trip">
-      <img class="trip_cover_photo" src="images/tahiti.jpg" alt="52f3505273df7f296b0007de_tahiti.jpg">
-      <div class="trip_box_info">
-        <h3>Tahiti</h3>
-        <h5>March 13, 2012</h5>
-        <h6>65 photos</h6>
-        <div class="social_bar">
-          <div class="social">
-            <div class="social_num">38</div>
-            <img class="social_buttons" src="images/icon_822.png" alt="52f34cb6593f6edf4100093d_icon_822.png">
-          </div>
-          <div class="social">
-            <div class="social_num">7</div>
-            <img class="social_buttons" src="images/star.png" width="25" alt="52f34cbfba5496e1410009ac_star.png">
-          </div>
-          <div class="social">
-            <div class="social_num">11</div>
-            <img class="social_buttons" src="images/comment.png" alt="52f34cccba5496e1410009ad_comment.png">
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="trip">
-      <img class="trip_cover_photo" src="images/amalfi.jpg" alt="52f33f16593f6edf410008ca_amalfi.jpg">
-      <div class="trip_box_info">
-        <h3>Amalfi, Italy</h3>
-        <h5>March 13, 2012</h5>
-        <h6>65 photos</h6>
-        <div class="social_bar">
-          <div class="social">
-            <div class="social_num">38</div>
-            <img class="social_buttons" src="images/icon_822.png" alt="52f34cb6593f6edf4100093d_icon_822.png">
-          </div>
-          <div class="social">
-            <div class="social_num">7</div>
-            <img class="social_buttons" src="images/star.png" width="25" alt="52f34cbfba5496e1410009ac_star.png">
-          </div>
-          <div class="social">
-            <div class="social_num">11</div>
-            <img class="social_buttons" src="images/comment.png" alt="52f34cccba5496e1410009ad_comment.png">
-          </div>
-        </div>
-      </div>
-    </div> --}}
+<script type="text/javascript">
+$(document).ready(function() {
+  function incrementLikes(tripID) {
+    var num_likes = parseInt($('#trip_' + tripID + ' .like_counter').html(), 10);
+    num_likes += 1;
+    $('#trip_' + tripID + ' .like_counter').html(num_likes);
+  }
 
-{{!--   <div class="w-col w-col-3 column">
-    <div class="trip">
-      <img class="trip_cover_photo" src="images/venice.jpg" alt="52f3524d73df7f296b00080e_venice.jpg">
-      <div class="trip_box_info">
-        <h3>Venice, Italy</h3>
-        <h5>March 13, 2012</h5>
-        <h6>65 photos</h6>
-        <div class="social_bar">
-          <div class="social">
-            <div class="social_num">38</div>
-            <img class="social_buttons" src="images/icon_822.png" alt="52f34cb6593f6edf4100093d_icon_822.png">
-          </div>
-          <div class="social">
-            <div class="social_num">7</div>
-            <img class="social_buttons" src="images/star.png" width="25" alt="52f34cbfba5496e1410009ac_star.png">
-          </div>
-          <div class="social">
-            <div class="social_num">11</div>
-            <img class="social_buttons" src="images/comment.png" alt="52f34cccba5496e1410009ad_comment.png">
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="trip">
-      <img class="trip_cover_photo" src="images/venice.jpg" alt="52f3524d73df7f296b00080e_venice.jpg">
-      <div class="trip_box_info">
-        <h3>Venice, Italy</h3>
-        <h5>March 13, 2012</h5>
-        <h6>65 photos</h6>
-        <div class="social_bar">
-          <div class="social">
-            <div class="social_num">38</div>
-            <img class="social_buttons" src="images/icon_822.png" alt="52f34cb6593f6edf4100093d_icon_822.png">
-          </div>
-          <div class="social">
-            <div class="social_num">7</div>
-            <img class="social_buttons" src="images/star.png" width="25" alt="52f34cbfba5496e1410009ac_star.png">
-          </div>
-          <div class="social">
-            <div class="social_num">11</div>
-            <img class="social_buttons" src="images/comment.png" alt="52f34cccba5496e1410009ad_comment.png">
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="w-col w-col-3 column">
-    <div class="trip">
-      <img class="trip_cover_photo" src="images/tahiti.jpg" alt="52f3505273df7f296b0007de_tahiti.jpg">
-      <div class="trip_box_info">
-        <h3>Tahiti</h3>
-        <h5>March 13, 2012</h5>
-        <h6>65 photos</h6>
-        <div class="social_bar">
-          <div class="social">
-            <div class="social_num">38</div>
-            <img class="social_buttons" src="images/icon_822.png" alt="52f34cb6593f6edf4100093d_icon_822.png">
-          </div>
-          <div class="social">
-            <div class="social_num">7</div>
-            <img class="social_buttons" src="images/star.png" width="25" alt="52f34cbfba5496e1410009ac_star.png">
-          </div>
-          <div class="social">
-            <div class="social_num">11</div>
-            <img class="social_buttons" src="images/comment.png" alt="52f34cccba5496e1410009ad_comment.png">
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="trip">
-      <img class="trip_cover_photo" src="images/tahiti.jpg" alt="52f3505273df7f296b0007de_tahiti.jpg">
-      <div class="trip_box_info">
-        <h3>Tahiti</h3>
-        <h5>March 13, 2012</h5>
-        <h6>65 photos</h6>
-        <div class="social_bar">
-          <div class="social">
-            <div class="social_num">38</div>
-            <img class="social_buttons" src="images/icon_822.png" alt="52f34cb6593f6edf4100093d_icon_822.png">
-          </div>
-          <div class="social">
-            <div class="social_num">7</div>
-            <img class="social_buttons" src="images/star.png" width="25" alt="52f34cbfba5496e1410009ac_star.png">
-          </div>
-          <div class="social">
-            <div class="social_num">11</div>
-            <img class="social_buttons" src="images/comment.png" alt="52f34cccba5496e1410009ad_comment.png">
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div> --}}
-{{else}}
-<div><p>You must be logged in to see your trips.</p></div>
-{{/if}}
+  $('.like_icon').click(function() {
+    var tripID = $(this).attr("data-trip");
+    var data = {
+      "tripID": tripID
+    };
+    var options = {
+      type: "POST",
+      url: "/like_trip",
+      data: data
+    };
+    $.ajax(options)
+    .done(function(data) {
+      incrementLikes(data);
+    })
+    .fail(function(msg) {
+      console.log(msg.responseText);
+    });
+  });
+
+  function incrementFavorites(tripID) {
+    var num_favorites = parseInt($('#trip_' + tripID + ' .favorite_counter').html(), 10);
+    num_favorites += 1;
+    $('#trip_' + tripID + ' .favorite_counter').html(num_favorites);
+  }
+
+  $('.favorite_icon').click(function() {
+    var tripID = $(this).attr("data-trip");
+    var data = {
+      "tripID": tripID
+    };
+    var options = {
+      type: "POST",
+      url: "/favorite_trip",
+      data: data
+    };
+    $.ajax(options)
+    .done(function(data) {
+      incrementFavorites(data);
+    })
+    .fail(function(msg) {
+      console.log(msg.responseText);
+    });
+  });  
+});
+</script>
