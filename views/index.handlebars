@@ -64,14 +64,14 @@
 						<div class="social_num comment_counter">{{num_comments}}</div>
 					</div>
 				</div>
-				{{#if comments.[0]}}
-				<div class="comment_box">
+{{!-- 				{{#if comments.[0]}}
+ --}}				<div class="comment_box">
 					{{#each comments}}
 						{{> comment this}}
 					{{/each}}
 				</div>
-				{{/if}}
-				<div class="w-clearfix addcomment_box">
+{{!-- 				{{/if}}
+ --}}				<div class="w-clearfix addcomment_box">
 					{{#if ../curuser}}
 						<img class="prof_pic-xsmall" src="{{../../curuser.profile_image}}" alt="prof-pic">
 						<div class="w-form comment_form">
