@@ -1,32 +1,7 @@
-{{!-- <a href="/trip/{{this._id}}">
-  <div class="trip" id="trip_{{this._id}}">
-    <img class="trip_cover_photo" src="{{image_large}}" alt="trip-cover-photo">
-    <div class="trip_box_info">
-      <h3>{{title}}</h3>
-      <h5>{{date}}</h5>
-      <h6>{{totalImages}} photos</h6>
-      <div class="social_bar">
-        <div class="social">
-          <div class="social_num like_counter">{{likes.length}}</div>
-          <img class="social_buttons like_icon" src="/images/icon_822.png" alt="like-button" data-trip="{{this._id}}">
-        </div>
-        <div class="social">
-          <div class="social_num favorite_counter">{{favorites.length}}</div>
-          <img class="social_buttons favorite_icon" src="/images/star.png" width="25" alt="favorite-button" data-trip="{{this._id}}">
-        </div>
-        <div class="social">
-          <div class="social_num comment_counter">{{comments.length}}</div>
-          <img class="social_buttons" src="/images/comment.png" alt="comments-button">
-        </div>
-      </div>
-    </div>
-  </div>
-</a> --}}
-
 <div class="trip" id="trip_{{this._id}}">
-  <a href="../trip/{{this._id}}"><img class="trip_cover_photo" src="{{image_large}}" alt="trip-cover-photo"></a>
+  <a href="/trip/{{this._id}}"><img class="trip_cover_photo" src="{{image_large}}" alt="trip-cover-photo"></a>
   <div class="trip_box_info">
-    <a href="../trip/{{this._id}}"><h3>{{title}}</h3></a>
+    <a href="/trip/{{this._id}}"><h3>{{title}}</h3></a>
     <h5>{{date}}</h5>
     <h6>{{totalImages}} photos</h6>
     <div class="social_bar">
@@ -36,11 +11,11 @@
       </div>
       <div class="social">
         <div class="social_num favorite_counter">{{favorites.length}}</div>
-        <img class="social_buttons favorite_icon" src="/images/star.png" width="25" alt="favorite-button" data-trip="{{this._id}}">
+        <img class="social_buttons favorite_icon" src="/images/better-pin.png" width="25" alt="favorite-button" data-trip="{{this._id}}">
       </div>
       <div class="social">
         <div class="social_num comment_counter">{{comments.length}}</div>
-        <img class="social_buttons" src="/images/comment.png" alt="comments-button">
+        <a href="/trip/{{this._id}}"><img class="social_buttons" src="/images/comment.png" alt="comments-button"></a>
       </div>
     </div>
   </div>

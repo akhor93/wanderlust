@@ -39,7 +39,7 @@
 						</div>
 					</div>             
 				</div>
-				<div class="margin_top"><span class="title">{{title}}</span><span> @ {{location}}</span></div>
+				<div class="margin_top"><span class="title"><a href="trip/{{_id}}">{{title}}</a></span><span> @ {{location}}</span></div>
 				<div>{{description}}</div>
 				<div class="w-clearfix social_bar">
 					<div class="trip_id" id="trip_{{_id}}"></div>
@@ -48,7 +48,7 @@
 						<div class="social_num like_counter">{{num_likes}}</div>
 					</div>
 					<div class="w-clearfix social">
-						<img class="social_buttons favorite_icon" src="images/star.png" alt="favorite-button" data-trip="{{this._id}}">
+						<img class="social_buttons favorite_icon" src="images/better-pin.png" alt="favorite-button" data-trip="{{this._id}}">
 						<div class="social_num favorite_counter">{{this.num_favorites}}</div>
 					</div>
 					<div class="w-clearfix social">
