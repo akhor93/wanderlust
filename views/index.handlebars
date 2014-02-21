@@ -36,18 +36,16 @@
             <div class="w-clearfix social_bar">
                 <div class="trip_id" id="trip_{{this._id}}"></div>
                 <div class="w-clearfix social">
-                  <div class="social_num">{{this.num_likes}}</div>
                     <img class="social_buttons like_icon" src="images/icon_822.png" alt="like-button" data-trip="{{this._id}}">
+                    <div class="social_num like_counter">{{this.num_likes}}</div>
                 </div>
                 <div class="w-clearfix social">
-                    <div class="social_num">{{this.num_favorites}}</div>
-                    <a href="#" class="fav-button">
-                        <img class="social_buttons favorite_icon" src="images/star.png" alt="favorite-button">
-                    </a>
+                    <img class="social_buttons favorite_icon" src="images/star.png" alt="favorite-button">
+                    <div class="social_num favorite_counter">{{this.num_favorites}}</div>
                 </div>
                 <div class="w-clearfix social">
-                    <div class="social_num">{{this.num_comments}}</div>
                     <img class="social_buttons" src="images/comment.png" alt="comments-button">
+                    <div class="social_num comment_counter">{{this.num_comments}}</div>
                 </div>
             </div>
             <div class="w-clearfix comment_box">
@@ -72,14 +70,15 @@
 <script type="text/javascript">
 $(document).ready(function() {
     function incrementLikes(tripID) {
-        var num_likes = parseInt($('#trip_' + tripID + ' .like_icon').html(), 10);
+        var num_likes = parseInt($('#trip_' + tripID + ' .like_counter').html(), 10);
         num_likes += 1;
-        $('#trip_' + tripID + ' .like_icon').html(num_likes);
-        }
+        $('#trip_' + tripID + ' .like_counter').html(num_likes);
+    }
 
-        $('.like_icon').click(function() {
+    $('.like_icon').click(function() {
+        var tripID = $(this).attr("data-trip");
         var data = {
-            "tripID": "{{trip._id}}"
+            "tripID": tripID
         };
         var options = {
             type: "POST",
@@ -88,12 +87,11 @@ $(document).ready(function() {
         };
         $.ajax(options)
         .done(function(data) {
-            console.log("success" + data);
-            incrementLikes();
+            incrementLikes(data);
         })
         .fail(function(msg) {
-            console.log("fail" + msg.responseText);
+            console.log(msg.responseText);
         });
     });
-}
+});
 </script>
