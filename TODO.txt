@@ -1,2 +1,4 @@
 1. Make pages unaccessible if user based on login status
 2. Allow user to change password
+3. Error handling when user is not logged in for liking, favoriting, commenting, etc.
+4. Fix "X days ago" for comment

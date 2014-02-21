@@ -108,6 +108,7 @@ exports.reset = function(req, res){
 function initialize() {
   var andrew;
   var lucy;
+  var adrian;
   async.parallel([
     function(cb) {
       andrew = new User({
@@ -120,6 +121,21 @@ function initialize() {
         aboutMe: "Vivian's Mitch. I loooove One Direction."
       });
       andrew.save(function(err) {
+        if(err) console.log("error initializing andrew: " + err);
+        else cb();
+      });
+    },
+    function(cb) {
+      adrian = new User({
+        name      : 'Adrian Rodriguez',
+        email     : 'arod2016@stanford.edu',
+        username  : 'Adrian',
+        password  : 'pass',
+        country   : 'United States',
+        profile_image: '/images/Adrian.JPG',
+        aboutMe: "Single handedly coded this entire website."
+      });
+      adrian.save(function(err) {
         if(err) console.log("error initializing andrew: " + err);
         else cb();
       });
@@ -241,7 +257,7 @@ function createTrips(lucy, andrew) {
       .exec(function(err) {});
   }); 
   var featMaldives = new Trip({
-    user: andrew._id,
+    user: adrian._id,
     title: "Maldives",
     date: "June 10, 2011",
     location: "Republic of the Maldives",
@@ -252,7 +268,7 @@ function createTrips(lucy, andrew) {
   });
   featMaldives.save(function(err, trip) {
     if(err) console.log("error saving featured Maldives");
-    User.update({"_id": andrew._id}, {$push: { trips: trip._id } }, {upsert: true})
+    User.update({"_id": adr._id}, {$push: { trips: trip._id } }, {upsert: true})
       .exec(function(err) {});
   }); 
   var featTahoe = new Trip({
@@ -271,7 +287,7 @@ function createTrips(lucy, andrew) {
       .exec(function(err) {});
   }); 
   var featEgypt = new Trip({
-    user: andrew._id,
+    user: adrian._id,
     title: "Giza",
     date: "May 1, 2012",
     location: "Giza, Egypt",
@@ -282,11 +298,11 @@ function createTrips(lucy, andrew) {
   });
   featEgypt.save(function(err, trip) {
     if(err) console.log("error saving featured Egypt");
-    User.update({"_id": andrew._id}, {$push: { trips: trip._id } }, {upsert: true})
+    User.update({"_id": adrian._id}, {$push: { trips: trip._id } }, {upsert: true})
       .exec(function(err) {});
   }); 
   var featRio = new Trip({
-    user: andrew._id,
+    user: ad._id,
     title: "Rio",
     date: "March, 2012",
     location: "Rio de Janeiro, France",
@@ -297,7 +313,7 @@ function createTrips(lucy, andrew) {
   });
   featRio.save(function(err, trip) {
     if(err) console.log("error saving featured Rio");
-    User.update({"_id": andrew._id}, {$push: { trips: trip._id } }, {upsert: true})
+    User.update({"_id": adrian._id}, {$push: { trips: trip._id } }, {upsert: true})
       .exec(function(err) {});
   }); 
 
