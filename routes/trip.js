@@ -10,35 +10,35 @@ var allData = require('../data.json');
 
 exports.show = function(req, res) {
 	var tripID = req.params.id;
-	data = {};
-  data = SH.getSessionData(req.session.user);
-  Trip.findById(tripID)
-  .populate('user likes favorites tags comments')
-  .lean()
-  .exec(function(err, trip) {
-    if(err) {
-      console.log("Could not find trip: " + tripID);
-      return res.redirect('/');
-    }
-    var trip_comments;
-    async.parallel([
-      function(cb) {
-        Comment.find({trip: trip._id})
-        .populate('user')
-        .exec(function(err, comments) {
-          if(err) return cb(err);
-          trip_comments = comments;
-          cb();
-        });
+  SH.getSessionData(req.session.user, function(data) {
+    Trip.findById(tripID)
+    .populate('user likes favorites tags comments')
+    .lean()
+    .exec(function(err, trip) {
+      if(err) {
+        console.log("Could not find trip: " + tripID);
+        return res.redirect('/');
       }
-    ], function(err, results) {
-      trip.comments = trip_comments;
-      data.trip = trip;
-      trip.num_likes = trip.likes.length;
-      trip.num_favorites = trip.favorites.length;
-      trip.num_tags = trip.tags.length;
-      trip.num_comments = trip.comments.length;
-      res.render('trip/show', data);
+      var trip_comments;
+      async.parallel([
+        function(cb) {
+          Comment.find({trip: trip._id})
+          .populate('user')
+          .exec(function(err, comments) {
+            if(err) return cb(err);
+            trip_comments = comments;
+            cb();
+          });
+        }
+      ], function(err, results) {
+        trip.comments = trip_comments;
+        data.trip = trip;
+        trip.num_likes = trip.likes.length;
+        trip.num_favorites = trip.favorites.length;
+        trip.num_tags = trip.tags.length;
+        trip.num_comments = trip.comments.length;
+        res.render('trip/show', data);
+      });
     });
   });
 }

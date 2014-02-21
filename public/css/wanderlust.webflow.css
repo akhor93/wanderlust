@@ -297,6 +297,7 @@ p {
 }
 .result_img {
   width: 300px;
+  max-height: 200px;
   float: left;
 }
 .padding-10 {
@@ -341,6 +342,7 @@ p {
 }
 .album-preview_large {
   height: 260px;
+  max-width: 390px;
   float: left;
 }
 .album-preview_small {

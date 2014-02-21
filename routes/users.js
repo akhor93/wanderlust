@@ -5,41 +5,39 @@ var User = mongoose.model('User');
 var CT = require("../modules/country-list");
 
 exports.edit = function(req, res) {
-  data = {};
-  data = SH.getSessionData(req.session.user, false);
-  User.findOne({_id: req.session.user._id}, function(err, user) {
-    if(err) {
-      console.log("Could not find user: " + err);
-      res.redirect('/');
-    }
-    else {
-      data.user = user;
-      console.log(data);
-      data.countries = CT;
-      res.render('users/edit', data);
-    }
+  SH.getSessionData(req.session.user, function(data) {
+    User.findOne({_id: req.session.user._id}, function(err, user) {
+      if(err) {
+        console.log("Could not find user: " + err);
+        res.redirect('/');
+      }
+      else {
+        data.user = user;
+        console.log(data);
+        data.countries = CT;
+        res.render('users/edit', data);
+      }
+    });
   });
 }
 
 exports.show = function(req, res) {
-  data = {};
-  data = SH.getSessionData(req.session.user, false);
-
-  var userID = req.params.id;
-  User.findById(userID, function(err, user) {
-    if(err) {
-      console.log("Could not find user: " + userID);
-      res.redirect('/');
-    }
-    else {
-      data.user = user;
-      res.render('users/show', data);
-    }
+  SH.getSessionData(req.session.user, function(data) {
+    var userID = req.params.id;
+    User.findById(userID, function(err, user) {
+      if(err) {
+        console.log("Could not find user: " + userID);
+        res.redirect('/');
+      }
+      else {
+        data.user = user;
+        res.render('users/show', data);
+      }
+    });
   });
 }
 
 exports.update = function(req, res) {
-  console.log("!" + req.param('password'));
   if(req.session.user) {
     User.findById(req.session.user._id, function(err, user) {
       if(req.param('password')) {

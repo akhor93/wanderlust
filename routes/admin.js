@@ -111,7 +111,8 @@ function initialize() {
     email     : 'akhor93@stanford.edu',
     username  : 'akhor',
     password  : 'gloving',
-    country   : 'United States'
+    country   : 'United States',
+    profile_image: '/images/andrew.jpg'
   });
   andrew.save(function(err) {
   	if(err) console.log("error initializing andrew: " + err);
@@ -121,7 +122,8 @@ function initialize() {
     email     : 'lucywang@stanford.edu',
     username  : 'lucywang',
     password  : 'password',
-    country   : 'United States'
+    country   : 'United States',
+    profile_image: '/images/profpic_venice_square.jpeg'
   });
   lucy.save(function(err) {
   	if(err) console.log("error initializing lucy");
@@ -156,8 +158,8 @@ function initialize() {
     date: "April 4, 2013",
     location: "Greece",
     description: "Study abroad, Spring 2013 -- couldn't have asked for more.", 
-    image_large: "/images/greece_sunset.jpg",
-    image_small: ["/images/greece.jpg", "/images/greece_pier", "/images/greece_ocean", "/images/greece_athens"]
+    image_large: "/images/greece_sunset.jpeg",
+    image_small: ["/images/greece.jpg", "/images/greece_pier.jpeg", "/images/greece_ocean.jpeg", "/images/greece_athens.jpg"]
   });
   t3.save(function(err) {
     if(err) console.log("error saving trip 3");
@@ -169,7 +171,7 @@ function initialize() {
     location: "Tahiti",
     description: "Vacation with the fam.", 
     image_large: "/images/tahiti.jpg",
-    image_small: ["/images/tahiti_resort.jpg", "/images/tahiti_swimming.jpg", "/images/tahiti_turtle", "/images/tahiti_islanders"]
+    image_small: ["/images/tahiti_resort.jpg", "/images/tahiti_swimming.jpg", "/images/tahiti_turtle.jpg", "/images/tahiti_islanders.jpg"]
   });
   t4.save(function(err) {
     if(err) console.log("error saving trip 4");
@@ -181,7 +183,7 @@ function initialize() {
     location: "Paris, France",
     description: "Backpacking in France!", 
     image_large: "/images/Paris_Large.jpg",
-    image_small: ["/images/paris_arc.jpg", "/images/paris_bridge", "/images/paris_locks", "/images/paris_cafe"]
+    image_small: ["/images/paris_arc.jpg", "/images/paris_bridge.jpg", "/images/paris_locks.jpg", "/images/paris_cafe.jpg"]
   });
   t5.save(function(err) {
     if(err) console.log("error saving trip 5");
