@@ -2,12 +2,11 @@
 <a href="#" class="jcarousel-control-prev">&lsaquo;</a>
 <a href="#" class="jcarousel-control-next">&rsaquo;</a>
 <!-- Carousel -->
+<div class="jcarousel-title"> <h3>Featured Trips</h3> </div>
 <div class="jcarousel">
   <ul>
-    <li><img src="/images/Paris_Small.jpg" alt=""></li>
-    <li><img src="/images/San_Torini_Small.jpg" alt=""></li>
-    <li><img src="/images/Rio_Small.jpg" alt=""></li>
-    <li><img src="/images/Pyramid_Small.jpg" alt=""></li>
-    <li><img src="/images/Maldives_Small.jpg" alt=""></li>
+  	{{#each featured}} 
+  		<li> <a href="/trip/{{this._id}}"> <img src="{{this.image_large}}" alt=""> </a> </li> 
+  	{{/each}}
   </ul>
 </div>

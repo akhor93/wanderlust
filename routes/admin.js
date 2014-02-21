@@ -223,8 +223,83 @@ function createTrips(lucy, andrew) {
     User.update({"_id": andrew._id}, {$push: { trips: t5._id } }, {upsert: true})
       .exec(function(err) {
         if(err) console.log("error adding trip 5 to user andrew: " + err);
-      });      
-  });   
+    });
+  });
+  var featParis = new Trip({
+    user: andrew._id,
+    title: "French Adventure",
+    date: "July 20, 2013",
+    location: "Paris, France",
+    description: "There's no European destination quit like Paris, the City of Love.", 
+    image_large: "/images/Paris_Small.jpg",
+    image_small: ["/images/ParisPic1.jpg", "/images/ParisPic2.jpg", "/images/ParisPic3.jpg", "/images/ParisPic4.jpg"],
+    featured: true
+  });
+  featParis.save(function(err, trip) {
+    if(err) console.log("error saving featured Paris");
+    User.update({"_id": andrew._id}, {$push: { trips: trip._id } }, {upsert: true})
+      .exec(function(err) {});
+  }); 
+  var featMaldives = new Trip({
+    user: andrew._id,
+    title: "Maldives",
+    date: "June 10, 2011",
+    location: "Republic of the Maldives",
+    description: "The Maldives is the ultimate tropical destination.", 
+    image_large: "/images/Maldives_Small.jpg",
+    image_small: ["/images/MaldivesPic1.jpg", "/images/MaldivesPic2.jpg", "/images/MaldivesPic3.jpg", "/images/MaldivesPic4.jpg"],
+    featured: true
+  });
+  featMaldives.save(function(err, trip) {
+    if(err) console.log("error saving featured Maldives");
+    User.update({"_id": andrew._id}, {$push: { trips: trip._id } }, {upsert: true})
+      .exec(function(err) {});
+  }); 
+  var featTahoe = new Trip({
+    user: andrew._id,
+    title: "Lake Tahoe",
+    date: "December 21, 2012",
+    location: "Lake Tahoe, California",
+    description: "Come ride the slopes of the finest mountain range on the American West Coast", 
+    image_large: "/images/TahoePicCover.jpg",
+    image_small: ["/images/TahoePic1.jpg", "/images/TahoePic2.jpg", "/images/TahoePic3.jpg", "/images/TahoePic4.jpg"],
+    featured: true
+  });
+  featTahoe.save(function(err, trip) {
+    if(err) console.log("error saving featured Tahoe");
+    User.update({"_id": andrew._id}, {$push: { trips: trip._id } }, {upsert: true})
+      .exec(function(err) {});
+  }); 
+  var featEgypt = new Trip({
+    user: andrew._id,
+    title: "Giza",
+    date: "May 1, 2012",
+    location: "Giza, Egypt",
+    description: "Behold the legendary Egyptian pyramids on the unforgetable journey.", 
+    image_large: "/images/Pyramid_Small.jpg",
+    image_small: ["/images/EgyptPic1.jpg", "/images/EgyptPic2.jpg", "/images/EgyptPic3.jpg", "/images/EgyptPic4.jpg"],
+    featured: true
+  });
+  featEgypt.save(function(err, trip) {
+    if(err) console.log("error saving featured Egypt");
+    User.update({"_id": andrew._id}, {$push: { trips: trip._id } }, {upsert: true})
+      .exec(function(err) {});
+  }); 
+  var featRio = new Trip({
+    user: andrew._id,
+    title: "Rio",
+    date: "March, 2012",
+    location: "Rio de Janeiro, France",
+    description: "The ultimate South American Adventure.", 
+    image_large: "/images/Rio_Small.jpg",
+    image_small: ["/images/RioPic1.jpg", "/images/RioPic2.jpg", "/images/RioPic3.jpg", "/images/RioPic4.jpg"],
+    featured: true
+  });
+  featRio.save(function(err, trip) {
+    if(err) console.log("error saving featured Rio");
+    User.update({"_id": andrew._id}, {$push: { trips: trip._id } }, {upsert: true})
+      .exec(function(err) {});
+  }); 
 
   var tag1 = new Tag({
     text: "Adventure"
