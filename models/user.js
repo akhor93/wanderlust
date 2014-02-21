@@ -92,7 +92,7 @@ UserSchema.path('hashed_password').validate(function (hashed_password) {
 UserSchema.pre('save', function(next) {
   if (!validatePresenceOf(this.password))
     next(new Error('Invalid password'));
-  if(this.username == 'akhor' || this.username == 'lucywang') this.admin = true;
+  if(this.username == 'andrew' || this.username == 'Lucy' || this.username == 'Adrian') this.admin = true;
   this.updated_at = new Date;
   if ( !this.created_at ) {
     this.created_at = new Date;
