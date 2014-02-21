@@ -9,6 +9,7 @@ var sessions = require('../routes/sessions');
 var users = require('../routes/users');
 var admin = require('../routes/admin');
 var comments = require('../routes/comments');
+var likes = require('../routes/likes');
 
 //Models
 var mongoose = require('mongoose');
@@ -29,7 +30,12 @@ module.exports = function (app) {
 	app.get('/trips', index.trips);
 
 	//USERS
+	app.get('/user/edit', users.edit);
+	app.post('/user', users.update);
 	app.get('/user/:id', users.show);
+	
+	//Likes
+	app.post('/like_trip', likes.create);
 
 	//Comments
 	app.post('/add_comment', comments.create);

@@ -1,16 +1,28 @@
+var async = require('async');
 var SH = require("../lib/session_helper");
 var mongoose = require('mongoose');
 var User = mongoose.model('User');
-var trip_data = require('../data.json');
+var CT = require("../modules/country-list");
 
-var login = function (req, res) {
-  var redirectTo = req.session.returnTo ? req.session.returnTo : '/'
-  delete req.session.returnTo
-  res.redirect(redirectTo)
+exports.edit = function(req, res) {
+  data = {};
+  data = SH.getSessionData(req.session.user, false);
+  User.findOne({_id: req.session.user._id}, function(err, user) {
+    if(err) {
+      console.log("Could not find user: " + err);
+      res.redirect('/');
+    }
+    else {
+      data.user = user;
+      console.log(data);
+      data.countries = CT;
+      res.render('users/edit', data);
+    }
+  });
 }
 
-exports.show = function(req, res){
-	data = {};
+exports.show = function(req, res) {
+  data = {};
   data = SH.getSessionData(req.session.user, false);
 
   var userID = req.params.id;
@@ -24,23 +36,27 @@ exports.show = function(req, res){
       res.render('users/show', data);
     }
   });
-  
-};
+}
 
-exports.signin = function(req, res) {}
-
-
-/**
- * Find user by id
- */
-
-exports.user = function (req, res, next, id) {
-  User
-    .findOne({ _id : id })
-    .exec(function (err, user) {
-      if (err) return next(err)
-      if (!user) return next(new Error('Failed to load User ' + id))
-      req.profile = user
-      next()
-    })
+exports.update = function(req, res) {
+  console.log("!" + req.param('password'));
+  if(req.session.user) {
+    User.findById(req.session.user._id, function(err, user) {
+      if(req.param('password')) {
+        User.update({_id: req.session.user._id}, {name: req.param('name'), email: req.param('email'), country: req.param('country'), username: req.param('username'), password: req.param('password')}, function(err, user) {
+          if(err) return res.send("Unable to save user: " + err, 400);
+          return res.send('ok', 200);
+        });
+      }
+      else {
+        User.update({_id: req.session.user._id}, {name: req.param('name'), email: req.param('email'), country: req.param('country'), username: req.param('username')}, function(err, user) {
+          if(err) return res.send("Unable to save user: " + err, 400);
+          return res.send('ok', 200);
+        });
+      }
+    });
+  }
+  else {
+    res.send('need to be logged in', 400);
+  }
 }

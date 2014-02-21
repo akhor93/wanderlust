@@ -1,1 +1,2 @@
 1. Make pages unaccessible if user based on login status
+2. Allow user to change password

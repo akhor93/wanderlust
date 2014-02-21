@@ -7,6 +7,7 @@ var User = mongoose.model('User');
 var Trip = mongoose.model('Trip');
 var Comment = mongoose.model('Comment');
 var Tag = mongoose.model("Tag");
+var Like = mongoose.model('Like');
 
 var trips = require('../data.json');
 
@@ -63,6 +64,12 @@ exports.reset = function(req, res){
         },
         function(cb) {
           Comment.remove({}, function (err) {
+            if(err) console.log(err);
+            else cb();
+          });
+        },
+        function(cb) {
+          Like.remove({}, function (err) {
             if(err) console.log(err);
             else cb();
           });

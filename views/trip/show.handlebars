@@ -2,30 +2,41 @@
 	<span class="title">{{trip.title}}</span><span> @ {{trip.location}}</span>
 	<div id="trip_images" class="w-clearfix pictures">
 		{{#if trip.image_large}}
-			<img src="{{trip.image_large}}" class="album-preview_large" />
+			<a class="fancybox" rel="gallery" href="{{trip.image_large}}">
+				<img src="{{trip.image_large}}" class="album-preview_large" />
+			</a>
 		{{else}}
 			<img src="/images/300x180tripfiller.jpg" class="album-preview_large" />
 		{{/if}}
 		{{#if trip.image_small}}
-			<img src="{{trip.image_small.[0]}}" class="album-preview_small" />{{#if trip.image_small.[1]}}
-				<img src="{{trip.image_small.[1]}}" class="album-preview_small" />
+			<a class="fancybox" rel="gallery" href="{{trip.image_small.[0]}}">
+				<img src="{{trip.image_small.[0]}}" class="album-preview_small" />
+			</a>
+			{{#if trip.image_small.[1]}}
+				<a class="fancybox" rel="gallery" href="{{trip.image_small.[1]}}">
+					<img src="{{trip.image_small.[1]}}" class="album-preview_small" />
+				</a>
 			{{else}}
 				<img src="/images/180x125tripfiller.jpg" class="album-preview_small" />
 			{{/if}}
 			{{#if trip.image_small.[2]}}
-				<img src="{{trip.image_small.[2]}}" class="album-preview_small"  style="margin-bottom:0px;" />
+				<a class="fancybox" rel="gallery" href="{{trip.image_small.[2]}}">
+					<img src="{{trip.image_small.[2]}}" class="album-preview_small"  style="margin-bottom:0px;" />
+				</a>
 			{{else}}
 				<img src="/images/180x125tripfiller.jpg" class="album-preview_small" style="margin-bottom:0px;"/>
 			{{/if}}
 			{{#if trip.image_small.[3]}}
-				<img src="{{trip.image_small.[3]}}" class="album-preview_small"  style="margin-bottom:0px;" />
+				<a class="fancybox" rel="gallery" href="{{trip.image_small.[3]}}">
+					<img src="{{trip.image_small.[3]}}" class="album-preview_small"  style="margin-bottom:0px;" />
+				</a>
 			{{else}}
 				<img src="/images/180x125tripfiller.jpg" class="album-preview_small" style="margin-bottom:0px;" />
 			{{/if}}
 		{{/if}}
 	</div>
 	<div class="social_buttons_container">
-		<img class="social_buttons" src="/images/icon_822.png" />
+		<img id="like_icon" class="social_buttons" src="/images/icon_822.png" />
 		&nbsp;<span id="likes_counter">{{trip.num_likes}}</span>&nbsp;&nbsp;
 		<img class="social_buttons" src="/images/star.png" />
 		&nbsp;<span id="favorites_counter">{{trip.num_favorites}}</span>&nbsp;&nbsp;
@@ -60,6 +71,8 @@
 
 <script type="text/javascript">
 $(document).ready(function() {
+	$('.fancybox').fancybox();
+
 	$('#add_comment_form').ajaxForm({
 		url: '/add_comment',
 		success: function(responseText, status, xhr, $form) {
@@ -101,5 +114,32 @@ $(document).ready(function() {
 	if($('.comment').length > 0) {
 		$('.comment_container').show();
 	}
+
+	function incrementLikes() {
+		var num_likes = parseInt($('#likes_counter').html(), 10);
+		num_likes += 1;
+		$('#likes_counter').html(num_likes);
+	}
+
+	$('#like_icon').click(function() {
+		var data = {
+			"tripID": "{{trip._id}}"
+		};
+		var options = {
+			type: "POST",
+			url: "/like_trip",
+			data: data
+		};
+		$.ajax(options)
+		.done(function(data) {
+			console.log("success" + data);
+			incrementLikes();
+		})
+		.fail(function(msg) {
+			console.log("fail" + msg.responseText);
+		});
+	});
+
+	
 });
 </script>

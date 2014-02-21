@@ -23,7 +23,6 @@ var LikeSchema = new Schema({
  * Pre-save hook
  */
 LikeSchema.pre('save', function(next) {
-
   next();
 });
 
