@@ -1,10 +1,8 @@
 $(document).ready(function(){
-
-// main login form //
 	$('#new-trip-form').ajaxForm({
-		url: '/trip',
+		url: '/trip/create',
 		beforeSubmit : function(formData, jqForm, options){
-			//Add Validations
+			console.log("enter validations later");
 		},
 		success	: function(responseText, status, xhr, $form){
 			if (status == 'success') location.reload(true);
@@ -17,6 +15,6 @@ $(document).ready(function(){
 	});
 
 	//TODO bind to specific modal
-	$('#login-username-tf').focus();
+	// $('#login-username-tf').focus();
 
 });

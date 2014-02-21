@@ -10,6 +10,8 @@ var Comment = mongoose.model('Comment');
 var allData = require('../data.json');
 
 exports.show = function(req, res) {
+  console.log("S" + req.param('test'));
+  if(req.params.id == "create") return res.send("show", 200);
 	var tripID = req.params.id;
   SH.getSessionData(req.session.user, function(data) {
     Trip.findById(tripID)
@@ -34,7 +36,6 @@ exports.show = function(req, res) {
       ], function(err, results) {
         trip.comments = trip_comments;
         data.trip = trip;
-        data.user = trip.user;
         trip.num_likes = trip.likes.length;
         trip.num_favorites = trip.favorites.length;
         trip.num_tags = trip.tags.length;
@@ -48,6 +49,7 @@ exports.show = function(req, res) {
 
 exports.create = function(req, res) {
 	//Get Moment library
+  console.log("x" + req.param('test'));
 	var trip = new Trip({
 		user       : req.session.user.id,
     title      : req.param('title'),

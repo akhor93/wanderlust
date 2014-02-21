@@ -56,7 +56,7 @@ app.use(express.bodyParser());
 app.use(express.urlencoded());
 app.use(express.methodOverride());
 app.use(express.cookieParser('Wanderlust Awesome Secret Key. Hello Viv'));
-app.use(express.session({key: 'somekey', cookie: {secure: false, maxAge: 300000}}));
+app.use(express.session({key: 'somekey', cookie: {secure: false, maxAge: 900000}}));
 app.use(app.router);
 app.use(express.static(path.join(__dirname, '/public')));
 

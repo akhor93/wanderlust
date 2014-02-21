@@ -24,52 +24,52 @@ exports.edit = function(req, res) {
 
 exports.show = function(req, res) {
   var userID = req.params.id;
-  var data = {};
-  async.parallel([
-    function(cb) {
-      User.findById(userID)
-        .populate('followers following')
-        .lean()
-        .exec(function(err, user) {
-          if(err) {
-            console.log("error couldn't find user: " + err);
-          } else {
-            data.user = user;
-            cb();      
-          }
-      });
-    },
-    function(cb) {
-      Trip.find({user: userID})
-        .populate('user likes favorites tags comments')
-        .lean()
-        .exec(function(err, trips) {
-          if(err) {
-            console.log("error couldn't find trips" + err);
-          } else {
-            var user_trips = {
-              col0: [],
-              col1: [],
-              col2: [],
-              col3: [],
-            };
-            for (var i = 0; i < trips.length; i++) {
-              var col_name = "col" + (i % 4).toString();
-              var totalImages = trips[i]["image_small"].length + 1;
-              trips[i]["totalImages"] = totalImages;
-              trips[i]["date"] = formatDate(trips[i]["date"]);
-              user_trips[col_name].push(trips[i]);
+  SH.getSessionData(req.session.user, function(data) {
+    async.parallel([
+      function(cb) {
+        User.findById(userID)
+          .populate('followers following')
+          .lean()
+          .exec(function(err, user) {
+            if(err) {
+              console.log("error couldn't find user: " + err);
+            } else {
+              data.user = user;
+              cb();      
             }
-            data.trips = user_trips;  
-            cb();          
-          }
-      }); 
-    }
-  ], function(err) {
-    console.log(data);
-    res.render('users/show', data);
+        });
+      },
+      function(cb) {
+        Trip.find({user: userID})
+          .populate('user likes favorites tags comments')
+          .lean()
+          .exec(function(err, trips) {
+            if(err) {
+              console.log("error couldn't find trips" + err);
+            } else {
+              var user_trips = {
+                col0: [],
+                col1: [],
+                col2: [],
+                col3: [],
+              };
+              for (var i = 0; i < trips.length; i++) {
+                var col_name = "col" + (i % 4).toString();
+                var totalImages = trips[i]["image_small"].length + 1;
+                trips[i]["totalImages"] = totalImages;
+                trips[i]["date"] = formatDate(trips[i]["date"]);
+                user_trips[col_name].push(trips[i]);
+              }
+              data.trips = user_trips;  
+              cb();          
+            }
+        }); 
+      }
+    ], function(err) {
+      console.log(data);
+      res.render('users/show', data);
+    });
   });
-
 }
 
 function formatDate(date) {
