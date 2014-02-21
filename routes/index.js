@@ -1,10 +1,18 @@
 var SH = require("../lib/session_helper");
-var data = require("../data.json");
+var async = require('async');
 
 exports.home = function(req, res){
-	data = {};
-	data = SH.getSessionData(req.session.user, true);
-	res.render('index', data);
+	async.parallel([
+		function(cb) {
+			var data = SH.getSessionData(req.session.user, true);
+			console.log(data);
+			cb(null, data);
+		}
+	], function(err, results) {
+		console.log(results);
+		res.render('index', results);
+	})
+
 };
 
 exports.trips = function(req, res){
