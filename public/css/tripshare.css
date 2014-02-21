@@ -164,3 +164,7 @@ have a fixed width and height (but it's not required).
 .like_icon:hover {
     cursor: pointer;
 }
+
+.favorite_icon:hover {
+    cursor: pointer;
+}

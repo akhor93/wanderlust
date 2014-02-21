@@ -33,7 +33,7 @@ exports.show = function(req, res) {
       col3: [],
       totalTrips: 0
     };
-    var username = data.user.username;
+    var username = data.curuser.username;
     var count = 0;
     console.log("Username on users database: " + username);
     for (var i = 0; i < all_trips.length; i++) {
