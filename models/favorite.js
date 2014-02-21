@@ -26,14 +26,6 @@ FavoriteSchema.pre('save', function(next) {
 });
 
 /**
- * Pre-update hook
- */
-FavoriteSchema.pre('update', function(next) {
-  this.updated_at = new Date;
-  next();
-});
-
-/**
  * Methods
  */
 FavoriteSchema.methods = {

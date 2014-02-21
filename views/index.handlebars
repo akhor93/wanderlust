@@ -95,8 +95,11 @@ $(document).ready(function() {
 	});
 
 	function append_comment(comment) {
+		var trip_id = comment.trip._id;
+		var tripdiv = '#trip_' + trip_id;
+		console.log(tripdiv);
 		var comment_box_html = '<div class="comment row">';
-		if($('.comment').length > 0) {
+		if($(tripdiv + ' .comment_box .comment').length > 0) {
 			comment_box_html += '<hr style="margin-bottom: 2px; margin-top:2px;"/>';
 		}
 		comment_box_html += '<div class="col-md-1">';
@@ -107,11 +110,11 @@ $(document).ready(function() {
 		comment_box_html += '<br /> X hours ago';
 		comment_box_html += '</div>';
 		comment_box_html += '</div>';
-		$('.comment_container').append(comment_box_html);
+		$(tripdiv + ' .comment_box').append(comment_box_html);
 
-		var num_comments = parseInt($('#comments_counter').html(), 10);
+		var num_comments = parseInt($(tripdiv + ' .comments_counter').html(), 10);
 		num_comments += 1;
-		$('#comments_counter').html(num_comments);
+		$(tripdiv + ' .comments_counter').html(num_comments);
 	}
 
 	function incrementLikes(tripID) {

@@ -27,15 +27,6 @@ CommentSchema.pre('save', function(next) {
 });
 
 /**
- * Pre-update hook
- */
-CommentSchema.pre('update', function(next) {
-  this.updated_at = new Date;
-  next();
-});
-
-
-/**
  * Methods
  */
 CommentSchema.methods = {
