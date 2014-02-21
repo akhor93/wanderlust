@@ -7,6 +7,7 @@ var Trip = mongoose.model('Trip');
 var Comment = mongoose.model('Comment');
 
 var allData = require('../data.json');
+
 exports.show = function(req, res) {
 	var tripID = req.params.id;
 	data = {};

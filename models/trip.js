@@ -12,13 +12,13 @@ var TripSchema = new Schema({
   title: { type: String, required: true },
   date: { type: Date, default: Date.now },
   location: { type: String, required: true },
-  description: { type: String},
-  image_large: { type: String},
-  image_small: [{ type: String}],
+  description: { type: String },
+  image_large: { type: String, default: '/images/300x180tripfiller.jpg'},
+  image_small: [{ type: String }],
   likes: [{ type: Schema.ObjectId, ref: 'Like' }],
   favorites: [{ type: Schema.ObjectId, ref: 'Favorite' }],
-  tags: [{ type: Schema.ObjectId, ref: 'Tag'}],
-  comments: [{ type: Schema.ObjectId, ref: 'Comment'}]
+  tags: [{ type: Schema.ObjectId, ref: 'Tag' }],
+  comments: [{ type: Schema.ObjectId, ref: 'Comment' }]
 })
 
 /**
