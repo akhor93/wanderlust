@@ -38,7 +38,7 @@
 						<div class="social_num like_counter">{{this.num_likes}}</div>
 					</div>
 					<div class="w-clearfix social">
-						<img class="social_buttons favorite_icon" src="images/star.png" alt="favorite-button">
+						<img class="social_buttons favorite_icon" src="images/star.png" alt="favorite-button" data-trip="{{this._id}}">
 						<div class="social_num favorite_counter">{{this.num_favorites}}</div>
 					</div>
 					<div class="w-clearfix social">
@@ -89,5 +89,31 @@ $(document).ready(function() {
 			console.log(msg.responseText);
 		});
 	});
+
+    function incrementFavorites(tripID) {
+        var num_favorites = parseInt($('#trip_' + tripID + ' .favorite_counter').html(), 10);
+        num_favorites += 1;
+        $('#trip_' + tripID + ' .favorite_counter').html(num_favorites);
+    }
+
+    $('.favorite_icon').click(function() {
+        var tripID = $(this).attr("data-trip");
+        var data = {
+          "tripID": tripID
+        };
+        var options = {
+          type: "POST",
+          url: "/favorite_trip",
+          data: data
+        };
+        $.ajax(options)
+        .done(function(data) {
+          incrementFavorites(data);
+        })
+        .fail(function(msg) {
+          console.log(msg.responseText);
+        });
+    });
+
 });
 </script>

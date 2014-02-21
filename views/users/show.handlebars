@@ -1,19 +1,19 @@
-{{#if user}}
+{{#if curuser}}
 <div class="w-container">
   <div class="margin-10">
       <div class="w-clearfix prof_box">
-        <img class="prof_pic" src="{{user.profile_image}}" width="140" height="140" alt="prof-pic">
+        <img class="prof_pic" src="{{curuser.profile_image}}" width="140" height="140" alt="prof-pic">
         <div class="prof_info">
-          <h2>{{user.name}}</h2>
-          <p class="about_me">Add your "About Me".</p>
+          <h2>{{curuser.name}}</h2>
+          <p class="about_me">{{curuser.aboutMe}}</p>
           <div class="social_bar">
             <img class="social_buttons" src="/images/icon_1832.png" alt="52f38673ba5496e141000d86_icon_1832.png">
-            <div class="location">{{user.country}}&nbsp;&nbsp;</div>
+            <div class="location">{{curuser.country}}&nbsp;&nbsp;</div>
             <img class="social_buttons" src="/images/facebook.png" alt="52f38687593f6edf41000d09_facebook.png">
             <img class="social_buttons" src="/images/twitter.png" alt="52f386ca5d8eed2b6b000e09_twitter.png">
           </div>
         </div>
-        <div class="prof_stats"><a class="button" href="#">Follow</a><a class="button" href="#">{{user.followers.length}} Followers</a><a class="button" href="#">{{user.following.length}} Following</a><a class="button" href="#">{{trips.totalTrips}} Trips</a>
+        <div class="prof_stats"><a class="button" href="#">Follow</a><a class="button" href="#">{{curuser.followers.length}} Followers</a><a class="button" href="#">{{curuser.following.length}} Following</a><a class="button" href="#">{{trips.totalTrips}} Trips</a>
         </div>
       </div>
     </div>
@@ -22,7 +22,7 @@
 <div class="w-row trip_pane">
   <div class="w-col w-col-3 w-clearfix column">
   {{#each trips.col0}}
-    <div class="trip">
+    <div class="trip" id="trip_{{this._id}}">
       <img class="trip_cover_photo" src="{{image_large}}" alt="trip-cover-photo">
       <div class="trip_box_info">
         <h3>{{title}}</h3>
@@ -30,15 +30,15 @@
         <h6>{{totalImages}} photos</h6>
         <div class="social_bar">
           <div class="social">
-            <div class="social_num">{{likes.length}}</div>
-            <img class="social_buttons" class="like-button" src="/images/icon_822.png" alt="like-button">
+            <div class="social_num like_counter">{{likes.length}}</div>
+            <img class="social_buttons like_icon" src="/images/icon_822.png" alt="like-button" data-trip="{{this._id}}">
           </div>
           <div class="social">
-            <div class="social_num">{{favorites.length}}</div>
-            <img class="social_buttons" class="fav-button" src="/images/star.png" width="25" alt="favorite-button">
+            <div class="social_num favorite_counter">{{favorites.length}}</div>
+            <img class="social_buttons favorite_icon" src="/images/star.png" width="25" alt="favorite-button" data-trip="{{this._id}}">
           </div>
           <div class="social">
-            <div class="social_num">{{comments.length}}</div>
+            <div class="social_num comment_counter">{{comments.length}}</div>
             <img class="social_buttons" src="/images/comment.png" alt="comments-button">
           </div>
         </div>
@@ -49,7 +49,7 @@
 
   <div class="w-col w-col-3 column">
   {{#each trips.col1}}
-    <div class="trip">
+    <div class="trip" id="trip_{{this._id}}">
       <img class="trip_cover_photo" src="{{image_large}}" alt="trip-cover-photo">
       <div class="trip_box_info">
         <h3>{{title}}</h3>
@@ -57,15 +57,15 @@
         <h6>{{totalImages}} photos</h6>
         <div class="social_bar">
           <div class="social">
-            <div class="social_num">{{likes.length}}</div>
-            <img class="social_buttons" class="like-button" src="/images/icon_822.png" alt="like-button">
+            <div class="social_num like_counter">{{likes.length}}</div>
+            <img class="social_buttons like_icon" src="/images/icon_822.png" alt="like-button" data-trip="{{this._id}}">
           </div>
           <div class="social">
-            <div class="social_num">{{favorites.length}}</div>
-            <img class="social_buttons" class="fav-button" src="/images/star.png" width="25" alt="favorite-button">
+            <div class="social_num favorite_counter">{{favorites.length}}</div>
+            <img class="social_buttons favorite_icon" src="/images/star.png" width="25" alt="favorite-button" data-trip="{{this._id}}">
           </div>
           <div class="social">
-            <div class="social_num">{{comments.length}}</div>
+            <div class="social_num comment_counter">{{comments.length}}</div>
             <img class="social_buttons" src="/images/comment.png" alt="comments-button">
           </div>
         </div>
@@ -76,7 +76,7 @@
 
   <div class="w-col w-col-3 column">
   {{#each trips.col2}}
-    <div class="trip">
+    <div class="trip" id="trip_{{this._id}}">
       <img class="trip_cover_photo" src="{{image_large}}" alt="trip-cover-photo">
       <div class="trip_box_info">
         <h3>{{title}}</h3>
@@ -84,15 +84,15 @@
         <h6>{{totalImages}} photos</h6>
         <div class="social_bar">
           <div class="social">
-            <div class="social_num">{{likes.length}}</div>
-            <img class="social_buttons" class="like-button" src="/images/icon_822.png" alt="like-button">
+            <div class="social_num like_counter">{{likes.length}}</div>
+            <img class="social_buttons like_icon" src="/images/icon_822.png" alt="like-button" data-trip="{{this._id}}">
           </div>
           <div class="social">
-            <div class="social_num">{{favorites.length}}</div>
-            <img class="social_buttons" class="fav-button" src="/images/star.png" width="25" alt="favorite-button">
+            <div class="social_num favorite_counter">{{favorites.length}}</div>
+            <img class="social_buttons favorite_icon" src="/images/star.png" width="25" alt="favorite-button" data-trip="{{this._id}}">
           </div>
           <div class="social">
-            <div class="social_num">{{comments.length}}</div>
+            <div class="social_num comment_counter">{{comments.length}}</div>
             <img class="social_buttons" src="/images/comment.png" alt="comments-button">
           </div>
         </div>
@@ -103,7 +103,7 @@
 
   <div class="w-col w-col-3 column">
   {{#each trips.col3}}
-    <div class="trip">
+    <div class="trip" id="trip_{{this._id}}">
       <img class="trip_cover_photo" src="{{image_large}}" alt="trip-cover-photo">
       <div class="trip_box_info">
         <h3>{{title}}</h3>
@@ -111,15 +111,15 @@
         <h6>{{totalImages}} photos</h6>
         <div class="social_bar">
           <div class="social">
-            <div class="social_num">{{likes.length}}</div>
-            <img class="social_buttons" class="like-button" src="/images/icon_822.png" alt="like-button">
+            <div class="social_num like_counter">{{likes.length}}</div>
+            <img class="social_buttons like_icon" src="/images/icon_822.png" alt="like-button" data-trip="{{this._id}}">
           </div>
           <div class="social">
-            <div class="social_num">{{favorites.length}}</div>
-            <img class="social_buttons" class="fav-button" src="/images/star.png" width="25" alt="favorite-button">
+            <div class="social_num favorite_counter">{{favorites.length}}</div>
+            <img class="social_buttons favorite_icon" src="/images/star.png" width="25" alt="favorite-button" data-trip="{{this._id}}">
           </div>
           <div class="social">
-            <div class="social_num">{{comments.length}}</div>
+            <div class="social_num comment_counter">{{comments.length}}</div>
             <img class="social_buttons" src="/images/comment.png" alt="comments-button">
           </div>
         </div>
@@ -131,3 +131,57 @@
 {{else}}
 <div><p>You must be logged in to see your trips.</p></div>
 {{/if}}
+
+<script type="text/javascript">
+$(document).ready(function() {
+  function incrementLikes(tripID) {
+    var num_likes = parseInt($('#trip_' + tripID + ' .like_counter').html(), 10);
+    num_likes += 1;
+    $('#trip_' + tripID + ' .like_counter').html(num_likes);
+  }
+
+  $('.like_icon').click(function() {
+    var tripID = $(this).attr("data-trip");
+    var data = {
+      "tripID": tripID
+    };
+    var options = {
+      type: "POST",
+      url: "/like_trip",
+      data: data
+    };
+    $.ajax(options)
+    .done(function(data) {
+      incrementLikes(data);
+    })
+    .fail(function(msg) {
+      console.log(msg.responseText);
+    });
+  });
+
+  function incrementFavorites(tripID) {
+    var num_favorites = parseInt($('#trip_' + tripID + ' .favorite_counter').html(), 10);
+    num_favorites += 1;
+    $('#trip_' + tripID + ' .favorite_counter').html(num_favorites);
+  }
+
+  $('.favorite_icon').click(function() {
+    var tripID = $(this).attr("data-trip");
+    var data = {
+      "tripID": tripID
+    };
+    var options = {
+      type: "POST",
+      url: "/favorite_trip",
+      data: data
+    };
+    $.ajax(options)
+    .done(function(data) {
+      incrementFavorites(data);
+    })
+    .fail(function(msg) {
+      console.log(msg.responseText);
+    });
+  });  
+});
+</script>

@@ -36,9 +36,9 @@
 		{{/if}}
 	</div>
 	<div class="social_buttons_container">
-		<img id="like_icon" class="social_buttons" src="/images/icon_822.png" />
+		<img class="social_buttons like_icon" src="/images/icon_822.png" />
 		&nbsp;<span id="likes_counter">{{trip.num_likes}}</span>&nbsp;&nbsp;
-		<img class="social_buttons" src="/images/star.png" />
+		<img class="social_buttons favorite_icon" src="/images/star.png" />
 		&nbsp;<span id="favorites_counter">{{trip.num_favorites}}</span>&nbsp;&nbsp;
 		<img class="social_buttons" src="/images/comment.png" />
 		&nbsp;<span id="comments_counter">{{trip.num_comments}}</span>&nbsp;&nbsp;
@@ -121,7 +121,7 @@ $(document).ready(function() {
 		$('#likes_counter').html(num_likes);
 	}
 
-	$('#like_icon').click(function() {
+	$('.like_icon').click(function() {
 		var data = {
 			"tripID": "{{trip._id}}"
 		};
@@ -140,6 +140,28 @@ $(document).ready(function() {
 		});
 	});
 
-	
+	function incrementFavorites(tripID) {
+		var num_favorites = parseInt($('#favorites_counter').html(), 10);
+		num_favorites += 1;
+		$('#favorites_counter').html(num_favorites);
+	}
+
+	$('.favorite_icon').click(function() {
+		var data = {
+		  "tripID": "{{trip._id}}"
+		};
+		var options = {
+		  type: "POST",
+		  url: "/favorite_trip",
+		  data: data
+		};
+		$.ajax(options)
+		.done(function(data) {
+		  incrementFavorites(data);
+		})
+		.fail(function(msg) {
+		  console.log(msg.responseText);
+		});
+	});  	
 });
 </script>

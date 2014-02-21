@@ -10,6 +10,7 @@ var users = require('../routes/users');
 var admin = require('../routes/admin');
 var comments = require('../routes/comments');
 var likes = require('../routes/likes');
+var favorites = require('../routes/favorites');
 
 //Models
 var mongoose = require('mongoose');
@@ -32,6 +33,9 @@ module.exports = function (app) {
 	
 	//Likes
 	app.post('/like_trip', likes.create);
+
+	//Favorites
+	app.post('/favorite_trip', favorites.create);
 
 	//Comments
 	app.post('/add_comment', comments.create);

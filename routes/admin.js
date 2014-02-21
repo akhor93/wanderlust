@@ -112,7 +112,8 @@ function initialize() {
     username  : 'akhor',
     password  : 'gloving',
     country   : 'United States',
-    profile_image: '/images/andrew.jpg'
+    profile_image: '/images/andrew.jpg',
+    aboutMe: "Vivian's Mitch. I loooove One Direction."
   });
   andrew.save(function(err) {
   	if(err) console.log("error initializing andrew: " + err);
@@ -123,7 +124,8 @@ function initialize() {
     username  : 'lucywang',
     password  : 'password',
     country   : 'United States',
-    profile_image: '/images/profpic_venice_square.jpeg'
+    profile_image: '/images/profpic_venice_square.jpeg',
+    aboutMe: "Imperfection is beauty, madness is genius and it's better to be absolutely ridiculous than absolutely boring."
   });
   lucy.save(function(err) {
   	if(err) console.log("error initializing lucy");
