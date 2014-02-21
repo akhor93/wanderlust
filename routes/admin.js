@@ -156,7 +156,7 @@ function initialize() {
     date: "April 4, 2013",
     location: "Greece",
     description: "Study abroad, Spring 2013 -- couldn't have asked for more.", 
-    image_large: "/images/greece_sunset.jpg",
+    image_large: "/images/greece_sunset.jpeg",
     image_small: ["/images/greece.jpg", "/images/greece_pier", "/images/greece_ocean", "/images/greece_athens"]
   });
   t3.save(function(err) {

@@ -22,12 +22,12 @@ module.exports = function (app) {
 	app.get('/', index.home);
 
 	//NEWS FEED
-	app.get('/index/:id', index.incrementLikes);
+	// app.get('/index/:id', index.incrementLikes);
 
 	//TRIPS
 	app.get('/trip/:id', trip.show);
 	app.post('/trip', trip.create);
-	app.get('/trips', index.trips);
+	// app.get('/trips', index.trips);
 
 	//USERS
 	app.get('/user/edit', users.edit);
@@ -46,7 +46,7 @@ module.exports = function (app) {
 	app.post('/signout', sessions.signout);
 
 	//Followers
-	app.get('/followers', index.followers);
+	// app.get('/followers', index.followers);
 
 	//Search
 	app.get('/search', search.search);
