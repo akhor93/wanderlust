@@ -4,7 +4,6 @@ var data = require("../data.json");
 exports.home = function(req, res){
 	data = {};
 	data = SH.getSessionData(req.session.user, true);
-	//data.key = value
 	res.render('index', data);
 };
 

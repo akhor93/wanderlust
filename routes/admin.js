@@ -6,6 +6,7 @@ var mongoose = require('mongoose');
 var User = mongoose.model('User');
 var Trip = mongoose.model('Trip');
 var Comment = mongoose.model('Comment');
+var Tag = mongoose.model("Tag");
 var Like = mongoose.model('Like');
 var Favorite = mongoose.model('Favorite');
 var Tag = mongoose.model('Tag');
@@ -48,8 +49,8 @@ exports.print_trips = function(req, res) {
 }
 
 exports.reset = function(req, res){
-	if(req.session.user) {
-		if(req.session.user.admin) {
+	// if(req.session.user) {
+	// 	if(req.session.user.admin) {
       async.parallel([
         function(cb) {
           User.remove({}, function (err) {
@@ -96,12 +97,12 @@ exports.reset = function(req, res){
         console.log("End of Initialization");
         res.redirect('/');
       });
-		}
-    else res.redirect('/');
-	}
-  else {
-    res.redirect('/');
-  }
+	// 	}
+ //    else res.redirect('/');
+	// }
+ //  else {
+ //    res.redirect('/');
+ //  }
 };
 
 function initialize() {
@@ -132,30 +133,177 @@ function initialize() {
   	location: "San Francisco, CA",
   	description: "Loved my trip to the Bay!",
     image_large: "/images/goldengate.jpg",
-  	image_small: ["/images/fishermans-wharf.jpg", "/images/painted_ladies.jpg", "/images/clarion_alley.jpg", "/images/lands_end.jpg"],
-  	likes: [],
-  	favorites: [],
-  	tags: [],
-  	comments: []
+  	image_small: ["/images/fishermans-wharf.jpg", "/images/painted_ladies.jpg", "/images/clarion_alley.jpg", "/images/lands_end.jpg"]
+  	// likes: [],
+  	// favorites: [],
+  	// tags: [],
+  	// comments: []
   });
   t1.save(function(err) {
   	if(err) console.log("error saving trip 1");
   });
   var t2 = new Trip({
   	user: lucy._id,
-  	title: "Paris, Je t'aime",
-  	date: "June 13, 2012",
-  	location: "Paris, France",
-  	description: "Backpacking in France!", 
-    image_large: "/images/Paris_Large.jpg",
-    // update below line
-    image_small: ["/images/fishermans-wharf.jpg", "/images/painted_ladies.jpg", "/images/clarion_alley.jpg", "/images/lands_end.jpg"],
-  	likes: [],
-  	favorites: [],
-  	tags: [],
-  	comments: []
+  	title: "Venice",
+  	date: "June 6, 2013",
+  	location: "Venice, Italy",
+  	description: "My summer of art, music, and gelato.", 
+    image_large: "/images/venice.jpg",
+    image_small: ["/images/venice-gondola.jpg", "/images/venice_piazza.jpg", "/images/venice_flooded.jpg", "/images/venice_rialto-bridge.jpg"]
+  	// likes: [],
+  	// favorites: [],
+  	// tags: [],
+  	// comments: []
   });
   t2.save(function(err) {
   	if(err) console.log("error saving trip 2");
   });
+  var t3 = new Trip({
+    user: lucy._id,
+    title: "Greece",
+    date: "April 4, 2013",
+    location: "Greece",
+    description: "Study abroad, Spring 2013 -- couldn't have asked for more.", 
+    image_large: "/images/greece_sunset.jpg",
+    image_small: ["/images/greece.jpg", "/images/greece_pier", "/images/greece_ocean", "/images/greece_athens"]
+    // likes: [],
+    // favorites: [],
+    // tags: [],
+    // comments: []
+  });
+  t3.save(function(err) {
+    if(err) console.log("error saving trip 3");
+  });
+  var t4 = new Trip({
+    user: andrew._id,
+    title: "Tahiti",
+    date: "December 15, 2012",
+    location: "Tahiti",
+    description: "Vacation with the fam.", 
+    image_large: "/images/tahiti.jpg",
+    image_small: ["/images/tahiti_resort.jpg", "/images/tahiti_swimming.jpg", "/images/tahiti_turtle", "/images/tahiti_islanders"]
+    // likes: [],
+    // favorites: [],
+    // tags: [],
+    // comments: []
+  });
+  t4.save(function(err) {
+    if(err) console.log("error saving trip 4");
+  });  
+  var t5 = new Trip({
+    user: andrew._id,
+    title: "Paris",
+    date: "June 13, 2012",
+    location: "Paris, France",
+    description: "Backpacking in France!", 
+    image_large: "/images/Paris_Large.jpg",
+    image_small: ["/images/paris_arc.jpg", "/images/paris_bridge", "/images/paris_locks", "/images/paris_cafe"]
+    // likes: [],
+    // favorites: [],
+    // tags: [],
+    // comments: []
+  });
+  t5.save(function(err) {
+    if(err) console.log("error saving trip 5");
+  });   
+
+  var tag1 = new Tag({
+    text: "Adventure"
+  });
+  var tag2 = new Tag({
+    text: "Arts"
+  });
+
+  tag1.save(function(err, tag1) {
+    if(err) console.log("error saving tag 1 - adventure");
+    Trip.update(t1, {$push: { tags: tag1._id } })
+      .exec(function(err) {
+        if(err) console.log("error adding tag 1 to trip");
+      });
+    Trip.update(t5, {$push: { tags: tag1._id } })
+      .exec(function(err) {
+        if(err) console.log("error adding tag 1 to trip");
+      });  
+    Tag.update(tag1, {$push: {trips: t1._id}})
+      .exec(function(err, tag) {
+        if(err) console.log("error adding trips to tag");
+    });  
+    Tag.update(tag1, {$push: {trips: t5._id}})
+      .exec(function(err, tag) {
+        if(err) console.log("error adding trips to tag");
+    });        
+  });
+
+
+  tag2.save(function(err, tag2) {
+    if(err) console.log("error saving tag 2 - arts");
+    Trip.update(t1, {$push: { tags: tag2._id } })
+      .exec(function(err) {
+        if(err) console.log("error adding tag 2 to trip");
+      });
+    Trip.update(t2, {$push: { tags: tag2._id } })
+      .exec(function(err) {
+        if(err) console.log("error adding tag 2 to trip");
+      });  
+    Trip.update(t3, {$push: { tags: tag2._id } })
+      .exec(function(err) {
+        if(err) console.log("error adding tag 2 to trip");
+      });
+    Trip.update(t5, {$push: { tags: tag2._id } })
+      .exec(function(err) {
+        if(err) console.log("error adding tag 2 to trip");
+      });           
+    Tag.update(tag2, {$push: {trips: t1._id}})
+      .exec(function(err, tag) {
+        if(err) console.log("error adding trips to tag");
+    });  
+    Tag.update(tag2, {$push: {trips: t2._id}})
+      .exec(function(err, tag) {
+        if(err) console.log("error adding trips to tag");
+    });       
+    Tag.update(tag2, {$push: {trips: t3._id}})
+      .exec(function(err, tag) {
+        if(err) console.log("error adding trips to tag");
+    });  
+    Tag.update(tag2, {$push: {trips: t5._id}})
+      .exec(function(err, tag) {
+        if(err) console.log("error adding trips to tag");
+    });                       
+  });
+  // var tag3 = new Tag({
+  //   text: "Relaxation"
+  // });
+  // tag3.save(function(err) {
+  //   if(err) console.log("error saving tag 3 - relaxation");
+  //   Trip.update(t2, {$push: { tags: tag3._id } })
+  //     .exec(function(err) {
+  //       if(err) console.log("error adding tag 3 to trip");
+  //     });
+  //   Trip.update(t3, {$push: { tags: tag3._id } })
+  //     .exec(function(err) {
+  //       if(err) console.log("error adding tag 3 to trip");
+  //     });  
+  //   Trip.update(t4, {$push: { tags: tag3._id } })
+  //     .exec(function(err) {
+  //       if(err) console.log("error adding tag 3 to trip");
+  //     }); 
+  //   Trip.update(t5, {$push: { tags: tag3._id } })
+  //     .exec(function(err) {
+  //       if(err) console.log("error adding tag 3 to trip");
+  //     });              
+  // });
+  // var tag1 = new Tag({
+  //   text: "Paradise"
+  // });
+  // tag1.save(function(err) {
+  //   if(err) console.log("error saving tag 4 - paradise");
+  //   Trip.update(t3, {$push: { tags: tag1._id } })
+  //     .exec(function(err) {
+  //       if(err) console.log("error adding tag 4 to trip");
+  //     });
+  //   Trip.update(t4, {$push: { tags: tag1._id } })
+  //     .exec(function(err) {
+  //       if(err) console.log("error adding tag 4 to trip");
+  //     });  
+  // });  
 }
