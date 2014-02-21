@@ -34,6 +34,7 @@ exports.show = function(req, res) {
       ], function(err, results) {
         trip.comments = trip_comments;
         data.trip = trip;
+        data.user = trip.user;
         trip.num_likes = trip.likes.length;
         trip.num_favorites = trip.favorites.length;
         trip.num_tags = trip.tags.length;
