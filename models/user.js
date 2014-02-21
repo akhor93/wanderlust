@@ -20,7 +20,9 @@ var UserSchema = new Schema({
   aboutMe: {type: String, default: '' },
   profile_image: {type: String, default: '/images/blank-profile.jpg' },
   following: [{ type: Schema.ObjectId, ref: 'User' }],
-  followers: [{ type: Schema.ObjectId, ref: 'User' }]
+  followers: [{ type: Schema.ObjectId, ref: 'User' }],
+  created_at: { type: Date },
+  updated_at: { type: Date }
 })
 
 /**
@@ -87,6 +89,18 @@ UserSchema.pre('save', function(next) {
   if (!validatePresenceOf(this.password))
     next(new Error('Invalid password'));
   if(this.username == 'akhor' || this.username == 'lucywang') this.admin = true;
+  this.updated_at = new Date;
+  if ( !this.created_at ) {
+    this.created_at = new Date;
+  }
+  next();
+});
+
+/**
+ * Pre-update hook
+ */
+UserSchema.pre('update', function(next) {
+  this.updated_at = new Date;
   next();
 });
 

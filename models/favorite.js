@@ -10,23 +10,28 @@ var Schema = mongoose.Schema;
 var FavoriteSchema = new Schema({
 	user: { type: Schema.ObjectId, ref: 'User' },
 	trip: { type: Schema.ObjectId, ref: 'Trip'},
-	date: { type: Date, default: Date.now },
+	created_at: { type: Date },
+  updated_at: { type: Date }
 });
-
-
-/**
- * Validations
- */
-
 
 /**
  * Pre-save hook
  */
 FavoriteSchema.pre('save', function(next) {
-
+	this.updated_at = new Date;
+  if ( !this.created_at ) {
+    this.created_at = new Date;
+  }
   next();
 });
 
+/**
+ * Pre-update hook
+ */
+FavoriteSchema.pre('update', function(next) {
+  this.updated_at = new Date;
+  next();
+});
 
 /**
  * Methods

@@ -10,7 +10,6 @@ var Schema = mongoose.Schema;
 var TripSchema = new Schema({
 	user: { type: Schema.ObjectId, ref: 'User' },
   title: { type: String, required: true },
-  date: { type: Date, default: Date.now },
   location: { type: String, required: true },
   description: { type: String },
   image_large: { type: String, default: '/images/300x180tripfiller.jpg'},
@@ -18,16 +17,30 @@ var TripSchema = new Schema({
   likes: [{ type: Schema.ObjectId, ref: 'Like' }],
   favorites: [{ type: Schema.ObjectId, ref: 'Favorite' }],
   tags: [{ type: Schema.ObjectId, ref: 'Tag' }],
-  comments: [{ type: Schema.ObjectId, ref: 'Comment' }]
+  comments: [{ type: Schema.ObjectId, ref: 'Comment' }],
+  created_at: { type: Date },
+  updated_at: { type: Date }
 })
 
 /**
  * Pre-save hook
  */
 TripSchema.pre('save', function(next) {
+  this.updated_at = new Date;
+  if ( !this.created_at ) {
+    this.created_at = new Date;
+  }
   next();
 });
 
+/**
+ * Pre-update hook
+ */
+TripSchema.pre('update', function(next) {
+  console.log("UPDATEd");
+  this.updated_at = new Date;
+  next();
+});
 
 /**
  * Methods
