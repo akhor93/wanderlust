@@ -8,6 +8,8 @@ var Trip = mongoose.model('Trip');
 var Comment = mongoose.model('Comment');
 var Tag = mongoose.model("Tag");
 var Like = mongoose.model('Like');
+var Favorite = mongoose.model('Favorite');
+var Tag = mongoose.model('Tag');
 
 var trips = require('../data.json');
 
@@ -73,7 +75,19 @@ exports.reset = function(req, res){
             if(err) console.log(err);
             else cb();
           });
-        }
+        },
+        function(cb) {
+          Favorite.remove({}, function (err) {
+            if(err) console.log(err);
+            else cb();
+          });
+        },
+        function(cb) {
+          Tag.remove({}, function (err) {
+            if(err) console.log(err);
+            else cb();
+          });
+        },
       ], function(err) {
         initialize();
         //Log out
