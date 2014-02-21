@@ -1,4 +1,4 @@
-{{#if user}}
+{{#if curuser}}
   {{> trip/new this}}
 {{else}}
   {{> new_user this}}
@@ -16,9 +16,9 @@
       <a class="navbar-brand" href="/">Wanderlust</a>
     </div>
     <div class="collapse navbar-collapse navbar-ex1-collapse">
-        {{#if user}}
+        {{#if curuser}}
         <ul class="nav navbar-nav">
-          <li><a href="/user/{{user._id}}">My Trips</a></li>
+          <li><a href="/user/{{curuser._id}}">My Trips</a></li>
         </ul>
         {{else}}
         {{!-- <li><a href="/user/1">My Trips</a></li> --}}
@@ -31,12 +31,12 @@
         </div>
       </form>
       <ul class="nav navbar-nav navbar-right">
-        {{#if user}}
+        {{#if curuser}}
           <li><a class="trigger" href="#" data-toggle="modal" data-target="#new_trip_modal">Create New Trip</a></li>
           <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{user.username}}<b class="caret"></b></a>
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{curuser.username}}<b class="caret"></b></a>
             <ul class="dropdown-menu">
-              <li><a href="/user/edit">{{ user.username }}</a></li>
+              <li><a href="/user/edit">{{ curuser.username }}</a></li>
               <li class="divider"></li>
               {{!-- <li><a href="#">SETTINGS</a></li> --}}
               <li><a href="/admin">ADMIN</a></li>
