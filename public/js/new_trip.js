@@ -10,9 +10,9 @@ $(document).ready(function(){
 			if (status == 'success') location.reload(true);
 		},
 		error : function(e){
-			console.log(e.responseText);
-      $('#trip_alert_container').html('');
-      $('#trip_alert_container').append('<div class="alert alert-danger">Error Creating Trip: ' + e.responseText + '</div>');
+			console.log("ERROR submitting form: " + e.responseText);
+      		$('#trip_alert_container').html('');
+      		$('#trip_alert_container').append('<div class="alert alert-danger">Error Creating Trip: ' + e.responseText + '</div>');
 		}
 	});
 

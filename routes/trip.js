@@ -48,21 +48,30 @@ exports.show = function(req, res) {
 
 exports.create = function(req, res) {
 	//Get Moment library
-	var trip = new Trip({
-		user       : req.session.user.id,
+  console.log("User logged in and user that the trip belongs to: " + req.session.user);
+  console.log("User logged in and user that the trip belongs to: " + req.session.user._id);
+	var userID = req.session.user._id;
+  var trip = new Trip({
+		user       : req.session.user._id,
     title      : req.param('title'),
     location   : req.param('location'),
     description: req.param('description'),
   });
-  trip.save(function(err) {
-  	if(err) {
-  		console.log("ERROR Saving trip");
-  		res.send("Error saving trip", 400);
-  	}
-  	else {
-  		res.redirect('trip/' + trip.id);
-  	}
-  })
+  async.parallel([
+    function(cb) {
+      trip.save(function(err, trip) {
+          if(err) console.log("error saving trip: " + err);
+          User.update({"_id": userID}, {$push: { trips: trip._id } }, {upsert: true})
+            .exec(function(err) {
+              if(err) console.log("error adding new trip: " + err);
+              else cb();
+            });    
+        });
+    }
+  ], function(err) {
+    console.log("new trip id: " + trip._id);
+    res.redirect('trip/' + trip._id);
+  });
 }
 
 exports.edit = function(req, res) {
