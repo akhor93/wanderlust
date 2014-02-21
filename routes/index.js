@@ -3,6 +3,7 @@ var SH = require("../lib/session_helper");
 
 exports.home = function(req, res){
 	SH.getSessionData(req.session.user, function(data) {
+		console.log(data);
 		res.render('index', data);
 	});
 };

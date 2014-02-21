@@ -40,7 +40,7 @@ exports.create = function(req, res) {
 					}
 				], function(err) {
 					if(err) return res.send(err, 400);
-					res.send("ok", 200);
+					res.send(tripID, 200);
 				});
 			})
 		})

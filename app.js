@@ -42,8 +42,7 @@ var app = express();
 // Handlebars.registerHelper('moduloIf', function(index_count, mod, remainder, block) {
 // 	if (parseInt(index_count)%(mod) === remainder) return block(this);
 // });
-var hbs = handlebars.create({defaultLayout: 'main', helpers: helpers});
-
+// var hbs = handlebars.create({defaultLayout: 'main', helpers: helpers});
 
 // all environments
 app.set('port', process.env.PORT || 3000);
