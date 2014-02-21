@@ -10,8 +10,8 @@ var Schema = mongoose.Schema;
 var LikeSchema = new Schema({
 	user: { type: Schema.ObjectId, ref: 'User' },
 	trip: { type: Schema.ObjectId, ref: 'Trip'},
-	created_at: { type: Date },
-  updated_at: { type: Date }
+	created_at: { type: Date, default: Date.now() },
+  updated_at: { type: Date, default: Date.now() }
 });
 
 /**

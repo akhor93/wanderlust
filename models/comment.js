@@ -11,8 +11,8 @@ var CommentSchema = new Schema({
 	user: { type: Schema.ObjectId, ref: 'User', required: true },
   text: { type: String, required: true },
   trip: { type: Schema.ObjectId, ref: 'Trip', required: true },
-  created_at: { type: Date },
-  updated_at: { type: Date }
+  created_at: { type: Date, default: Date.now() },
+  updated_at: { type: Date, default: Date.now() }
 })
 
 /**
