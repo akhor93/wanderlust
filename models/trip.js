@@ -19,9 +19,9 @@ var TripSchema = new Schema({
   tags: [{ type: Schema.ObjectId, ref: 'Tag' }],
   comments: [{ type: Schema.ObjectId, ref: 'Comment' }],
   featured: { type: Boolean, default: false},
-  created_at: { type: Date },
-  updated_at: { type: Date },
-  date: { type: Date }
+  created_at: { type: Date, default: Date.now() },
+  updated_at: { type: Date, default: Date.now() },
+  date: { type: Date, default: Date.now() }
 })
 
 /**

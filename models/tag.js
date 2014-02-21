@@ -10,8 +10,8 @@ var Schema = mongoose.Schema;
 var TagSchema = new Schema({
   trips: [{ type: Schema.ObjectId, ref: 'Trip'}],
   text: { type: String, required: true},
-  created_at: { type: Date },
-  updated_at: { type: Date }
+  created_at: { type: Date, default: Date.now() },
+  updated_at: { type: Date, default: Date.now() }
 })
 
 /**

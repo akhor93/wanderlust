@@ -44,11 +44,19 @@
 				<div class="w-clearfix social_bar">
 					<div class="trip_id" id="trip_{{_id}}"></div>
 					<div class="w-clearfix social">
-						<img class="social_buttons like_icon" src="images/icon_822.png" alt="like-button" data-trip="{{_id}}">
+                        {{#if curuser}}
+                            <img class="social_buttons like_icon" src="images/icon_822.png" alt="like-button" data-trip="{{_id}}">
+                        {{else}}
+                            <img class="social_buttons like_icon" title="Login to like trips" src="images/icon_822.png" alt="like-button" data-trip="{{_id}}">
+                        {{/if}}
 						<div class="social_num like_counter">{{num_likes}}</div>
 					</div>
 					<div class="w-clearfix social">
-						<img class="social_buttons favorite_icon" src="images/better-pin.png" alt="favorite-button" data-trip="{{this._id}}">
+                        {{#if curuser}}
+					       <img class="social_buttons favorite_icon" src="images/better-pin.png" alt="favorite-button" data-trip="{{this._id}}">
+                        {{else}}                
+                            <img class="social_buttons favorite_icon" title="Login to pin trips" src="images/better-pin.png" alt="favorite-button" data-trip="{{this._id}}">
+                        {{/if}}
 						<div class="social_num favorite_counter">{{this.num_favorites}}</div>
 					</div>
 					<div class="w-clearfix social">
@@ -56,14 +64,14 @@
 						<div class="social_num comment_counter">{{num_comments}}</div>
 					</div>
 				</div>
-				{{#if comments.[0]}}
-				<div class="comment_box">
+{{!-- 				{{#if comments.[0]}}
+ --}}				<div class="comment_box">
 					{{#each comments}}
 						{{> comment this}}
 					{{/each}}
 				</div>
-				{{/if}}
-				<div class="w-clearfix addcomment_box">
+{{!-- 				{{/if}}
+ --}}				<div class="w-clearfix addcomment_box">
 					{{#if ../curuser}}
 						<img class="prof_pic-xsmall" src="{{../../curuser.profile_image}}" alt="prof-pic">
 						<div class="w-form comment_form">

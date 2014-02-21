@@ -7,11 +7,7 @@ var User = mongoose.model('User');
 var Trip = mongoose.model('Trip');
 var Comment = mongoose.model('Comment');
 
-var allData = require('../data.json');
-
 exports.show = function(req, res) {
-  console.log("S" + req.param('test'));
-  if(req.params.id == "create") return res.send("show", 200);
 	var tripID = req.params.id;
   SH.getSessionData(req.session.user, function(data) {
     Trip.findById(tripID)
@@ -36,11 +32,13 @@ exports.show = function(req, res) {
       ], function(err, results) {
         trip.comments = trip_comments;
         data.trip = trip;
+        data.user = trip.user;
         trip.num_likes = trip.likes.length;
         trip.num_favorites = trip.favorites.length;
         trip.num_tags = trip.tags.length;
         trip.num_comments = trip.comments.length;
         if(req.session.user && trip.user._id == req.session.user._id) data.isowner = true;
+        console.log(data);
         res.render('trip/show', data);
       });
     });
@@ -49,26 +47,32 @@ exports.show = function(req, res) {
 
 exports.create = function(req, res) {
 	//Get Moment library
-  console.log("x" + req.param('test'));
-	var trip = new Trip({
-		user       : req.session.user.id,
+	var userID = req.session.user._id;
+  var trip = new Trip({
+		user       : userID,
     title      : req.param('title'),
     location   : req.param('location'),
     description: req.param('description'),
   });
-  trip.save(function(err) {
-  	if(err) {
-  		console.log("ERROR Saving trip");
-  		res.send("Error saving trip", 400);
-  	}
-  	else {
-  		res.redirect('trip/' + trip.id);
-  	}
-  })
+  async.parallel([
+    function(cb) {
+      trip.save(function(err, trip) {
+          if(err) console.log("error saving trip: " + err);
+          User.update({"_id": userID}, {$push: { trips: trip._id } }, {upsert: true})
+            .exec(function(err) {
+              if(err) console.log("error adding new trip: " + err);
+              else cb();
+            });    
+        });
+    }
+  ], function(err) {
+    console.log("new trip id: " + trip._id);
+    res.redirect('trip/' + trip._id);
+  });
 }
 
 exports.edit = function(req, res) {
-  // if(!req.session.user) return redirect('/');
+  if(!req.session.user) return redirect('/');
   var tripID = req.param('id');
   SH.getSessionData(req.session.user, function(data) {
     Trip.findOne({_id: tripID}, function(err, trip) {
