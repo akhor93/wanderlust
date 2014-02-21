@@ -27,14 +27,6 @@ LikeSchema.pre('save', function(next) {
 });
 
 /**
- * Pre-update hook
- */
-LikeSchema.pre('update', function(next) {
-  this.updated_at = new Date;
-  next();
-});
-
-/**
  * Methods
  */
 LikeSchema.methods = {

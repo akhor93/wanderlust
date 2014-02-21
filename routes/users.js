@@ -23,8 +23,6 @@ exports.edit = function(req, res) {
 
 exports.show = function(req, res) {
   SH.getSessionData(req.session.user, function(data) {
-    console.log("Starting data:");
-    console.log(data);
     var all_trips = data.trips;
     var user_trips = {
       col0: [],
@@ -44,7 +42,7 @@ exports.show = function(req, res) {
         var totalImages = all_trips[i]["image_small"].length + 1;
         // console.log(totalImages);
         all_trips[i]["totalImages"] = totalImages;
-        all_trips[i]["date"] = formatDate(all_trips[i]["date"]);
+        //all_trips[i]["date"] = formatDate(all_trips[i]["date"]);
         // console.log(all_trips[i]);
         user_trips[col_name].push(all_trips[i]);
         count++;

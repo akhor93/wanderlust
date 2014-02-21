@@ -23,8 +23,10 @@ module.exports = function (app) {
 	app.get('/', index.home);
 
 	//TRIPS
-	app.get('/trip/:id', trip.show);
 	app.post('/trip', trip.create);
+	app.post('/trip/update', trip.update);
+	app.get('/trip/edit/:id', trip.edit);
+	app.get('/trip/:id', trip.show);
 
 	//USERS
 	app.get('/user/edit', users.edit);

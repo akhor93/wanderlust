@@ -1,0 +1,83 @@
+<div class="container" style="width: 600px; background: white">
+	<h1>Edit Trip</h1>
+	<form id="update_trip_form" method="post" class="form-horizontal" enctype="multipart/form-data">
+		<input type="hidden" name="tripid" value="{{trip._id}}" />
+		<div id="title-cg" class="form-group">
+			<label class="control-label col-sm-3">Title</label>
+      <div class="col-sm-9">
+        <input id="title-tf" class="form-control" name="title" type="text" value="{{trip.title}}">
+      </div>
+		</div>
+		<div id="location-cg" class="form-group">
+			<label class="control-label col-sm-3">Location</label>
+      <div class="col-sm-9">
+        <input id="location-tf" class="form-control" name="location" type="text" value="{{trip.location}}">
+      </div>
+		</div>
+		<div id="description-cg" class="form-group">
+			<label class="control-label col-sm-3">Description</label>
+      <div class="col-sm-9">
+        <input id="description-tf" class="form-control" name="description" type="text" value="{{trip.description}}">
+      </div>
+		</div>
+		<div class="row">
+			Leave images empty to keep existing
+		</div>
+    <div id="large_image-cg" class="form-group">
+			<label class="control-label col-sm-3">Large Image</label>
+      <div class="col-sm-9">
+        <input id="large_image-tf" class="form-control" name="large_image" type="file">
+      </div>
+		</div>
+		<div id="small_image_0-cg" class="form-group">
+			<label class="control-label col-sm-3">Small Image 1</label>
+      <div class="col-sm-9">
+        <input id="small_image_0-tf" class="form-control" name="small_0" type="file">
+      </div>
+		</div>
+		<div id="small_image_1-cg" class="form-group">
+			<label class="control-label col-sm-3">Small Image 2</label>
+      <div class="col-sm-9">
+        <input id="small_image_1-tf" class="form-control" name="small_1" type="file">
+      </div>
+		</div>
+		<div id="small_image_2-cg" class="form-group">
+			<label class="control-label col-sm-3">Small Image 3</label>
+      <div class="col-sm-9">
+        <input id="small_image_2-tf" class="form-control" name="small_2" type="file">
+      </div>
+		</div>
+		<div id="small_image_3-cg" class="form-group">
+			<label class="control-label col-sm-3">Small Image 4</label>
+      <div class="col-sm-9">
+        <input id="small_image_3-tf" class="form-control" name="small_3" type="file">
+      </div>
+		</div>
+		<div class="form-group">
+      <div class="col-sm-offset-9 col-sm-2">
+        <button type="submit" class="btn btn-primary">Update Trip</button>
+      </div>
+    </div>
+	</form>
+</div>
+
+<script type="text/javascript">
+$(document).ready(function(){
+	$('#update_trip_form').ajaxForm({
+		url: '/trip/update',
+		type: 'post',
+		success	: function(responseText, status, xhr, $form){
+			if (status == 'success') {
+				console.log("success");
+				console.log(responseText);
+				// window.location.href = "/";
+			}
+		},
+		error : function(e){
+			console.log(e.responseText);
+		}
+	});
+
+	$('#name-tf').focus();
+});
+</script>

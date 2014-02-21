@@ -10,6 +10,7 @@ var Schema = mongoose.Schema;
 var TripSchema = new Schema({
 	user: { type: Schema.ObjectId, ref: 'User' },
   title: { type: String, required: true },
+  date: { type: String, required: true, default: Date.now },
   location: { type: String, required: true },
   description: { type: String },
   image_large: { type: String, default: '/images/300x180tripfiller.jpg'},
@@ -30,15 +31,6 @@ TripSchema.pre('save', function(next) {
   if ( !this.created_at ) {
     this.created_at = new Date;
   }
-  next();
-});
-
-/**
- * Pre-update hook
- */
-TripSchema.pre('update', function(next) {
-  console.log("UPDATEd");
-  this.updated_at = new Date;
   next();
 });
 

@@ -1,5 +1,13 @@
 <div id="single_trip" class="container">
-	<span class="title">{{trip.title}}</span><span> @ {{trip.location}}</span>
+	<div class="row">
+		<div class="col-md-5">
+			<span class="title">{{trip.title}}</span><span> @ {{trip.location}}</span>
+		</div>
+		<div class="offset-col-md-9">
+			<a href="/trip/edit/{{trip._id}}"><h3>Edit Trip</h3></a>
+		</div>
+	</div>
+	
 	<div id="trip_images" class="w-clearfix pictures">
 		{{#if trip.image_large}}
 			<a class="fancybox" rel="gallery" href="{{trip.image_large}}">
@@ -9,9 +17,13 @@
 			<img src="/images/300x180tripfiller.jpg" class="album-preview_large" />
 		{{/if}}
 		{{#if trip.image_small}}
-			<a class="fancybox" rel="gallery" href="{{trip.image_small.[0]}}">
-				<img src="{{trip.image_small.[0]}}" class="album-preview_small" />
-			</a>
+			{{#if trip.image_small.[0]}}
+				<a class="fancybox" rel="gallery" href="{{trip.image_small.[0]}}">
+					<img src="{{trip.image_small.[0]}}" class="album-preview_small" />
+				</a>
+			{{else}}
+				<img src="/images/180x125tripfiller.jpg" class="album-preview_small" />
+			{{/if}}
 			{{#if trip.image_small.[1]}}
 				<a class="fancybox" rel="gallery" href="{{trip.image_small.[1]}}">
 					<img src="{{trip.image_small.[1]}}" class="album-preview_small" />

@@ -26,15 +26,6 @@ TagSchema.pre('save', function(next) {
 });
 
 /**
- * Pre-update hook
- */
-TagSchema.pre('update', function(next) {
-  this.updated_at = new Date;
-  next();
-});
-
-
-/**
  * Methods
  */
 TagSchema.methods = {

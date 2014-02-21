@@ -97,15 +97,6 @@ UserSchema.pre('save', function(next) {
 });
 
 /**
- * Pre-update hook
- */
-UserSchema.pre('update', function(next) {
-  this.updated_at = new Date;
-  next();
-});
-
-
-/**
  * Methods
  */
 UserSchema.methods = {
