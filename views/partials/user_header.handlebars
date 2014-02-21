@@ -8,14 +8,14 @@
           <div class="social_bar">
             <img class="social_buttons" src="/images/icon_1832.png" alt="location-icon">
             <div class="location">{{user.country}}&nbsp;&nbsp;</div>
-            <img class="social_buttons" src="/images/facebook.png" alt="facebook-icon">
-            <img class="social_buttons" src="/images/twitter.png" alt="twitter-icon">
+            {{!-- <img class="social_buttons" src="/images/facebook.png" alt="facebook-icon">
+            <img class="social_buttons" src="/images/twitter.png" alt="twitter-icon"> --}}
           </div>
         </div>
         <div class="prof_stats">
-          <a class="button" href="#">Follow</a>
+          {{!-- <a class="button" href="#">Follow</a>
           <a class="button" href="#">{{user.followers.length}} Followers</a>
-          <a class="button" href="#">{{user.following.length}} Following</a>
+          <a class="button" href="#">{{user.following.length}} Following</a> --}}
           <a class="button" href="/user/{{user._id}}">All Trips ({{user.trips.length}})</a>
         </div>
       </div>
