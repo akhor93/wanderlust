@@ -1,16 +1,6 @@
 var async = require("async");
 var SH = require("../lib/session_helper");
-var fs = require('fs');
-// var s3 = require('s3');
-// var cred = require('../awscred.json');
-// var client = s3.createClient({
-//   key: cred.accessKeyId,
-//   secret: cred.secretAccessKey,
-//   bucket: "wanderlustapp"
-// });
-var AWS = require('aws-sdk'); 
-AWS.config.loadFromPath('awscred.json');
-var s3 = new AWS.S3();
+var image_helper = require('../lib/image_helper');
 //Models
 var mongoose = require('mongoose');
 var User = mongoose.model('User');
@@ -113,7 +103,7 @@ exports.update = function(req, res) {
         function(cb) {
           if(req.files) {
             if(req.files.large_image) {
-              movefile(req.files.large_image, req.session.user, function(imagepath) {
+              image_helper.uploadfile(req.files.large_image, req.session.user, function(imagepath) {
                 if(imagepath == null) cb("problem saving large image");
                 Trip.update({_id: tripID}, { $set: {image_large: imagepath} } ,null, function(err, trip) {
                   if(err) return cb("Unable to save trip: " + err);
@@ -128,7 +118,7 @@ exports.update = function(req, res) {
         function(cb) {
           if(req.files) {
             if(req.files.small_0) {
-              movefile(req.files.small_0, req.session.user, function(imagepath) {
+              image_helper.uploadfile(req.files.small_0, req.session.user, function(imagepath) {
                 if(imagepath == null) cb("problem saving small image 0");
                 var pathobj = { "image_small.0": imagepath };
                 Trip.update({_id: tripID}, { $set: pathobj } ,null, function(err, trip) {
@@ -144,7 +134,7 @@ exports.update = function(req, res) {
         function(cb) {
           if(req.files) {
             if(req.files.small_1) {
-              movefile(req.files.small_1, req.session.user, function(imagepath) {
+              image_helper.uploadfile(req.files.small_1, req.session.user, function(imagepath) {
                 if(imagepath == null) cb("problem saving small image 1");
                 var pathobj = { "image_small.1": imagepath };
                 Trip.update({_id: tripID}, { $set: pathobj } ,null, function(err, trip) {
@@ -160,7 +150,7 @@ exports.update = function(req, res) {
         function(cb) {
           if(req.files) {
             if(req.files.small_2) {
-              movefile(req.files.small_2, req.session.user, function(imagepath) {
+              image_helper.uploadfile(req.files.small_2, req.session.user, function(imagepath) {
                 if(imagepath == null) cb("problem saving small image 2");
                 var pathobj = { "image_small.2": imagepath };
                 Trip.update({_id: tripID}, { $set: pathobj } ,null, function(err, trip) {
@@ -176,7 +166,7 @@ exports.update = function(req, res) {
         function(cb) {
           if(req.files) {
             if(req.files.small_3) {
-              movefile(req.files.small_3, req.session.user, function(imagepath) {
+              image_helper.uploadfile(req.files.small_3, req.session.user, function(imagepath) {
                 if(imagepath == null) cb("problem saving small image 3");
                 var pathobj = { "image_small.3": imagepath };
                 Trip.update({_id: tripID}, { $set: pathobj } ,null, function(err, trip) {
@@ -206,61 +196,4 @@ exports.update = function(req, res) {
   }
 }
 
-function movefile(file, user, cb) {
-  var usable_path = user._id + "" + file.name;
-  // var headers = {
-  //   'Content-Type' : 'image/jpg',
-  //   'x-amz-acl'    : 'public-read'
-  // };
-  // var newpath = __dirname + "/../public" + usable_path;
-  
-  // var uploader = client.upload(file.path, usable_path, headers);
-  // uploader.on('error', function(err) {
-  //   console.error("unable to upload:", err.stack);
-  // });
-  // uploader.on('progress', function(amountDone, amountTotal) {
-  //   console.log("progress", amountDone, amountTotal);
-  // });
-  // uploader.on('end', function(url) {
-  //   console.log("file available at", url);
-  //   return url;
-  // });
-  fs.stat(file.path, function(err, file_info) {
-    var bodyStream = fs.createReadStream(file.path);
-    var params = {
-      Bucket: "wanderlustapp/uploads",
-      Key: usable_path,
-      ContentLength: file_info.size,
-      Body: bodyStream
-    };
-
-    s3.putObject(params, function(err, data) {
-      if(err) {
-        console.log("Error uploading image: " + err);
-        cb(null);
-      }
-      var completeaddress = "https://s3-us-west-1.amazonaws.com/wanderlustapp/uploads/" + usable_path;
-      console.log("uploaded successfully " + completeaddress);
-      cb(completeaddress);
-    });
-  });
-    
-
-
-  // async.series([
-  //   function(cb) {
-  //     var is = fs.createReadStream(file.path);
-  //     var os = fs.createWriteStream(newpath);
-  //     is.pipe(os);
-  //     is.on('end',function() {
-  //         fs.unlinkSync(file.path);
-  //         cb();
-  //     });
-  //   }
-    
-  //   ], function(err) {
-  //     console.log(usable_path);
-  //     cb(usable_path);
-  //   });
-}
 

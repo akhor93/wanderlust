@@ -1,5 +1,7 @@
 var async = require('async');
 var SH = require("../lib/session_helper");
+var image_helper = require('../lib/image_helper');
+//Models
 var mongoose = require('mongoose');
 var User = mongoose.model('User');
 var CT = require("../modules/country-list");
@@ -14,7 +16,6 @@ exports.edit = function(req, res) {
       }
       else {
         data.user = user;
-        console.log(data);
         data.countries = CT;
         res.render('users/edit', data);
       }
@@ -84,15 +85,30 @@ function formatDate(date) {
 
 exports.update = function(req, res) {
   if(req.session.user) {
+    var update = {
+      name: req.param('name'),
+      email: req.param('email'),
+      country: req.param('country'),
+      username: req.param('username'),
+      aboutMe: req.param('aboutMe')
+    };
+    if(req.param('password')) {
+      console.log("updating password");
+      update.password = req.param('password');
+    }
     User.findById(req.session.user._id, function(err, user) {
-      if(req.param('password')) {
-        User.update({_id: req.session.user._id}, {name: req.param('name'), email: req.param('email'), country: req.param('country'), username: req.param('username'), password: req.param('password')}, function(err, user) {
-          if(err) return res.send("Unable to save user: " + err, 400);
-          return res.send('ok', 200);
+      if(req.files && req.files.profile_image) {
+        image_helper.uploadfile(req.files.profile_image, req.session.user, function(imagepath) {
+          if(imagepath == null) return res.send('trouble uploading profile picture');
+          update.profile_image = imagepath;
+          User.update({_id: req.session.user._id}, update, function(err, user) {
+            if(err) return res.send("Unable to save user: " + err, 400);
+            return res.send('ok', 200);
+          });
         });
       }
       else {
-        User.update({_id: req.session.user._id}, {name: req.param('name'), email: req.param('email'), country: req.param('country'), username: req.param('username')}, function(err, user) {
+        User.update({_id: req.session.user._id}, update, function(err, user) {
           if(err) return res.send("Unable to save user: " + err, 400);
           return res.send('ok', 200);
         });

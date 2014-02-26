@@ -11,7 +11,8 @@ exports.signup = function(req, res) {
     email     : req.param('email'),
     username  : req.param('username'),
     password  : req.param('password'),
-    country   : req.param('country')
+    country   : req.param('country'),
+    aboutMe   : req.param('aboutMe')
   });
   user.save(function(err) {
     if(err) {

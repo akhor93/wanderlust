@@ -1,6 +1,6 @@
 <div class="container" style="width: 600px; background: white">
 	<h1>Edit User Account</h1>
-	<form id="update_user_form" class="form-horizontal">
+	<form id="update_user_form" class="form-horizontal" enctype="multipart/form-data">
 		<div id="name-cg" class="form-group">
 			<label class="control-label col-sm-3">Name</label>
       <div class="col-sm-9">
@@ -23,6 +23,12 @@
         </select>
       </div>
     </div>
+    <div id="aboutme-cg" class="form-group">
+      <label class="control-label col-sm-3">About Me</label>
+      <div class="col-sm-9">
+        <input id="aboutme-tf" class="form-control" name="aboutMe" type="text" value="{{user.aboutMe}}">
+      </div>
+    </div>
     <div id="username-cg" class="form-group">
 			<label class="control-label col-sm-3">Username</label>
       <div class="col-sm-9">
@@ -32,7 +38,13 @@
 		<div id="password-cg" class="form-group">
 			<label class="control-label col-sm-3">Password</label>
       <div class="col-sm-9">
-        <input id="password-tf" class="form-control" name="password" type="text" placeholder="Leave blank to keep">
+        <input id="password-tf" class="form-control" name="password" type="password" placeholder="Leave blank to keep">
+      </div>
+		</div>
+		<div id="profile-image-cg" class="form-group">
+			<label class="control-label col-sm-3">Profile Picture (leave blank to keep existing)</label>
+      <div class="col-sm-9">
+        <input id="profile-image-field" class="form-control" name="profile_image" type="file">
       </div>
 		</div>
 		<div class="form-group">
