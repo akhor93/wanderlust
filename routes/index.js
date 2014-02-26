@@ -1,5 +1,7 @@
 var SH = require("../lib/session_helper");
 var async = require('async');
+var moment = require('moment');
+//Models
 var mongoose = require('mongoose');
 var Comment = mongoose.model('Comment');
 
@@ -15,6 +17,7 @@ exports.home = function(req, res){
 				var id = data.trips[i]._id;
 				Comment.find({trip: id})
 				.populate('user trip')
+				.lean()
 				.exec(function(err, comments) {
 					i++;
 					cb(null, comments);
@@ -26,6 +29,10 @@ exports.home = function(req, res){
 		async.series(asyncfunctions, function(err, results) {
 			for(var i = 0; i < results.length; i++) {
 				data.trips[i].comments = results[i];
+				for(var j = 0; j < data.trips[i].comments.length; j++) {
+					var timeago = moment(data.trips[i].comments[j].created_at).fromNow();
+					data.trips[i].comments[j].timeago = timeago;
+				}
 			}
 			Trip.find({featured: true}, function(err, trips) {
 				data.featured = trips;

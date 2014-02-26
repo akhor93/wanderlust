@@ -91,7 +91,8 @@
 
 <script type="text/javascript">
 $(document).ready(function() {
-    $('a.fancybox').fancybox();
+  $('.fancybox').fancybox({"hideOnOverlayClick": false});
+
 	$('.comment_form').ajaxForm({
 		url: '/add_comment',
 		success: function(responseText, status, xhr, $form) {
@@ -115,7 +116,7 @@ $(document).ready(function() {
 		comment_box_html += '</div>';
 		comment_box_html += '<div class="col-md-10">';
 		comment_box_html += '<a href="user/' + comment.user._id + '">' + comment.user.username + '</a> ' + comment.text;
-		comment_box_html += '<br /> X hours ago';
+		comment_box_html += '<br />' + moment(comment.created_at).fromNow();
 		comment_box_html += '</div>';
 		comment_box_html += '</div>';
 		$(tripdiv + ' .comment_box').append(comment_box_html);

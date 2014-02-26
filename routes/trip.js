@@ -1,6 +1,7 @@
 var async = require("async");
 var SH = require("../lib/session_helper");
 var image_helper = require('../lib/image_helper');
+var moment = require('moment');
 //Models
 var mongoose = require('mongoose');
 var User = mongoose.model('User');
@@ -31,6 +32,9 @@ exports.show = function(req, res) {
         }
       ], function(err, results) {
         trip.comments = trip_comments;
+        for(var i = 0; i < trip.comments.length; i++) {
+          trip.comments[i].timeago = moment(trip.comments[i].created_at).fromNow();
+        }
         data.trip = trip;
         data.user = trip.user;
         trip.num_likes = trip.likes.length;

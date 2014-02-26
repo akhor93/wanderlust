@@ -16,7 +16,8 @@
     "express3-handlebars": "*",
     "mongodb": "*",
     "mongoose": "*",
-    "s3": "~0.3.1"
+    "s3": "~0.3.1",
+    "moment": "~2.5.1"
   },
   "engines": {
     "node": "0.10.25"
