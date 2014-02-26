@@ -1,13 +1,16 @@
 var async = require("async");
 var SH = require("../lib/session_helper");
 var fs = require('fs');
-var s3 = require('s3');
-var cred = require('../awscred.json');
-var client = s3.createClient({
-  key: cred.accessKeyId,
-  secret: cred.secretAccessKey,
-  bucket: "wanderlustapp"
-});
+// var s3 = require('s3');
+// var cred = require('../awscred.json');
+// var client = s3.createClient({
+//   key: cred.accessKeyId,
+//   secret: cred.secretAccessKey,
+//   bucket: "wanderlustapp"
+// });
+var AWS = require('aws-sdk'); 
+AWS.config.loadFromPath('awscred.json');
+var s3 = new AWS.S3();
 //Models
 var mongoose = require('mongoose');
 var User = mongoose.model('User');
@@ -106,7 +109,6 @@ exports.update = function(req, res) {
       var title = req.param('title');
       var location = req.param('location');
       var description = req.param('description');
-      console.log(req.files);
       async.parallel([
         function(cb) {
           if(req.files) {
@@ -119,7 +121,9 @@ exports.update = function(req, res) {
                 });
               });
             }
+            else cb();
           }
+          else cb();
         },
         function(cb) {
           if(req.files) {
@@ -133,7 +137,9 @@ exports.update = function(req, res) {
                 });
               });
             }
+            else cb();
           }
+          else cb();
         },
         function(cb) {
           if(req.files) {
@@ -147,7 +153,9 @@ exports.update = function(req, res) {
                 });
               });
             }
+            else cb();
           }
+          else cb();
         },
         function(cb) {
           if(req.files) {
@@ -161,7 +169,9 @@ exports.update = function(req, res) {
                 });
               });
             }
+            else cb();
           }
+          else cb();
         },
         function(cb) {
           if(req.files) {
@@ -175,7 +185,9 @@ exports.update = function(req, res) {
                 });
               });
             }
+            else cb();
           }
+          else cb();
         },
         function(cb) {
           Trip.update({_id: tripID}, { $set: {title: title, location: location, description: description} } ,null, function(err, trip) {
@@ -185,7 +197,7 @@ exports.update = function(req, res) {
         }
       ], function(err) {
         if(err) return res.send(err, 400);
-        res.send("ok", 200);
+        return res.send("ok", 200);
       });
     });
   }
@@ -195,20 +207,44 @@ exports.update = function(req, res) {
 }
 
 function movefile(file, user, cb) {
-  var usable_path = "/uploads/" + user._id + "" + file.name;
+  var usable_path = user._id + "" + file.name;
+  // var headers = {
+  //   'Content-Type' : 'image/jpg',
+  //   'x-amz-acl'    : 'public-read'
+  // };
   // var newpath = __dirname + "/../public" + usable_path;
   
-  var uploader = client.upload(file.path, usable_path, headers);
-  uploader.on('error', function(err) {
-    console.error("unable to upload:", err.stack);
+  // var uploader = client.upload(file.path, usable_path, headers);
+  // uploader.on('error', function(err) {
+  //   console.error("unable to upload:", err.stack);
+  // });
+  // uploader.on('progress', function(amountDone, amountTotal) {
+  //   console.log("progress", amountDone, amountTotal);
+  // });
+  // uploader.on('end', function(url) {
+  //   console.log("file available at", url);
+  //   return url;
+  // });
+  fs.stat(file.path, function(err, file_info) {
+    var bodyStream = fs.createReadStream(file.path);
+    var params = {
+      Bucket: "wanderlustapp/uploads",
+      Key: usable_path,
+      ContentLength: file_info.size,
+      Body: bodyStream
+    };
+
+    s3.putObject(params, function(err, data) {
+      if(err) {
+        console.log("Error uploading image: " + err);
+        cb(null);
+      }
+      var completeaddress = "https://s3-us-west-1.amazonaws.com/wanderlustapp/uploads/" + usable_path;
+      console.log("uploaded successfully " + completeaddress);
+      cb(completeaddress);
+    });
   });
-  uploader.on('progress', function(amountDone, amountTotal) {
-    console.log("progress", amountDone, amountTotal);
-  });
-  uploader.on('end', function(url) {
-    console.log("file available at", url);
-    return url;
-  });
+    
 
 
   // async.series([

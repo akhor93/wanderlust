@@ -22,7 +22,7 @@ module.exports = function (app) {
 
 	//TRIPS
 	app.post('/trip/create', trip.create);
-	app.post('/trip', trip.update);
+	app.post('/trip/update', trip.update);
 	app.get('/trip/edit/:id', trip.edit);
 	app.get('/trip/:id', trip.show);
 	
