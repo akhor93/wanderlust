@@ -2,13 +2,11 @@
   "name": "WanderlustApp",
   "version": "0.0.2",
   "author": "Andrew Khor, Lucy Wang, Adrian Rodriguez",
-
   "repository": {
     "type": "git",
     "url": "https://github.com/akhor93/wanderlust"
   },
   "license": "MIT",
-
   "private": true,
   "scripts": {
     "start": "node app.js"
@@ -17,9 +15,10 @@
     "express": "3.x",
     "express3-handlebars": "*",
     "mongodb": "*",
-    "mongoose": "*"
+    "mongoose": "*",
+    "s3": "~0.3.1"
   },
   "engines": {
     "node": "0.10.25"
-  }  
+  }
 }

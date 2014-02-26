@@ -1,6 +1,13 @@
 var async = require("async");
 var SH = require("../lib/session_helper");
 var fs = require('fs');
+var s3 = require('s3');
+var cred = require('../awscred.json');
+var client = s3.createClient({
+  key: cred.accessKeyId,
+  secret: cred.secretAccessKey,
+  bucket: "wanderlustapp"
+});
 //Models
 var mongoose = require('mongoose');
 var User = mongoose.model('User');
@@ -189,22 +196,35 @@ exports.update = function(req, res) {
 
 function movefile(file, user, cb) {
   var usable_path = "/uploads/" + user._id + "" + file.name;
-  var newpath = __dirname + "/../public" + usable_path;
+  // var newpath = __dirname + "/../public" + usable_path;
   
-  async.series([
-    function(cb) {
-      var is = fs.createReadStream(file.path);
-      var os = fs.createWriteStream(newpath);
-      is.pipe(os);
-      is.on('end',function() {
-          fs.unlinkSync(file.path);
-          cb();
-      });
-    }
+  var uploader = client.upload(file.path, usable_path, headers);
+  uploader.on('error', function(err) {
+    console.error("unable to upload:", err.stack);
+  });
+  uploader.on('progress', function(amountDone, amountTotal) {
+    console.log("progress", amountDone, amountTotal);
+  });
+  uploader.on('end', function(url) {
+    console.log("file available at", url);
+    return url;
+  });
+
+
+  // async.series([
+  //   function(cb) {
+  //     var is = fs.createReadStream(file.path);
+  //     var os = fs.createWriteStream(newpath);
+  //     is.pipe(os);
+  //     is.on('end',function() {
+  //         fs.unlinkSync(file.path);
+  //         cb();
+  //     });
+  //   }
     
-    ], function(err) {
-      console.log(usable_path);
-      cb(usable_path);
-    });
+  //   ], function(err) {
+  //     console.log(usable_path);
+  //     cb(usable_path);
+  //   });
 }
 

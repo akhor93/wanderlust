@@ -1,6 +1,6 @@
 $(document).ready(function(){
 	$('#new-trip-form').ajaxForm({
-		url: '/trip/create',
+		url: '/trip',
 		beforeSubmit : function(formData, jqForm, options){
 			console.log("enter validations later");
 		},

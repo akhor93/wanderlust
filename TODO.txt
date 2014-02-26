@@ -2,3 +2,6 @@
 2. Allow user to change password
 3. Error handling when user is not logged in for liking, favoriting, commenting, etc.
 4. Fix "X days ago" for comment
+5. After creating trip, be forwarded to that trip
+6. Clear comment box after submit
+7. profile picture upload

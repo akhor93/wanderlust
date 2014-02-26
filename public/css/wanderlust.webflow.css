@@ -341,6 +341,7 @@ p {
   float: none;
 }
 .album-preview_large {
+  max-height: 300px;
   height: 260px;
   max-width: 390px;
   float: left;
