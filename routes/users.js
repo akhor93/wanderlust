@@ -101,16 +101,22 @@ exports.update = function(req, res) {
         image_helper.uploadfile(req.files.profile_image, req.session.user, function(imagepath) {
           if(imagepath == null) return res.send('trouble uploading profile picture');
           update.profile_image = imagepath;
-          User.update({_id: req.session.user._id}, update, function(err, user) {
+          User.update({_id: req.session.user._id}, update, function(err, users) {
             if(err) return res.send("Unable to save user: " + err, 400);
-            return res.send('ok', 200);
+            User.findById(req.session.user._id, function(err, user) {
+              req.session.user = user;
+              return res.send('ok', 200);
+            });
           });
         });
       }
       else {
-        User.update({_id: req.session.user._id}, update, function(err, user) {
+        User.update({_id: req.session.user._id}, update, function(err, users) {
           if(err) return res.send("Unable to save user: " + err, 400);
-          return res.send('ok', 200);
+          User.findById(req.session.user._id, function(err, user) {
+              req.session.user = user;
+              return res.send('ok', 200);
+            });
         });
       }
     });
