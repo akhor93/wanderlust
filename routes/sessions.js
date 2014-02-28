@@ -35,11 +35,13 @@ exports.login = function(req, res) {
         User.findOne({username: req.param('username')}).lean().exec(function(err, user) {
           user.showPicUpload = true;
           req.session.user = user;
+          // res.redirect('/user/' + user._id);
           res.send("ok", 200);
         });
       }
       else {
         req.session.user = user;
+        // res.redirect('/user/' + user._id);        
         res.send("ok", 200);
       }
     }
@@ -54,6 +56,7 @@ exports.signout = function(req, res) {
     res.clearCookie('user');
     res.clearCookie('pass');
     req.session.destroy(function(e) {
+      // res.redirect('/');
       res.send('ok', 200);
     });
   }
