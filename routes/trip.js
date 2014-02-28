@@ -75,8 +75,12 @@ exports.create = function(req, res) {
     var createtagfunctions = [];
     var i;
     var inputtags;
-    if(typeof req.body.tags[0] === 'string') inputtags = req.body.tags;
-    else inputtags = req.body.tags[0];
+    console.log(req.body.tags);
+    if(req.body.tags) {
+      if(typeof req.body.tags[0] === 'string') inputtags = req.body.tags;
+      else inputtags = req.body.tags[0];
+    }
+    else inputtags = [];
     for(i = 0; i < inputtags.length; i++) {
       var func = function(cb) {
         var text = inputtags[i];
