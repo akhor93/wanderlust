@@ -74,16 +74,11 @@ exports.create = function(req, res) {
     if(err) return res.send(err, 400);
     var createtagfunctions = [];
     var i;
-    console.log(req.body.tags);
-    console.log(trip + "1");
     for(i = 0; i < req.body.tags[0].length; i++) {
       var func = function(cb) {
         var text = req.body.tags[0][i];
         Tag.findOne({text: text}, function(err, tag) {
           if(tag) {
-            // console.log(tag);
-            // console.log(tag._id);
-            // console.log(trip._id);
             Tag.update({_id: tag._id}, {$push: { trips: tripID}}, function(err) {
               if(err) {
                 i++;
@@ -119,8 +114,7 @@ exports.create = function(req, res) {
       createtagfunctions.push(func);
     }
     i = 0;
-    var tripID = trip._id;
-    console.log(trip + "TTT");
+    var tripID = trip[0]._id;
     async.series(createtagfunctions, function(err) {
       if(err) return res.send(err, 400);
       async.parallel([
@@ -204,7 +198,7 @@ exports.create = function(req, res) {
           else cb();
         }
       ], function(err) {
-        res.send(trip._id, 200);
+        res.send(trip[0]._id, 200);
       });
     });
   });
