@@ -341,9 +341,9 @@ p {
   float: none;
 }
 .album-preview_large {
-  max-height: 300px;
-  height: 260px;
-  max-width: 390px;
+/*  max-height: 300px;
+  height: 260px;*/
+  max-width: 345px;
   float: left;
 }
 .album-preview_small {
