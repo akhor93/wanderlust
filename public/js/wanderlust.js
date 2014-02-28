@@ -24,3 +24,30 @@ function initializeListeners() {
 		event.preventDefault();
 	});
 }
+
+function updateFollowers(userFollowed) {
+	console.log("got here");
+	$('#user_' + userFollowed + ' .all_follow_buttons').html("Following");
+	$('#user_' + userFollowed + ' .all_follow_buttons').addClass("follow_button");
+}
+
+$('.follow_button').click(function() {
+	console.log("follow button clicked!");
+	var userID = $(this).attr("userID"); //user to follow
+	console.log("user to follow: " + userID);
+	var data = {
+	  "userID": userID
+	};
+	var options = {
+	  type: "POST",
+	  url: "/follow",
+	  data: data
+	};
+	$.ajax(options)
+	  .done(function(data) { //data sent by res.send, not the data in options
+	    updateFollowers(data);
+	  })
+	  .fail(function(msg) {
+	    console.log(msg.responseText);
+	  });
+});

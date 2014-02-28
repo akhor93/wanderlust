@@ -163,15 +163,6 @@ function initialize() {
         if(err) console.log("error adding user following: " + err);        
       });
 
-    User.update({'_id': lucy._id}, {$push: { followers: adrian._id}}, {upsert: true})
-      .exec(function(err) {
-        if(err) console.log("error adding follower to user lucy: " + err);        
-      });     
-    User.update({'_id': adrian._id}, {$push: { following: lucy._id}}, {upsert: true})
-      .exec(function(err) {
-        if(err) console.log("error adding user following: " + err);        
-      });
-
     User.update({'_id': andrew._id}, {$push: { followers: adrian._id}}, {upsert: true})
       .exec(function(err) {
         if(err) console.log("error adding follower to user andrew: " + err);        

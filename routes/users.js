@@ -1,6 +1,7 @@
 var async = require('async');
 var SH = require("../lib/session_helper");
 var image_helper = require('../lib/image_helper');
+var UH = require('../lib/user_helper');
 //Models
 var mongoose = require('mongoose');
 var User = mongoose.model('User');
@@ -28,17 +29,21 @@ exports.show = function(req, res) {
   SH.getSessionData(req.session.user, function(data) {
     async.parallel([
       function(cb) {
-        User.findById(userID)
-          .populate('followers following')
-          .lean()
-          .exec(function(err, user) {
-            if(err) {
-              console.log("error couldn't find user: " + err);
-            } else {
-              data.user = user;
-              cb();      
-            }
+        UH.userHeaderData(data, userID, function(data) {
+          cb();
         });
+
+        // User.findById(userID)
+        //   .populate('followers following')
+        //   .lean()
+        //   .exec(function(err, user) {
+        //     if(err) {
+        //       console.log("error couldn't find user: " + err);
+        //     } else {
+        //       data.user = user;
+        //       cb();      
+        //     }
+        // });
       },
       function(cb) {
         Trip.find({user: userID})

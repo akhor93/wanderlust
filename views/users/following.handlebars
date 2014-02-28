@@ -2,17 +2,17 @@
 
 <div class="w-container">
   <div>
-    <h2 class="title">Followers</h2>
+    <h2 class="title">Following</h2>
   </div>
 
   <div class="w-row follower_content">
 
     <div class="w-col w-col-6">
-      {{#each followers.col0}}
+      {{#each following.col0}}
         <div class="follower_div" id="user_{{_id}}">
           <a href="/user/{{_id}}"><img class="follower_pic" src="{{profile_image}}"></a>
           <div class="follower_description">
-            <a href="/user/{{_id}}"><p class="follower_name">{{username}}</p></a>
+            <a href="/user/{{_id}}"><p class="follower_name">{{name}}</p></a>
             <p class="follower_location">{{country}}</p>
             <p class="w-clearfix follower_stats">{{trips.length}} Trips &middot; {{followers.length}} Followers</p>
           </div>
@@ -36,11 +36,11 @@
     
     <div class="w-col w-col-6">
 
-      {{#each followers.col1}}      
+      {{#each following.col1}}      
         <div class="follower_div" id="user_{{_id}}">
           <a href="/user/{{_id}}"><img class="follower_pic" src="{{profile_image}}"></a>
           <div class="follower_description">
-            <a href="/user/{{_id}}"><p class="follower_name">{{username}}</p></a>
+            <a href="/user/{{_id}}"><p class="follower_name">{{name}}</p></a>
             <p class="follower_location">{{country}}</p>
             <p class="w-clearfix follower_stats">{{trips.length}} Trips &middot; {{followers.length}} Followers</p>
           </div>
