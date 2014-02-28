@@ -1,0 +1,84 @@
+.follower_pic {
+  display: inline-block;
+  width: 108px;
+  height: 108px;
+  float: none;
+}
+.follower_div {
+  display: block;
+  height: 110px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  border: 1px solid #c7c7c7;
+  background-color: white;  
+}
+.follower_description {
+  display: inline-block;
+  width: 220px;
+  height: auto;
+  float: none;
+}
+.all_follow_buttons {
+  position: relative;
+  right: 5px;
+  display: inline-block;
+  width: 110px;
+  height: 35px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  float: none;
+  border: 1px solid #c2c2c2;
+  border-radius: 5px;
+  background-color: #f7f7f7;
+  color: #6e6e6e;
+  font-weight: 700;
+}
+
+.follow_button:hover {
+  cursor: pointer;
+}
+
+.follower_name {
+  margin: 0px 5px;
+  font-size: 16px;
+  font-weight: 600;
+}
+.follower_aboutme {
+  margin-right: 5px;
+  margin-bottom: 5px;
+  margin-left: 5px;
+}
+.follower_location {
+  margin: 0px 5px;
+  color: #858585;
+  font-size: 12px;  
+  font-weight: 600;
+}
+.follower_stats {
+  margin: 0px 5px;
+  float: left;
+  color: #858585;
+  font-size: 12px;
+  font-weight: 600;
+}
+.inline-block {
+  display: inline-block;
+}
+.overflow-hidden {
+  overflow-x: hidden;
+  overflow-y: hidden;
+}
+.follower_content {
+  width: 960px;
+}
+.follower_column {
+  overflow-x: hidden;
+  overflow-y: hidden;
+}
+.title {
+  position: relative;
+  left: 0px;
+  top: 0px;
+  width: auto;
+  text-align: center;
+}

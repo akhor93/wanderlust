@@ -156,6 +156,42 @@ function initialize() {
       });
     }
   ], function(err) {
+    User.update({'_id': lucy._id}, {$push: { followers: andrew._id}}, {upsert: true})
+      .exec(function(err) {
+        if(err) console.log("error adding follower to user lucy: " + err);        
+      });
+    User.update({'_id': andrew._id}, {$push: { following: lucy._id}}, {upsert: true})
+      .exec(function(err) {
+        if(err) console.log("error adding user following: " + err);        
+      });
+
+    User.update({'_id': lucy._id}, {$push: { followers: adrian._id}}, {upsert: true})
+      .exec(function(err) {
+        if(err) console.log("error adding follower to user lucy: " + err);        
+      });     
+    User.update({'_id': adrian._id}, {$push: { following: lucy._id}}, {upsert: true})
+      .exec(function(err) {
+        if(err) console.log("error adding user following: " + err);        
+      });
+
+    User.update({'_id': andrew._id}, {$push: { followers: adrian._id}}, {upsert: true})
+      .exec(function(err) {
+        if(err) console.log("error adding follower to user andrew: " + err);        
+      });      
+    User.update({'_id': adrian._id}, {$push: { following: andrew._id}}, {upsert: true})
+      .exec(function(err) {
+        if(err) console.log("error adding user following: " + err);        
+      });  
+      
+    User.update({'_id': adrian._id}, {$push: { followers: lucy._id}}, {upsert: true})
+      .exec(function(err) {
+        if(err) console.log("error adding follower to user adrian: " + err);        
+      });    
+    User.update({'_id': lucy._id}, {$push: { following: adrian._id}}, {upsert: true})
+      .exec(function(err) {
+        if(err) console.log("error adding user following: " + err);        
+      });  
+
     createTrips(lucy, andrew, adrian);
   });
 }

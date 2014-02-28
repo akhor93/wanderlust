@@ -67,7 +67,6 @@ exports.show = function(req, res) {
         }); 
       }
     ], function(err) {
-      if (req.session.user) data.logged_in = true;
       console.log(data);
       res.render('users/show', data);
     });

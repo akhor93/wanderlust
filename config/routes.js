@@ -11,6 +11,7 @@ var admin = require('../routes/admin');
 var comments = require('../routes/comments');
 var likes = require('../routes/likes');
 var favorites = require('../routes/favorites');
+var follow = require('../routes/follow');
 
 //Models
 var mongoose = require('mongoose');
@@ -40,6 +41,11 @@ module.exports = function (app) {
 
 	//Comments
 	app.post('/add_comment', comments.create);
+
+	//Followers & Following
+	app.get('/followers/:user', follow.followers);
+	// app.get('/following/:user', follow.following);
+	app.post('/follow', follow.follow_user);
 
 	//Session
 	app.post('/signup', sessions.signup);
