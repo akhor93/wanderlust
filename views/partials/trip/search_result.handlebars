@@ -3,6 +3,9 @@
     <img class="result_img" src="{{image_large}}" alt="">
     <div class="float-left result_content">
       <h3>{{title}}</h3>
+        {{#each tags}}
+              <span class="glyphicon glyphicon-tag"></span> <a href="/tag/{{text}}">{{text}}</a>
+        {{/each}}
       <div>{{description}}</div>
       <div>{{user.username}}</div>
     </div>

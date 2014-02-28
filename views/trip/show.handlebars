@@ -3,7 +3,11 @@
 <div id="single_trip" class="container">
 	<div class="row">
 		<div class="col-md-8">
-			<span class="title">{{trip.title}}</span><span> @ {{trip.location}}</span>
+			<span class="title">{{trip.title}}</span><span> @ {{trip.location}} &nbsp;   
+				{{#each trip.tags}}
+					<span class="glyphicon glyphicon-tag"></span> <a href="/tag/{{text}}">{{text}}</a>
+				{{/each}}
+			</span>
 		</div>
 		<div class="offset-col-md-9">
 			{{#if isowner}}
@@ -11,7 +15,6 @@
 			{{/if}}
 		</div>
 	</div>
-	
 	<div id="trip_images" class="w-clearfix pictures">
 		{{#if trip.image_large}}
 			<a class="fancybox" rel="gallery" href="{{trip.image_large}}">
