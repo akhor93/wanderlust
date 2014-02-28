@@ -31,8 +31,17 @@ exports.login = function(req, res) {
       return res.send("User not found", 400);
     }
     if(user.authenticate(req.param('password'))) {
-      req.session.user = user;
-      res.send("ok", 200);
+      if(Math.floor((Math.random()*10)+1)%2 == 1) {
+        User.findOne({username: req.param('username')}).lean().exec(function(err, user) {
+          user.showPicUpload = true;
+          req.session.user = user;
+          res.send("ok", 200);
+        });
+      }
+      else {
+        req.session.user = user;
+        res.send("ok", 200);
+      }
     }
     else {
       res.send("Password invalid", 400);
