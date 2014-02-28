@@ -11,6 +11,7 @@ var admin = require('../routes/admin');
 var comments = require('../routes/comments');
 var likes = require('../routes/likes');
 var favorites = require('../routes/favorites');
+var tag = require('../routes/tag');
 var follow = require('../routes/follow');
 
 //Models
@@ -42,6 +43,8 @@ module.exports = function (app) {
 	//Comments
 	app.post('/add_comment', comments.create);
 
+	//Tags
+	app.get('/tag/:id', tag.show);
 	//Followers & Following
 	app.get('/followers/:user', follow.followers);
 	app.get('/following/:user', follow.following);

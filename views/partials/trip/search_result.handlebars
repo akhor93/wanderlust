@@ -1,17 +1,19 @@
-<a href="trip/{{id}}">
-  <div class="w-clearfix search_result">
+<div class="w-clearfix search_result">
+  <a href="/trip/{{_id}}">
     <img class="result_img" src="{{image_large}}" alt="">
-    <div class="float-left result_content">
-      <h3>{{title}}</h3>
-      <div>{{description}}</div>
-      <div>{{user.username}}</div>
-    </div>
-    <div class="w-clearfix search_social">
-      {{!-- <div class="float_bottom social_num"><strong>60</strong> users have been here</div> --}}
-      <div class="social float-right no-borders-margins">
-        <img class="social_buttons" src="images/icon_822.png" alt="52f34cb6593f6edf4100093d_icon_822.png">
-        <div class="social_num">{{likes.length}}</div>
-      </div>
+  </a>
+  <div class="float-left result_content">
+    <h3><a href="/trip/{{_id}}">{{title}}</a> by <a href="/user/{{user._id}}">{{user.username}}</a></h3>
+    {{#each tags}}
+      <span class="glyphicon glyphicon-tag"></span> <a href="/tag/{{text}}">{{text}}</a>
+    {{/each}}
+    <div>{{description}}</div>
+  </div>
+  <div class="w-clearfix search_social">
+    {{!-- <div class="float_bottom social_num"><strong>60</strong> users have been here</div> --}}
+    <div class="social float-right no-borders-margins">
+      <img class="social_buttons" src="/images/icon_822.png" alt="52f34cb6593f6edf4100093d_icon_822.png">
+      <div class="social_num">{{likes.length}}</div>
     </div>
   </div>
-</a>
+</div>

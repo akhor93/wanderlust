@@ -1,0 +1,16 @@
+<div class="w-container container">
+  <div class="search_header padding-10 search_container">
+    <h1 class="search_text">{{tag.text}} Trips</h1>
+    <div class="num_results">Showing {{tag.trips.length}} trips</div>
+  </div>
+</div>
+<div class="w-container container">
+  <div class="w-row search_container">
+    <div class="w-col w-col-9 column-right">
+      <div class="relative">
+        {{#each tag.trips}}
+          {{>trip/search_result this}}
+        {{/each}}
+    </div>
+  </div>
+</div>

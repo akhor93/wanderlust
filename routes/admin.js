@@ -11,8 +11,6 @@ var Like = mongoose.model('Like');
 var Favorite = mongoose.model('Favorite');
 var Tag = mongoose.model('Tag');
 
-var trips = require('../data.json');
-
 exports.dashboard = function(req, res) {
 	res.render('admin/dashboard');
 }

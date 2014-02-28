@@ -7,7 +7,15 @@
 		<div class="w-clearfix news-item" id="trip_{{_id}}">
 			<a href="user/{{user._id}}"><img class="prof_pic-small float-left" src="{{user.profile_image}}" alt="prof-pic"></a>
 			<div class="float-left">
-				<a href="user/{{user._id}}"><h5 class="status"><strong>{{user.username}}</strong></a> added a new <a href="/trip/{{_id}}">trip</a>.</h5>
+				<h5 class="status">
+					<a href="user/{{user._id}}"><strong>{{user.username}}</strong></a>
+					added a new <a href="/trip/{{_id}}">trip</a>. 
+					<span class="tag_container">
+						{{#each tags}}
+							<span class="glyphicon glyphicon-tag"></span> <a href="/tag/{{text}}">{{text}}</a>
+						{{/each}}
+					</span>
+				</h5>
 				<div class="w-clearfix pictures">
 					<div class="row" style="max-height: 300px;">
 						<div class="col-md-5">
@@ -44,17 +52,17 @@
 				<div class="w-clearfix social_bar">
 					<div class="trip_id" id="trip_{{_id}}"></div>
 					<div class="w-clearfix social">
-                            <img class="social_buttons like_icon" src="images/icon_822.png" alt="like-button" data-trip="{{_id}}">
-                            <div id="popup_likes" title="Login to like">
-                            	<p>You must be logged in to like trips.</p>
-                            </div>
-						<div class="social_num like_counter">{{num_likes}}</div>
-					</div>
-					<div class="w-clearfix social">
-					       <img class="social_buttons favorite_icon" src="images/better-pin.png" alt="favorite-button" data-trip="{{this._id}}">
-                            <div id="popup_favorites" title="Login to pin">
-                            	<p>You must be logged in to pin trips.</p>
-                            </div>                            
+              <img class="social_buttons like_icon" src="images/icon_822.png" alt="like-button" data-trip="{{_id}}">
+              <div id="popup_likes" title="Login to like">
+              	<p>You must be logged in to like trips.</p>
+              </div>
+<div class="social_num like_counter">{{num_likes}}</div>
+</div>
+<div class="w-clearfix social">
+   <img class="social_buttons favorite_icon" src="images/better-pin.png" alt="favorite-button" data-trip="{{this._id}}">
+              <div id="popup_favorites" title="Login to pin">
+              	<p>You must be logged in to pin trips.</p>
+              </div>                            
 						<div class="social_num favorite_counter">{{this.num_favorites}}</div>
 					</div>
 					<div class="w-clearfix social">
@@ -114,7 +122,7 @@ $(document).ready(function() {
 		comment_box_html += '</div>';
 		comment_box_html += '<div class="col-md-10">';
 		comment_box_html += '<a href="user/' + comment.user._id + '">' + comment.user.username + '</a> ' + comment.text;
-		comment_box_html += '<br />' + moment(comment.created_at).fromNow();
+		comment_box_html += '<br />' + moment().fromNow();
 		comment_box_html += '</div>';
 		comment_box_html += '</div>';
 		$(tripdiv + ' .comment_box').append(comment_box_html);

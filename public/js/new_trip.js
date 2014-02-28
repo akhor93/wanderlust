@@ -5,7 +5,7 @@ $(document).ready(function(){
 			console.log("enter validations later");
 		},
 		success	: function(responseText, status, xhr, $form){
-			if (status == 'success') location.reload(true);
+			if (status == 'success') window.location.replace("/trip/" + responseText);
 		},
 		error : function(e){
 			console.log("ERROR submitting form: " + e.responseText);
