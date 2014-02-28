@@ -339,10 +339,12 @@ exports.update = function(req, res) {
           deletetags = [];
           addtags = [];
           var inputtags;
-          if(typeof req.body.tags[0] === 'string') inputtags = req.body.tags;
-          else inputtags = req.body.tags[0];
-          console.log(req.body.tags);
-          console.log(inputtags);
+          if(req.body.tags) {
+            if(typeof req.body.tags[0] === 'string') inputtags = req.body.tags;
+            else inputtags = req.body.tags[0];
+          }
+          else inputtags = [];
+          
           for(var i = 0; i < trip.tags.length; i++) deletetags.push(trip.tags[i].text);
           for(var i = 0; i < inputtags.length; i++) addtags.push(inputtags[i]);
           for(var i = 0; i < trip.tags.length; i++) {
