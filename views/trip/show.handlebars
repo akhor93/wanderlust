@@ -52,17 +52,15 @@
 		{{/if}}
 	</div>
 	<div class="social_buttons_container">
-		{{#if curuser}}
 			<img class="social_buttons like_icon" src="/images/icon_822.png" />&nbsp;
-		{{else}}
-			<img class="social_buttons like_icon" title="Login to like trips" src="/images/icon_822.png" />&nbsp;
-		{{/if}}
+			<div id="popup_likes" title="Login to like">
+				<p>You must be logged in to like trips.</p>
+			</div>          			
 		<span id="likes_counter">{{trip.num_likes}}</span>&nbsp;&nbsp;
-		{{#if curuser}}
 			<img class="social_buttons favorite_icon" src="/images/better-pin.png" />&nbsp;
-		{{else}}
-			<img class="social_buttons favorite_icon" title="Login to pin trips" src="/images/better-pin.png" />&nbsp;
-		{{/if}}
+            <div id="popup_favorites" title="Login to pin">
+            	<p>You must be logged in to pin trips.</p>
+            </div>  			
 		<span id="favorites_counter">{{trip.num_favorites}}</span>&nbsp;&nbsp;
 		<img class="social_buttons" src="/images/comment.png" />&nbsp;
 		<span id="comments_counter">{{trip.num_comments}}</span>&nbsp;&nbsp;
@@ -168,6 +166,9 @@ $(document).ready(function() {
 		})
 		.fail(function(msg) {
 			console.log("fail" + msg.responseText);
+			if (msg.responseText == "must be logged in to like") {
+	  			$('#popup_likes').dialog();			
+			}
 		});
 	});
 
@@ -192,6 +193,9 @@ $(document).ready(function() {
 		})
 		.fail(function(msg) {
 		  console.log(msg.responseText);
+          if (msg.responseText == "must be logged in to favorite") {
+		 	$('#popup_favorites').dialog();		            
+          }  	  
 		});
 	});  	
 });

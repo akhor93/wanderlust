@@ -420,3 +420,11 @@ p {
 }
 @media (max-width: 479px) {
 }
+
+#popup_likes {
+  display: none;
+}
+
+#popup_favorites {
+  display: none;
+}

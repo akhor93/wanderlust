@@ -1,0 +1,98 @@
+{{> user_header this}}
+
+<div class="w-container">
+  <div>
+    <h2 class="title">Followers</h2>
+  </div>
+
+  <div class="w-row follower_content">
+
+    <div class="w-col w-col-6">
+      {{#each followers.col0}}
+        <div class="follower_div" id="user_{{_id}}">
+          <a href="/user/{{_id}}"><img class="follower_pic" src="{{profile_image}}"></a>
+          <div class="follower_description">
+            <a href="/user/{{_id}}"><p class="follower_name">{{name}}</p></a>
+            <p class="follower_location">{{country}}</p>
+            <p class="w-clearfix follower_stats">{{trips.length}} Trips &middot; {{followers.length}} Followers</p>
+          </div>
+          {{#if ../curuser}}
+            {{#if thatsMe}}
+              <p class="button all_follow_buttons">That's you!</p>
+            {{else}}
+
+              {{#if curuser_following}}
+                <p class="button all_follow_buttons" userID="{{_id}}">Following</p>
+              {{else}}
+                <p class="button all_follow_buttons follow_button" userID="{{_id}}">Follow</a>
+              {{/if}}
+              
+            {{/if}}
+          {{/if}}
+        </div>
+      {{/each}}
+    
+    </div>
+    
+    <div class="w-col w-col-6">
+
+      {{#each followers.col1}}      
+        <div class="follower_div" id="user_{{_id}}">
+          <a href="/user/{{_id}}"><img class="follower_pic" src="{{profile_image}}"></a>
+          <div class="follower_description">
+            <a href="/user/{{_id}}"><p class="follower_name">{{name}}</p></a>
+            <p class="follower_location">{{country}}</p>
+            <p class="w-clearfix follower_stats">{{trips.length}} Trips &middot; {{followers.length}} Followers</p>
+          </div>
+          {{#if ../curuser}}
+            {{#if thatsMe}}
+              <p class="button all_follow_buttons">That's you!</p>
+            {{else}}
+
+              {{#if curuser_following}}
+                <p class="button all_follow_buttons" userID="{{_id}}">Following</p>
+              {{else}}
+                <p class="button all_follow_buttons follow_button" userID="{{_id}}">Follow</a>
+              {{/if}}
+              
+            {{/if}}
+          {{/if}}
+        </div>
+      {{/each}}
+    
+    </div>
+  
+  </div>
+</div>
+
+<script type="text/javascript">
+$(document).ready(function() {
+  function updateFollowers(userFollowed) {
+    console.log("got here");
+    $('#user_' + userFollowed + ' .all_follow_buttons').html("Following");
+    $('#user_' + userFollowed + ' .all_follow_buttons').addClass("follow_button");
+  }
+
+  $('.follow_button').click(function() {
+    console.log("follow button clicked!");
+    var userID = $(this).attr("userID"); //user to follow
+    console.log("user to follow: " + userID);
+    var data = {
+      "userID": userID
+    };
+    var options = {
+      type: "POST",
+      url: "/follow",
+      data: data
+    };
+    $.ajax(options)
+      .done(function(data) { //data sent by res.send, not the data in options
+        updateFollowers(data);
+      })
+      .fail(function(msg) {
+        console.log(msg.responseText);
+      });
+  });
+
+});
+</script>
