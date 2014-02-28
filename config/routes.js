@@ -44,7 +44,7 @@ module.exports = function (app) {
 
 	//Followers & Following
 	app.get('/followers/:user', follow.followers);
-	// app.get('/following/:user', follow.following);
+	app.get('/following/:user', follow.following);
 	app.post('/follow', follow.follow_user);
 
 	//Session

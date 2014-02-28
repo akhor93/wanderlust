@@ -12,11 +12,22 @@
             <img class="social_buttons" src="/images/twitter.png" alt="twitter-icon"> --}}
           </div>
         </div>
-        <div class="prof_stats">
-{{!--           <a class="button" href="#">Follow</a>
- --}}          <a class="button" href="/followers/{{user._id}}">{{user.followers.length}} Followers</a>
-{{!--           <a class="button" href="#">{{user.following.length}} Following</a>
- --}}          <a class="button" href="/user/{{user._id}}">All Trips ({{user.trips.length}})</a>
+        <div class="prof_stats" id="user_{{user._id}}">
+          {{#if thatsMe}}
+          {{else}}
+          
+            {{#if curuser}}
+              {{#if curuser_following}}
+                <p class="button all_follow_buttons">Following</p>
+              {{else}}
+                <p class="button all_follow_buttons follow_button" userID="{{user._id}}">Follow</p>
+              {{/if}}
+            {{/if}}
+            
+          {{/if}}
+          <a class="button" href="/followers/{{user._id}}">{{user.followers.length}} Followers</a>
+          <a class="button" href="/following/{{user._id}}">{{user.following.length}} Following</a>
+          <a class="button" href="/user/{{user._id}}">All Trips ({{user.trips.length}})</a>
         </div>
       </div>
     </div>
