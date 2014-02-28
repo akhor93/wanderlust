@@ -53,6 +53,14 @@
         <input id="small_image_3-tf" class="form-control" name="small_3" type="file">
       </div>
 		</div>
+		<div id="description-cg" class="form-group">
+      <label class="control-label col-sm-3">Tags</label>
+      <div class="col-sm-9">
+        <div id="edit_tag_container">
+          <button id="add_edit_tag_btn" type="button" class="btn btn-default">Add Tag</button>
+        </div>
+      </div>
+    </div>
 		<div class="form-group">
       <div class="col-sm-offset-9 col-sm-2">
         <button type="submit" class="btn btn-primary">Update Trip</button>
@@ -69,7 +77,7 @@ $(document).ready(function(){
 		success	: function(responseText, status, xhr, $form){
 			if (status == 'success') {
 				console.log(responseText);
-				window.location.href = "/";
+				// window.location.href = "/";
 			}
 		},
 		error : function(e){
@@ -79,4 +87,45 @@ $(document).ready(function(){
 
 	$('#name-tf').focus();
 });
+</script>
+
+<script type="text/javascript">
+  $(document).ready(function() {
+
+  var MaxInputs       = 8; //maximum input boxes allowed
+  var InputsWrapper   = $("#edit_tag_container"); //Input boxes wrapper ID
+  var AddButton       = $("#add_edit_tag_btn"); //Add button ID
+
+  var x = InputsWrapper.length; //initlal text box count
+  
+
+  var initialTags = [{{{trip.tags}}}];
+  for(var i = 0; i < initialTags.length; i++) {
+  	console.log(i);
+  	$(InputsWrapper).append('<div class="row"><div class="col-md-8"><input type="text" name="tags[]" class="form-control" id="field_'+ FieldCount +'" value="' + initialTags[i] + '"/></div><div class="col-sm-4"><a href="#" class="removeclass"><img src="/images/x.jpg" /></a></div></div>');
+  	x++;
+  }
+	var FieldCount=initialTags.length-1; //to keep track of text box added
+  
+  $(AddButton).click(function (e)  //on add input button click
+  {
+    if(x <= MaxInputs) //max input box allowed
+    {
+        FieldCount++; //text box added increment
+        //add input box
+        $(InputsWrapper).append('<div class="row"><div class="col-md-8"><input type="text" name="tags[]" class="form-control" id="field_'+ FieldCount +'" value="Tag '+ FieldCount +'"/></div><div class="col-sm-4"><a href="#" class="removeclass"><img src="/images/x.jpg" /></a></div></div>');
+        x++; //text box increment
+    }
+    return false;
+  });
+
+  $("body").on("click",".removeclass", function(e){ //user click on remove text
+    if( x > 1 ) {
+        $(this).parent('div').parent('div').remove(); //remove text box
+        x--; //decrement textbox
+    }
+    return false;
+  });
+
+  });
 </script>

@@ -10,7 +10,6 @@
 
         </div>
         <form id="new-trip-form" class="form-horizontal" method="post">
-          <input type="hidden" name="test" value="?">
           <div id="title-cg" class="form-group">
             <label class="control-label col-sm-3">Title</label>
             <div class="col-sm-9">
@@ -29,6 +28,14 @@
               <input id="description-tf" class="form-control" name="description" type="text">
             </div>
           </div>
+          <div id="description-cg" class="form-group">
+            <label class="control-label col-sm-3">Tags</label>
+            <div class="col-sm-9">
+              <div id="tag_container">
+                <button id="add_tag_btn" type="button" class="btn btn-default">Add Tag</button>
+              </div>
+            </div>
+          </div>
           <div class="form-group">
             <div class="col-sm-offset-7 col-sm-2">
               <button id="trip_close_btn" type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -42,3 +49,35 @@
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
+<script type="text/javascript">
+  $(document).ready(function() {
+
+  var MaxInputs       = 8; //maximum input boxes allowed
+  var InputsWrapper   = $("#tag_container"); //Input boxes wrapper ID
+  var AddButton       = $("#add_tag_btn"); //Add button ID
+
+  var x = InputsWrapper.length; //initlal text box count
+  var FieldCount=0; //to keep track of text box added
+
+  $(AddButton).click(function (e)  //on add input button click
+  {
+    if(x <= MaxInputs) //max input box allowed
+    {
+        FieldCount++; //text box added increment
+        //add input box
+        $(InputsWrapper).append('<div class="row"><div class="col-md-8"><input type="text" name="tags[]" class="form-control" id="field_'+ FieldCount +'" value="Tag '+ FieldCount +'"/></div><div class="col-sm-4"><a href="#" class="removeclass"><img src="/images/x.jpg" /></a></div></div>');
+        x++; //text box increment
+    }
+    return false;
+  });
+
+  $("body").on("click",".removeclass", function(e){ //user click on remove text
+    if( x > 1 ) {
+        $(this).parent('div').parent('div').remove(); //remove text box
+        x--; //decrement textbox
+    }
+    return false;
+  });
+
+  });
+</script>

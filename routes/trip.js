@@ -7,6 +7,7 @@ var mongoose = require('mongoose');
 var User = mongoose.model('User');
 var Trip = mongoose.model('Trip');
 var Comment = mongoose.model('Comment');
+var Tag = mongoose.model('Tag');
 
 exports.show = function(req, res) {
 	var tripID = req.params.id;
@@ -66,12 +67,57 @@ exports.create = function(req, res) {
             .exec(function(err) {
               if(err) console.log("error adding new trip: " + err);
               else cb();
-            });    
+            });
         });
     }
   ], function(err) {
-    console.log("new trip id: " + trip._id);
-    res.redirect('trip/' + trip._id);
+    var createtagfunctions = [];
+    var i;
+    for(i = 0; i < req.body.tags.length; i++) {
+      var func = function(cb) {
+        var text = req.body.tags[i];
+        Tag.findOne({text: text}, function(err, tag) {
+          if(tag) {
+            Tag.update({_id: tag._id}, {$push: { trips: trip._id}}).exec(function(err) {
+              if(err) {
+                i++;
+                cb("error updating existing tag");
+              }
+              else {
+                Trip.update({_id: trip._id}, {$push: { tags: tag._id}}).exec(function(err) {
+                  i++;
+                  cb();
+                });
+              }
+            });
+          }
+          else {
+            var newtag = new Tag({text: text });
+            newtag.save(function(err, newtag) {
+              Tag.update({_id: newtag._id}, {$push: { trips: trip._id}}).exec(function(err) {
+                if(err) {
+                  i++;
+                  cb("error updating new tag");
+                }
+                else {
+                  Trip.update({_id: trip._id}, {$push: { tags: newtag._id}}).exec(function(err) {
+                    i++;
+                    cb();
+                  });
+                }
+              });
+            });
+          }
+        });
+      };
+      createtagfunctions.push(func);
+    }
+    i = 0;
+    async.series(createtagfunctions, function(err) {
+      if(err) console.log(err);
+      console.log("new trip id: " + trip._id);
+      res.send(trip._id, 200);
+    });
   });
 }
 
@@ -79,7 +125,10 @@ exports.edit = function(req, res) {
   if(!req.session.user) return redirect('/');
   var tripID = req.param('id');
   SH.getSessionData(req.session.user, function(data) {
-    Trip.findOne({_id: tripID}, function(err, trip) {
+    Trip.findOne({_id: tripID})
+    .populate('tags')
+    .lean()
+    .exec(function(err, trip) {
       if(err) {
         console.log("Could not find trip: " + trip);
         res.redirect('/');
@@ -89,6 +138,11 @@ exports.edit = function(req, res) {
         res.redirect('/');
       }
       else {
+        tags = [];
+        for(var i = 0; i < trip.tags.length; i++) {
+          tags.push('"' + trip.tags[i].text + '"');
+        }
+        trip.tags = tags;
         data.trip = trip;
         res.render('trip/edit', data);
       }
@@ -191,7 +245,70 @@ exports.update = function(req, res) {
         }
       ], function(err) {
         if(err) return res.send(err, 400);
-        return res.send("ok", 200);
+        Trip.findById(tripID).populate('tags').lean().exec(function(err, trip) {
+          deletetags = [];
+          addtags = []
+          for(var i = 0; i < trip.tags.length; i++) deletetags.push(trip.tags[i].text);
+          for(var i = 0; i < req.body.tags[0].length; i++) addtags.push(req.body.tags[0][i]);
+          for(var i = 0; i < trip.tags.length; i++) {
+            for(var j = 0; j < req.body.tags[0].length; j++) {
+              if(req.body.tags[0][j] == trip.tags[i].text) {
+                var index = deletetags.indexOf(trip.tags[i].text);
+                deletetags.splice(index, 1);
+                index = addtags.indexOf(req.body.tags[0][j]);
+                addtags.splice(index, 1);
+              }
+            }
+          }
+          console.log(trip.tags);
+          console.log(req.body.tags[0]);
+          console.log(deletetags);
+          console.log(addtags);
+
+          asyncfunctions = [];
+          var i = 0;
+          for(i = 0; i < deletetags.length; i++) {
+            var func = function(cb) {
+              Tag.findOne({text: deletetags[i]}, function(err, tag) {
+                async.parallel([
+                  function(cb2) {
+                    Trip.update({_id: trip._id}, {$pull: {'tags': tag._id}}, function(err) {
+                      cb2();
+                    });
+                  },
+                  function(cb2) {
+                    Tag.update({_id: tag._id}, {$pull: {'trips': trip._id}}, function(err) {
+                      cb2();
+                    });
+                  }
+                  ], function(err) {
+                    i++;
+                    cb();
+                  });
+              });
+            }
+            asyncfunctions.push(func);
+          }
+          var j = 0;
+          for(j = 0; j < addtags.length; j++) {
+            var func = function(cb) {
+              var trips = [trip._id];
+              var tag = new Tag({text: addtags[j], trips: trips});
+              tag.save(function(err, tag) {
+                Trip.update({_id: trip._id}, {$push: { tags: tag._id}}, function(err) {
+                  j++;
+                  cb();
+                });
+              });
+            }
+            asyncfunctions.push(func);
+          }
+          i = 0;
+          j = 0;
+          async.series(asyncfunctions, function(err) {
+            return res.send("ok", 200);
+          });
+        });
       });
     });
   }

@@ -11,6 +11,7 @@ var admin = require('../routes/admin');
 var comments = require('../routes/comments');
 var likes = require('../routes/likes');
 var favorites = require('../routes/favorites');
+var tag = require('../routes/tag');
 
 //Models
 var mongoose = require('mongoose');
@@ -40,6 +41,9 @@ module.exports = function (app) {
 
 	//Comments
 	app.post('/add_comment', comments.create);
+
+	//Tags
+	app.get('/tag/:id', tag.show);
 
 	//Session
 	app.post('/signup', sessions.signup);
