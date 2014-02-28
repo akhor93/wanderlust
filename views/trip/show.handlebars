@@ -8,10 +8,10 @@
 					<span class="glyphicon glyphicon-tag"></span> <a href="/tag/{{text}}">{{text}}</a>
 				{{/each}}
 			</span>
-		</div>
-		<div class="offset-col-md-9">
+		<div class="offset-col-md-11">
 			{{#if isowner}}
-				<a href="/trip/edit/{{trip._id}}"><h3>Edit Trip</h3></a>
+				<a href="/trip/edit/{{trip._id}}"><button type=
+					"button" class="btn btn-success">Edit Trip</button></a>
 			{{/if}}
 		</div>
 	</div>
@@ -128,7 +128,7 @@ $(document).ready(function() {
 		comment_box_html += '</div>';
 		comment_box_html += '<div class="col-md-10">';
 		comment_box_html += '<a href="user/' + comment.user._id + '">' + comment.user.username + '</a> ' + comment.text;
-		comment_box_html += '<br />' + moment(comment.created_at).fromNow();
+		comment_box_html += '<br />' + moment().fromNow();
 		comment_box_html += '</div>';
 		comment_box_html += '</div>';
 		existing += comment_box_html;
