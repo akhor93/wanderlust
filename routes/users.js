@@ -9,19 +9,24 @@ var CT = require("../modules/country-list");
 var Trip = mongoose.model('Trip');
 
 exports.edit = function(req, res) {
-  SH.getSessionData(req.session.user, function(data) {
-    User.findOne({_id: req.session.user._id}, function(err, user) {
-      if(err) {
-        console.log("Could not find user: " + err);
-        res.redirect('/');
-      }
-      else {
-        data.user = user;
-        data.countries = CT;
-        res.render('users/edit', data);
-      }
-    });
-  });
+  if (req.session.user) {
+    SH.getSessionData(req.session.user, function(data) {
+      User.findOne({_id: req.session.user._id}, function(err, user) {
+        if(err) {
+          console.log("Could not find user: " + err);
+          res.redirect('/');
+        }
+        else {
+          data.user = user;
+          data.countries = CT;
+          res.render('users/edit', data);
+        }
+      });
+    }); 
+  } else {
+    res.redirect('/');
+  }
+
 }
 
 exports.show = function(req, res) {
