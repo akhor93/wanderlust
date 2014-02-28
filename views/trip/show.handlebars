@@ -126,7 +126,7 @@ $(document).ready(function() {
 		comment_box_html += '</div>';
 		comment_box_html += '<div class="col-md-10">';
 		comment_box_html += '<a href="user/' + comment.user._id + '">' + comment.user.username + '</a> ' + comment.text;
-		comment_box_html += '<br />' + moment(comment.created_at).fromNow();
+		comment_box_html += '<br />' + moment().fromNow();
 		comment_box_html += '</div>';
 		comment_box_html += '</div>';
 		existing += comment_box_html;
