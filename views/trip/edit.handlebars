@@ -75,10 +75,7 @@ $(document).ready(function(){
 		url: '/trip/update',
 		type: 'post',
 		success	: function(responseText, status, xhr, $form){
-			if (status == 'success') {
-				console.log(responseText);
-				// window.location.href = "/";
-			}
+			if (status == 'success') window.location.replace("/trip/" + responseText);
 		},
 		error : function(e){
 			console.log(e.responseText);

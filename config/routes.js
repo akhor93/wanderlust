@@ -43,15 +43,12 @@ module.exports = function (app) {
 	//Comments
 	app.post('/add_comment', comments.create);
 
-<<<<<<< HEAD
 	//Tags
 	app.get('/tag/:id', tag.show);
-=======
 	//Followers & Following
 	app.get('/followers/:user', follow.followers);
 	// app.get('/following/:user', follow.following);
 	app.post('/follow', follow.follow_user);
->>>>>>> cc750b6fabe155d1933eb69f3e22adb439e26773
 
 	//Session
 	app.post('/signup', sessions.signup);

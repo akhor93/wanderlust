@@ -28,6 +28,41 @@
               <input id="description-tf" class="form-control" name="description" type="text">
             </div>
           </div>
+          {{#if showPicUpload}}
+            <div class="row">
+              Leave images empty to keep existing
+            </div>
+            <div id="large_image-cg" class="form-group">
+              <label class="control-label col-sm-3">Large Image</label>
+              <div class="col-sm-9">
+                <input id="large_image-tf" class="form-control" name="large_image" type="file">
+              </div>
+            </div>
+            <div id="small_image_0-cg" class="form-group">
+              <label class="control-label col-sm-3">Small Image 1</label>
+              <div class="col-sm-9">
+                <input id="small_image_0-tf" class="form-control" name="small_0" type="file">
+              </div>
+            </div>
+            <div id="small_image_1-cg" class="form-group">
+              <label class="control-label col-sm-3">Small Image 2</label>
+              <div class="col-sm-9">
+                <input id="small_image_1-tf" class="form-control" name="small_1" type="file">
+              </div>
+            </div>
+            <div id="small_image_2-cg" class="form-group">
+              <label class="control-label col-sm-3">Small Image 3</label>
+              <div class="col-sm-9">
+                <input id="small_image_2-tf" class="form-control" name="small_2" type="file">
+              </div>
+            </div>
+            <div id="small_image_3-cg" class="form-group">
+              <label class="control-label col-sm-3">Small Image 4</label>
+              <div class="col-sm-9">
+                <input id="small_image_3-tf" class="form-control" name="small_3" type="file">
+              </div>
+            </div>
+          {{/if}}
           <div id="description-cg" class="form-group">
             <label class="control-label col-sm-3">Tags</label>
             <div class="col-sm-9">

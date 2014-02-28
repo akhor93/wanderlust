@@ -57,34 +57,40 @@ exports.create = function(req, res) {
 		user       : userID,
     title      : req.param('title'),
     location   : req.param('location'),
-    description: req.param('description'),
+    description: req.param('description')
   });
   async.parallel([
     function(cb) {
       trip.save(function(err, trip) {
-          if(err) console.log("error saving trip: " + err);
+          if(err) return cb("error saving trip: " + err);
           User.update({"_id": userID}, {$push: { trips: trip._id } }, {upsert: true})
             .exec(function(err) {
-              if(err) console.log("error adding new trip: " + err);
-              else cb();
+              if(err) cb(err);
+              else cb(null, trip);
             });
         });
     }
-  ], function(err) {
+  ], function(err, trip) {
+    if(err) return res.send(err, 400);
     var createtagfunctions = [];
     var i;
-    for(i = 0; i < req.body.tags.length; i++) {
+    console.log(req.body.tags);
+    console.log(trip + "1");
+    for(i = 0; i < req.body.tags[0].length; i++) {
       var func = function(cb) {
-        var text = req.body.tags[i];
+        var text = req.body.tags[0][i];
         Tag.findOne({text: text}, function(err, tag) {
           if(tag) {
-            Tag.update({_id: tag._id}, {$push: { trips: trip._id}}).exec(function(err) {
+            // console.log(tag);
+            // console.log(tag._id);
+            // console.log(trip._id);
+            Tag.update({_id: tag._id}, {$push: { trips: tripID}}, function(err) {
               if(err) {
                 i++;
-                cb("error updating existing tag");
+                cb("error updating existing tag: " + err);
               }
               else {
-                Trip.update({_id: trip._id}, {$push: { tags: tag._id}}).exec(function(err) {
+                Trip.update({_id: tripID}, {$push: { tags: tag._id}}, function(err) {
                   i++;
                   cb();
                 });
@@ -94,13 +100,13 @@ exports.create = function(req, res) {
           else {
             var newtag = new Tag({text: text });
             newtag.save(function(err, newtag) {
-              Tag.update({_id: newtag._id}, {$push: { trips: trip._id}}).exec(function(err) {
+              Tag.update({_id: newtag._id}, {$push: { trips: tripID}}, function(err) {
                 if(err) {
                   i++;
-                  cb("error updating new tag");
+                  cb("error updating new tag: " + err);
                 }
                 else {
-                  Trip.update({_id: trip._id}, {$push: { tags: newtag._id}}).exec(function(err) {
+                  Trip.update({_id: tripID}, {$push: { tags: newtag._id}}, function(err) {
                     i++;
                     cb();
                   });
@@ -113,10 +119,93 @@ exports.create = function(req, res) {
       createtagfunctions.push(func);
     }
     i = 0;
+    var tripID = trip._id;
+    console.log(trip + "TTT");
     async.series(createtagfunctions, function(err) {
-      if(err) console.log(err);
-      console.log("new trip id: " + trip._id);
-      res.send(trip._id, 200);
+      if(err) return res.send(err, 400);
+      async.parallel([
+        function(cb) {
+          if(req.files) {
+            if(req.files.large_image) {
+              image_helper.uploadfile(req.files.large_image, req.session.user, function(imagepath) {
+                if(imagepath == null) cb("problem saving large image");
+                Trip.update({_id: tripID}, { $set: {image_large: imagepath} } ,null, function(err, trip) {
+                  if(err) return cb("Unable to save trip: " + err);
+                  cb();
+                });
+              });
+            }
+            else cb();
+          }
+          else cb();
+        },
+        function(cb) {
+          if(req.files) {
+            if(req.files.small_0) {
+              image_helper.uploadfile(req.files.small_0, req.session.user, function(imagepath) {
+                if(imagepath == null) cb("problem saving small image 0");
+                var pathobj = { "image_small.0": imagepath };
+                Trip.update({_id: tripID}, { $set: pathobj } ,null, function(err, trip) {
+                  if(err) return cb("Unable to save trip: " + err);
+                  cb();
+                });
+              });
+            }
+            else cb();
+          }
+          else cb();
+        },
+        function(cb) {
+          if(req.files) {
+            if(req.files.small_1) {
+              image_helper.uploadfile(req.files.small_1, req.session.user, function(imagepath) {
+                if(imagepath == null) cb("problem saving small image 1");
+                var pathobj = { "image_small.1": imagepath };
+                Trip.update({_id: tripID}, { $set: pathobj } ,null, function(err, trip) {
+                  if(err) return cb("Unable to save trip: " + err);
+                  cb();
+                });
+              });
+            }
+            else cb();
+          }
+          else cb();
+        },
+        function(cb) {
+          if(req.files) {
+            if(req.files.small_2) {
+              image_helper.uploadfile(req.files.small_2, req.session.user, function(imagepath) {
+                if(imagepath == null) cb("problem saving small image 2");
+                var pathobj = { "image_small.2": imagepath };
+                Trip.update({_id: tripID}, { $set: pathobj } ,null, function(err, trip) {
+                  if(err) return cb("Unable to save trip: " + err);
+                  cb();
+                });
+              });
+            }
+            else cb();
+          }
+          else cb();
+        },
+        function(cb) {
+          if(req.files) {
+            if(req.files.small_3) {
+              image_helper.uploadfile(req.files.small_3, req.session.user, function(imagepath) {
+                if(imagepath == null) cb("problem saving small image 3");
+                var pathobj = { "image_small.3": imagepath };
+                Trip.update({_id: tripID}, { $set: pathobj } ,null, function(err, trip) {
+                  if(err) return cb("Unable to save trip: " + err);
+                  cb();
+                });
+              });
+            }
+            else cb();
+          }
+          else cb();
+        }
+      ], function(err) {
+        res.send(trip._id, 200);
+      });
     });
   });
 }
@@ -260,11 +349,6 @@ exports.update = function(req, res) {
               }
             }
           }
-          console.log(trip.tags);
-          console.log(req.body.tags[0]);
-          console.log(deletetags);
-          console.log(addtags);
-
           asyncfunctions = [];
           var i = 0;
           for(i = 0; i < deletetags.length; i++) {
@@ -306,7 +390,7 @@ exports.update = function(req, res) {
           i = 0;
           j = 0;
           async.series(asyncfunctions, function(err) {
-            return res.send("ok", 200);
+            return res.send(trip._id, 200);
           });
         });
       });
