@@ -44,19 +44,17 @@
 				<div class="w-clearfix social_bar">
 					<div class="trip_id" id="trip_{{_id}}"></div>
 					<div class="w-clearfix social">
-                        {{#if curuser}}
                             <img class="social_buttons like_icon" src="images/icon_822.png" alt="like-button" data-trip="{{_id}}">
-                        {{else}}
-                            <img class="social_buttons like_icon" title="Login to like trips" src="images/icon_822.png" alt="like-button" data-trip="{{_id}}">
-                        {{/if}}
+                            <div id="popup_likes" title="Login to like">
+                            	<p>You must be logged in to like trips.</p>
+                            </div>
 						<div class="social_num like_counter">{{num_likes}}</div>
 					</div>
 					<div class="w-clearfix social">
-                        {{#if curuser}}
 					       <img class="social_buttons favorite_icon" src="images/better-pin.png" alt="favorite-button" data-trip="{{this._id}}">
-                        {{else}}                
-                            <img class="social_buttons favorite_icon" title="Login to pin trips" src="images/better-pin.png" alt="favorite-button" data-trip="{{this._id}}">
-                        {{/if}}
+                            <div id="popup_favorites" title="Login to pin">
+                            	<p>You must be logged in to pin trips.</p>
+                            </div>                            
 						<div class="social_num favorite_counter">{{this.num_favorites}}</div>
 					</div>
 					<div class="w-clearfix social">
@@ -91,7 +89,7 @@
 
 <script type="text/javascript">
 $(document).ready(function() {
-  $('.fancybox').fancybox({"hideOnOverlayClick": false});
+  	$('.fancybox').fancybox({"hideOnOverlayClick": false});
 
 	$('.comment_form').ajaxForm({
 		url: '/add_comment',
@@ -148,6 +146,9 @@ $(document).ready(function() {
 		})
 		.fail(function(msg) {
 			console.log(msg.responseText);
+			if (msg.responseText == "must be logged in to like") {
+	  			$('#popup_likes').dialog();			
+			}
 		});
 	});
 
@@ -173,6 +174,9 @@ $(document).ready(function() {
         })
         .fail(function(msg) {
           console.log(msg.responseText);
+          if (msg.responseText == "must be logged in to favorite") {
+		 	$('#popup_favorites').dialog();		            
+          }          
         });
     });
 

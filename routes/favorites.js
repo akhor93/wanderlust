@@ -14,7 +14,7 @@ exports.create = function(req, res) {
 			function(cb) {
 				Favorite.find({user: userID, trip: tripID}, function(err, favorite) {
 					if(favorite.length > 0) {
-						return cb("Already favorited");
+						return cb("already favorited");
 					}
 					cb();
 				})

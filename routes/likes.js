@@ -14,7 +14,7 @@ exports.create = function(req, res) {
 			function(cb) {
 				Like.find({user: userID, trip: tripID}, function(err, like) {
 					if(like.length > 0) {
-						return cb("Already liked");
+						return cb("already liked");
 					}
 					cb();
 				})
