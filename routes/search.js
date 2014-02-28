@@ -28,13 +28,8 @@ exports.search = function(req, res){
 			return res.render('search/search', data);
 		}
 		else {
-			Trip.find({})
-			.populate("user likes")
-			.exec(function(err, trips) {
-				data.numTrips = trips.length;
-				data.trips = trips;
-				return res.render('search/search', data);
-			});
+			data.numTrips = data.trips.length;
+			return res.render('search/search', data);
 		}
 	});
 };
