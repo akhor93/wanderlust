@@ -118,6 +118,7 @@ $(document).ready(function() {
 	});
 
 	function append_comment(comment) {
+		$('#add_comment_ta').val('');
 		$('.comment_container').show();
 		var existing = $('.comment_container').html();
 		var comment_box_html = '<div class="comment row">';

@@ -20,7 +20,7 @@
 					<div class="row" style="max-height: 300px;">
 						<div class="col-md-5">
 							<a class="fancybox" rel="group{{_id}}" href="{{image_large}}">
-                <img class="album-preview_large img-responsive" src="{{image_large}}" alt="album-preview_large">
+                <img class="album-preview_large" src="{{image_large}}" alt="album-preview_large">
 	            </a>
 						</div>
 						<div class="col-md-7">
@@ -113,6 +113,7 @@ $(document).ready(function() {
 		var trip_id = comment.trip._id;
 		var tripdiv = '#trip_' + trip_id;
 		console.log(tripdiv);
+		$(tripdiv + ' .comment_form').find('.w-input').val('');		
 		var comment_box_html = '<div class="comment row">';
 		if($(tripdiv + ' .comment_box .comment').length > 0) {
 			comment_box_html += '<hr style="margin-bottom: 2px; margin-top:2px;"/>';
