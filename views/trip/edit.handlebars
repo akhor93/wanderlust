@@ -70,8 +70,8 @@
 </div>
 <script type="text/javascript">
   $(document).ready(function() {
-    var now = new Date();
     $('.img_upload').click(function() {
+      var now = new Date();
       ga("send", "event", "Image Upload Click", "{{curuser.username}} from edit trip form at " + now.toLocaleDateString() + " " + now.toLocaleTimeString());
     });
   });
