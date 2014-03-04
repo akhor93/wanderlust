@@ -72,7 +72,11 @@
   $(document).ready(function() {
     $('.img_upload').click(function() {
       var now = new Date();
-      ga("send", "event", "Image Upload Click", "{{curuser.username}} from edit trip form at " + now.toLocaleDateString() + " " + now.toLocaleTimeString());
+      var extra = "now showPicUpload User";
+      {{#if curuser.showPicUpload}}
+        extra = "showPicUpload User";
+      {{/if}}
+      ga("send", "event", "Image Upload Click", "{{curuser.username}} (" + extra + ") from edit trip form at " + now.toLocaleDateString() + " " + now.toLocaleTimeString());
     });
   });
 </script>
