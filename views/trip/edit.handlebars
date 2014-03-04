@@ -71,7 +71,7 @@
 <script type="text/javascript">
   $(document).ready(function() {
     $('.img_upload').click(function() {
-      ga("send", "event", "Image Upload Click", "{{curuser.username}} from edit trip form");
+      ga("send", "event", "Image Upload Click", "{{curuser.username}} from edit trip form at " + Date.now());
     });
   });
 </script>
