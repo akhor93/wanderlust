@@ -16,19 +16,19 @@ exports.dashboard = function(req, res) {
 }
 
 exports.print = function(req, res){
-	// if(req.session.user) {
-	// 	if(req.session.user.admin) {
+	if(req.session.user) {
+		if(req.session.user.admin) {
 			User.find({}, function (err, users) {
 				if(err) console.log(err);
 				else {
 					res.render('admin/print', { users: users});
 				}
 			});
-	// 	}
-	// }
-	// else {
-	// 	res.redirect('/');
-	// }
+		}
+	}
+	else {
+		res.redirect('/');
+	}
 };
 
 exports.print_trips = function(req, res) {
@@ -47,8 +47,8 @@ exports.print_trips = function(req, res) {
 }
 
 exports.reset = function(req, res){
-	// if(req.session.user) {
-	// 	if(req.session.user.admin) {
+	if(req.session.user) {
+		if(req.session.user.admin) {
       async.parallel([
         function(cb) {
           User.remove({}, function (err) {
@@ -95,12 +95,12 @@ exports.reset = function(req, res){
         console.log("End of Initialization");
         res.redirect('/');
       });
-	// 	}
- //    else res.redirect('/');
-	// }
- //  else {
- //    res.redirect('/');
- //  }
+		}
+    else res.redirect('/');
+	}
+  else {
+    res.redirect('/');
+  }
 };
 
 function initialize() {
