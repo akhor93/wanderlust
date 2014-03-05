@@ -5,3 +5,5 @@
 5. After creating trip, be forwarded to that trip
 6. Clear comment box after submit
 7. profile picture upload
+8. United States First
+9. Optimize for mobile.
