@@ -26,31 +26,31 @@
     <div id="large_image-cg" class="form-group">
 			<label class="control-label col-sm-3">Large Image</label>
       <div class="col-sm-9">
-        <input id="large_image-tf" class="form-control" name="large_image" type="file">
+        <input id="large_image-tf" class="form-control img_upload" name="large_image" type="file">
       </div>
 		</div>
 		<div id="small_image_0-cg" class="form-group">
 			<label class="control-label col-sm-3">Small Image 1</label>
       <div class="col-sm-9">
-        <input id="small_image_0-tf" class="form-control" name="small_0" type="file">
+        <input id="small_image_0-tf" class="form-control img_upload" name="small_0" type="file">
       </div>
 		</div>
 		<div id="small_image_1-cg" class="form-group">
 			<label class="control-label col-sm-3">Small Image 2</label>
       <div class="col-sm-9">
-        <input id="small_image_1-tf" class="form-control" name="small_1" type="file">
+        <input id="small_image_1-tf" class="form-control img_upload" name="small_1" type="file">
       </div>
 		</div>
 		<div id="small_image_2-cg" class="form-group">
 			<label class="control-label col-sm-3">Small Image 3</label>
       <div class="col-sm-9">
-        <input id="small_image_2-tf" class="form-control" name="small_2" type="file">
+        <input id="small_image_2-tf" class="form-control img_upload" name="small_2" type="file">
       </div>
 		</div>
 		<div id="small_image_3-cg" class="form-group">
 			<label class="control-label col-sm-3">Small Image 4</label>
       <div class="col-sm-9">
-        <input id="small_image_3-tf" class="form-control" name="small_3" type="file">
+        <input id="small_image_3-tf" class="form-control img_upload" name="small_3" type="file">
       </div>
 		</div>
 		<div id="description-cg" class="form-group">
@@ -68,6 +68,19 @@
     </div>
 	</form>
 </div>
+<script type="text/javascript">
+  $(document).ready(function() {
+    $('.img_upload').click(function() {
+      var now = new Date();
+      var extra = "now showPicUpload User";
+      {{#if curuser.showPicUpload}}
+        extra = "showPicUpload User";
+      {{/if}}
+      ga("send", "event", "Image Upload Click", "{{curuser.username}} (" + extra + ") from edit trip form at " + now.toLocaleDateString() + " " + now.toLocaleTimeString());
+    });
+  });
+</script>
+
 
 <script type="text/javascript">
 $(document).ready(function(){
