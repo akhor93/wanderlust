@@ -1,6 +1,7 @@
 
 module.exports = [
     {short:"  " , name:"Please select a country"},
+    {short:"US" , name:"United States"},
     {short:"AF" , name:"Afghanistan"},
     {short:"AL" , name:"Albania"},
     {short:"DZ" , name:"Algeria"},
@@ -226,7 +227,6 @@ module.exports = [
     {short:"UA" , name:"Ukraine"},
     {short:"AE" , name:"United Arab Emirates"},
     {short:"GB" , name:"United Kingdom"},
-    {short:"US" , name:"United States"},
     {short:"UM" , name:"United States Minor Outlying Islands"},
     {short:"UY" , name:"Uruguay"},
     {short:"UZ" , name:"Uzbekistan"},

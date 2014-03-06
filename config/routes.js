@@ -66,4 +66,5 @@ module.exports = function (app) {
 
 	//HOME
 	app.get('/', index.home);
+	app.get("/index2", index.home2);
 };
