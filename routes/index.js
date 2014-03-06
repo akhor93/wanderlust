@@ -36,7 +36,7 @@ exports.home = function(req, res){
 			}
 			Trip.find({featured: true}, function(err, trips) {
 				data.featured = trips;
-				data.showPicUpload = false;
+				data.showPicUpload = true;
 				res.render('index', data);
 			});
 		});
@@ -70,7 +70,7 @@ exports.home2 = function(req, res){
 			}
 			Trip.find({featured: true}, function(err, trips) {
 				data.featured = trips;
-				data.showPicUpload = true;
+				data.showPicUpload = false;
 				res.render('index', data);
 			});
 		});
