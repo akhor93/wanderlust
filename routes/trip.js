@@ -74,9 +74,16 @@ exports.create = function(req, res) {
     if(err) return res.send(err, 400);
     var createtagfunctions = [];
     var i;
-    for(i = 0; i < req.body.tags[0].length; i++) {
+    var inputtags;
+    console.log(req.body.tags);
+    if(req.body.tags) {
+      if(typeof req.body.tags[0] === 'string') inputtags = req.body.tags;
+      else inputtags = req.body.tags[0];
+    }
+    else inputtags = [];
+    for(i = 0; i < inputtags.length; i++) {
       var func = function(cb) {
-        var text = req.body.tags[0][i];
+        var text = inputtags[i];
         Tag.findOne({text: text}, function(err, tag) {
           if(tag) {
             Tag.update({_id: tag._id}, {$push: { trips: tripID}}, function(err) {
@@ -330,15 +337,22 @@ exports.update = function(req, res) {
         if(err) return res.send(err, 400);
         Trip.findById(tripID).populate('tags').lean().exec(function(err, trip) {
           deletetags = [];
-          addtags = []
+          addtags = [];
+          var inputtags;
+          if(req.body.tags) {
+            if(typeof req.body.tags[0] === 'string') inputtags = req.body.tags;
+            else inputtags = req.body.tags[0];
+          }
+          else inputtags = [];
+          
           for(var i = 0; i < trip.tags.length; i++) deletetags.push(trip.tags[i].text);
-          for(var i = 0; i < req.body.tags[0].length; i++) addtags.push(req.body.tags[0][i]);
+          for(var i = 0; i < inputtags.length; i++) addtags.push(inputtags[i]);
           for(var i = 0; i < trip.tags.length; i++) {
-            for(var j = 0; j < req.body.tags[0].length; j++) {
-              if(req.body.tags[0][j] == trip.tags[i].text) {
+            for(var j = 0; j < inputtags.length; j++) {
+              if(inputtags[j] == trip.tags[i].text) {
                 var index = deletetags.indexOf(trip.tags[i].text);
                 deletetags.splice(index, 1);
-                index = addtags.indexOf(req.body.tags[0][j]);
+                index = addtags.indexOf(inputtags[j]);
                 addtags.splice(index, 1);
               }
             }

@@ -16,19 +16,19 @@ exports.dashboard = function(req, res) {
 }
 
 exports.print = function(req, res){
-	// if(req.session.user) {
-	// 	if(req.session.user.admin) {
+	if(req.session.user) {
+		if(req.session.user.admin) {
 			User.find({}, function (err, users) {
 				if(err) console.log(err);
 				else {
 					res.render('admin/print', { users: users});
 				}
 			});
-	// 	}
-	// }
-	// else {
-	// 	res.redirect('/');
-	// }
+		}
+	}
+	else {
+		res.redirect('/');
+	}
 };
 
 exports.print_trips = function(req, res) {
@@ -47,8 +47,8 @@ exports.print_trips = function(req, res) {
 }
 
 exports.reset = function(req, res){
-	// if(req.session.user) {
-	// 	if(req.session.user.admin) {
+	if(req.session.user) {
+		if(req.session.user.admin) {
       async.parallel([
         function(cb) {
           User.remove({}, function (err) {
@@ -95,12 +95,12 @@ exports.reset = function(req, res){
         console.log("End of Initialization");
         res.redirect('/');
       });
-	// 	}
- //    else res.redirect('/');
-	// }
- //  else {
- //    res.redirect('/');
- //  }
+		}
+    else res.redirect('/');
+	}
+  else {
+    res.redirect('/');
+  }
 };
 
 function initialize() {
@@ -159,15 +159,6 @@ function initialize() {
         if(err) console.log("error adding follower to user lucy: " + err);        
       });
     User.update({'_id': andrew._id}, {$push: { following: lucy._id}}, {upsert: true})
-      .exec(function(err) {
-        if(err) console.log("error adding user following: " + err);        
-      });
-
-    User.update({'_id': lucy._id}, {$push: { followers: adrian._id}}, {upsert: true})
-      .exec(function(err) {
-        if(err) console.log("error adding follower to user lucy: " + err);        
-      });     
-    User.update({'_id': adrian._id}, {$push: { following: lucy._id}}, {upsert: true})
       .exec(function(err) {
         if(err) console.log("error adding user following: " + err);        
       });

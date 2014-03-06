@@ -8,6 +8,7 @@
 					<span class="glyphicon glyphicon-tag"></span> <a href="/tag/{{text}}">{{text}}</a>
 				{{/each}}
 			</span>
+		</div>
 		<div class="offset-col-md-11">
 			{{#if isowner}}
 				<a href="/trip/edit/{{trip._id}}"><button type=
@@ -117,6 +118,7 @@ $(document).ready(function() {
 	});
 
 	function append_comment(comment) {
+		$('#add_comment_ta').val('');
 		$('.comment_container').show();
 		var existing = $('.comment_container').html();
 		var comment_box_html = '<div class="comment row">';

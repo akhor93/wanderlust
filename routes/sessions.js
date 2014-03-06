@@ -1,7 +1,7 @@
 var CT = require("../modules/country-list");
 // var AM = require("../modules/account-manager");
 // var EM = require("../modules/email-dispatcher");
-
+var crypto = require('crypto');
 var mongoose = require('mongoose');
 var User = mongoose.model('User');
 
@@ -31,8 +31,23 @@ exports.login = function(req, res) {
       return res.send("User not found", 400);
     }
     if(user.authenticate(req.param('password'))) {
-      req.session.user = user;
-      res.send("ok", 200);
+      console.log(crypto.createHash('md5').update(user.username).digest("hex"));
+      console.log(crypto.createHash('md5').update(user.username).digest("hex").charCodeAt(0));
+      // console.log(crypto.createHash('md5').update(user.username).digest("hex")%2);
+      var hash = crypto.createHash('md5').update(user.username).digest("hex");
+      if((hash.charCodeAt(hash.length-1) + hash.charCodeAt(hash.length-2))%2 == 1) {
+        User.findOne({username: req.param('username')}).lean().exec(function(err, user) {
+          user.showPicUpload = true;
+          req.session.user = user;
+          // res.redirect('/user/' + user._id);
+          res.send("ok", 200);
+        });
+      }
+      else {
+        req.session.user = user;
+        // res.redirect('/user/' + user._id);        
+        res.send("ok", 200);
+      }
     }
     else {
       res.send("Password invalid", 400);
@@ -45,6 +60,7 @@ exports.signout = function(req, res) {
     res.clearCookie('user');
     res.clearCookie('pass');
     req.session.destroy(function(e) {
+      // res.redirect('/');
       res.send('ok', 200);
     });
   }

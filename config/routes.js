@@ -47,7 +47,7 @@ module.exports = function (app) {
 	app.get('/tag/:id', tag.show);
 	//Followers & Following
 	app.get('/followers/:user', follow.followers);
-	// app.get('/following/:user', follow.following);
+	app.get('/following/:user', follow.following);
 	app.post('/follow', follow.follow_user);
 
 	//Session
