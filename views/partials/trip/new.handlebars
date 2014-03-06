@@ -28,7 +28,7 @@
               <input id="description-tf" class="form-control" name="description" type="text">
             </div>
           </div>
-          {{#if curuser.showPicUpload}}
+          {{#if showPicUpload}}
             <div class="row">
               Leave images empty to keep existing
             </div>
@@ -66,7 +66,7 @@
               $(document).ready(function() {
                 $('.img_upload').click(function() {
                   var now = new Date();
-                  ga("send", "event", "Image Upload Click Create", "{{curuser.username}} from create trip form at " + now.toLocaleDateString() + " " + now.toLocaleTimeString());
+                  ga("send", "event", "Image Upload Click", "{{curuser.username}}-CREATE-" + now.toLocaleDateString() + " " + now.toLocaleTimeString());
                 });
               });
             </script>
