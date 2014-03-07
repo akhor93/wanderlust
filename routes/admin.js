@@ -256,7 +256,7 @@ function createTrips(lucy, andrew, adrian) {
     date: "June 13, 2012",
     location: "Paris, France",
     description: "Backpacking in France!", 
-    image_large: "/images/Paris_Large.jpg",
+    image_large: "/images/Paris_Small.jpg",
     image_small: ["/images/paris_arc.jpg", "/images/paris_bridge.jpg", "/images/paris_locks.jpg", "/images/paris_cafe.jpg"]
   });
   t5.save(function(err, t5) {
@@ -272,8 +272,8 @@ function createTrips(lucy, andrew, adrian) {
     date: "July 20, 2013",
     location: "Paris, France",
     description: "There's no European destination quit like Paris, the City of Love.", 
-    image_large: "/images/Paris_Small.jpg",
-    image_small: ["/images/ParisPic1.jpg", "/images/ParisPic2.jpg", "/images/ParisPic3.jpg", "/images/ParisPic4.jpg"],
+    image_large: "/images/adrian.jpg",
+    image_small: ["/images/adrian.jpg", "/images/adrian.jpg", "/images/adrian.jpg", "/images/adrian.jpg"],
     featured: true
   });
   featParis.save(function(err, trip) {
@@ -287,7 +287,7 @@ function createTrips(lucy, andrew, adrian) {
     date: "June 10, 2011",
     location: "Republic of the Maldives",
     description: "The Maldives is the ultimate tropical destination.", 
-    image_large: "/images/Maldives_Small.jpg",
+    image_large: "/images/Maldives_Large.jpg",
     image_small: ["/images/MaldivesPic1.jpg", "/images/MaldivesPic2.jpg", "/images/MaldivesPic3.jpg", "/images/MaldivesPic4.jpg"],
     featured: true
   });
@@ -298,7 +298,7 @@ function createTrips(lucy, andrew, adrian) {
   }); 
   var featTahoe = new Trip({
     user: andrew._id,
-    title: "Lake Tahoe",
+    title: "Lake ",
     date: "December 21, 2012",
     location: "Lake Tahoe, California",
     description: "Come ride the slopes of the finest mountain range on the American West Coast", 
@@ -316,8 +316,8 @@ function createTrips(lucy, andrew, adrian) {
     title: "Giza",
     date: "May 1, 2012",
     location: "Giza, Egypt",
-    description: "Behold the legendary Egyptian pyramids on the unforgetable journey.", 
-    image_large: "/images/Pyramid_Small.jpg",
+    description: "Behold the legendary Egyptian pyramids on this unforgetable journey.", 
+    image_large: "/images/Pyramid_Large.jpg",
     image_small: ["/images/EgyptPic1.jpg", "/images/EgyptPic2.jpg", "/images/EgyptPic3.jpg", "/images/EgyptPic4.jpg"],
     featured: true
   });
@@ -332,7 +332,7 @@ function createTrips(lucy, andrew, adrian) {
     date: "March, 2012",
     location: "Rio de Janeiro, Brazil",
     description: "The ultimate South American Adventure.", 
-    image_large: "/images/Rio_Small.jpg",
+    image_large: "/images/Rio_Large.jpg",
     image_small: ["/images/RioPic1.jpg", "/images/RioPic2.jpg", "/images/RioPic3.jpg", "/images/RioPic4.jpg"],
     featured: true
   });
