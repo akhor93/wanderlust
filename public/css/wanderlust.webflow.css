@@ -428,3 +428,7 @@ p {
 #popup_favorites {
   display: none;
 }
+
+.comment {
+  width: 700px;
+}
