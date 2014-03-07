@@ -368,7 +368,7 @@ p {
   position: static;
 }
 .pictures {
-  width: 800px;
+  width: 100%;
 }
 .prof_pic-xsmall {
   width: 40px;
@@ -397,7 +397,6 @@ p {
   padding-top: 10px;
   padding-left: 10px;
   background-color: white;
-  overflow: auto;
 }
 .search_filter {
   display: inline-block;
