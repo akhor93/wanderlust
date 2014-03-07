@@ -350,15 +350,16 @@ p {
 /*  max-height: 300px;
   height: 260px;*/
   /*max-width: 345px;*/
-  width: 45%;
+  height: 210px;
+  width: 50%;
   float: left;
 }
 .album-preview_small {
   position: static;
   left: 0px;
   top: 0px;
-  height: 125px;
-  width: 25%;
+  height: 100px;
+  width: 22%;
   margin-right: 0px;
   margin-bottom: 10px;
   margin-left: 12px;
