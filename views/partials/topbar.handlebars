@@ -39,7 +39,7 @@
               <li><a href="/user/edit">Edit Account</a></li>
               <li class="divider"></li>
               {{!-- <li><a href="#">SETTINGS</a></li> --}}
-              <li><a href="/admin">ADMIN</a></li>
+              {{#if curuser.admin}}<li><a href="/admin">ADMIN</a></li>{{/if}}
               <li><a id="signout_link" href="#">Signout</a></li>
             </ul>
           </li>
