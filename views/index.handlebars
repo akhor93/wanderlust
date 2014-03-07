@@ -91,6 +91,10 @@
 
 <script type="text/javascript">
 $(document).ready(function() {
+	var prof_pic = $('.prof_pic-news');
+	var prof_width = $('.prof_pic-news').width();
+	console.log("prof pic width: " + prof_width);
+	prof_pic.css("height", prof_width); //changes all profile pic heights to the width	
   	$('.fancybox').fancybox({"hideOnOverlayClick": false});
 
 	$('.comment_form').ajaxForm({
@@ -182,12 +186,5 @@ $(document).ready(function() {
           }          
         });
     });
-});
-
-$(window).load(function() {
-	var prof_pic = $('.prof_pic-news');
-	var prof_width = $('.prof_pic-news').width();
-	console.log("prof pic width: " + prof_width);
-	prof_pic.css("height", prof_width); //changes all profile pic heights to the width
 });
 </script>
