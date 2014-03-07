@@ -19,7 +19,7 @@
 	<div id="trip_images" class="w-clearfix pictures">
 		{{#if trip.image_large}}
 			<a class="fancybox" rel="gallery" href="{{trip.image_large}}">
-				<img src="{{trip.image_large}}" class="album-preview_large" />
+				<img class="album-preview_large" style="background-image: url({{trip.image_large}});"/>
 			</a>
 		{{else}}
 			<img src="/images/300x180tripfiller.jpg" class="album-preview_large" />
@@ -27,28 +27,28 @@
 		{{#if trip.image_small}}
 			{{#if trip.image_small.[0]}}
 				<a class="fancybox" rel="gallery" href="{{trip.image_small.[0]}}">
-					<img src="{{trip.image_small.[0]}}" class="album-preview_small" />
+					<img style="background-image: url({{trip.image_small.[0]}});" class="album-preview_small" />
 				</a>
 			{{else}}
 				<img src="/images/180x125tripfiller.jpg" class="album-preview_small" />
 			{{/if}}
 			{{#if trip.image_small.[1]}}
 				<a class="fancybox" rel="gallery" href="{{trip.image_small.[1]}}">
-					<img src="{{trip.image_small.[1]}}" class="album-preview_small" />
+					<img style="background-image: url({{trip.image_small.[1]}});" class="album-preview_small" />
 				</a>
 			{{else}}
 				<img src="/images/180x125tripfiller.jpg" class="album-preview_small" />
 			{{/if}}
 			{{#if trip.image_small.[2]}}
 				<a class="fancybox" rel="gallery" href="{{trip.image_small.[2]}}">
-					<img src="{{trip.image_small.[2]}}" class="album-preview_small"  style="margin-bottom:0px;" />
+					<img style="background-image: url({{trip.image_small.[2]}});" class="album-preview_small"  style="margin-bottom:0px;" />
 				</a>
 			{{else}}
 				<img src="/images/180x125tripfiller.jpg" class="album-preview_small" style="margin-bottom:0px;"/>
 			{{/if}}
 			{{#if trip.image_small.[3]}}
 				<a class="fancybox" rel="gallery" href="{{trip.image_small.[3]}}">
-					<img src="{{trip.image_small.[3]}}" class="album-preview_small"  style="margin-bottom:0px;" />
+					<img style="background-image: url({{trip.image_small.[3]}});" class="album-preview_small"  style="margin-bottom:0px;" />
 				</a>
 			{{else}}
 				<img src="/images/180x125tripfiller.jpg" class="album-preview_small" style="margin-bottom:0px;" />

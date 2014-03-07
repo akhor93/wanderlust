@@ -2,9 +2,9 @@
   <div class="margin-10">
       <div class="w-clearfix prof_box">
         {{#if thatsMe}}
-          <a href="/user/edit"><img class="prof_pic" src="{{user.profile_image}}" width="140" height="140" alt="prof-pic"></a>
+          <a href="/user/edit"><img class="prof_pic" style="background-image: url({{user.profile_image}});"></a>
         {{else}}
-          <img class="prof_pic" src="{{user.profile_image}}" width="140" height="140" alt="prof-pic">
+          <img class="prof_pic" style="background-image: url({{user.profile_image}});">
         {{/if}}
         <div class="prof_info">
           <h2>{{user.username}}</h2>
