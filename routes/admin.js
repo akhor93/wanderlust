@@ -272,8 +272,8 @@ function createTrips(lucy, andrew, adrian) {
     date: "July 20, 2013",
     location: "Paris, France",
     description: "There's no European destination quit like Paris, the City of Love.", 
-    image_large: "/images/adrian.jpg",
-    image_small: ["/images/adrian.jpg", "/images/adrian.jpg", "/images/adrian.jpg", "/images/adrian.jpg"],
+    image_large: "/images/Paris_Large.jpg",
+    image_small: ["/images/ParisPic1.jpg", "/images/ParisPic2.jpg", "/images/ParisPic3.jpg", "/images/ParisPic4.jpg"],
     featured: true
   });
   featParis.save(function(err, trip) {
