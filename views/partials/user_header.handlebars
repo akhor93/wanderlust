@@ -35,4 +35,12 @@
         </div>
       </div>
     </div>
-</div>  
+</div> 
+<script>
+$(document).ready(function() {
+  var prof_pic = $('.prof_pic');
+  var prof_width = $('.prof_pic').width();
+  console.log("prof pic width: " + prof_width);
+  prof_pic.css("height", prof_width); //changes all profile pic heights to the width  
+});
+</script>

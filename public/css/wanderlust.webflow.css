@@ -135,6 +135,7 @@ p {
 }
 .social_bar {
   display: inline-block;
+  margin: 5px;
 }
 .column {
   position: relative;
@@ -175,7 +176,7 @@ p {
   left: 0px;
   top: 0px;
   bottom: 0px;
-  width: 65%;
+  width: 60%;
   margin-right: 10px;
   margin-left: 10px;
   float: left;
@@ -186,7 +187,7 @@ p {
   top: 0px;
   bottom: 0px;
   display: block;
-  width: 910px;
+  width: 100%;
   margin-top: 10px;
   margin-right: auto;
   margin-left: auto;
@@ -197,7 +198,6 @@ p {
   background-color: white;
 }
 .about_me {
-  height: 45px;
   margin-left: 0px;
 }
 .content {
@@ -207,7 +207,7 @@ p {
   margin-left: auto;
 }
 .prof_stats {
-  width: 140px;
+  width: 20%;
   float: right;
 }
 .social_media {
