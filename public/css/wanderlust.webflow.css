@@ -414,7 +414,7 @@ p {
 }
 
 .search_container {
-  width: 920px;
+  width: 100%;
   overflow: auto;
 }
 
