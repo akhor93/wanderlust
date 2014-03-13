@@ -138,14 +138,14 @@ p {
 }
 .column {
   position: relative;
-  width: 250px;
+  width: 22%;
   margin: 7px 7px 6px;
   padding-right: 0px;
   padding-left: 0px;
 }
 .trip_pane {
   display: block;
-  width: 1070px;
+  width: 100%;
   margin-right: auto;
   margin-left: auto;
   float: none;
@@ -164,8 +164,8 @@ p {
   left: 0px;
   top: 0px;
   bottom: 0px;
-  width: 140px;
-  height: 140px;
+  width: 15%;
+  max-height: 140px;
   float: left;
   background-position: center;
   background-size: cover;
@@ -175,7 +175,7 @@ p {
   left: 0px;
   top: 0px;
   bottom: 0px;
-  width: 600px;
+  width: 65%;
   margin-right: 10px;
   margin-left: 10px;
   float: left;
