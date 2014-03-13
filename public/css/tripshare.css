@@ -47,6 +47,11 @@ body {
     vertical-align: middle;
 }
 
+.search {
+    background: white url("/images/search.png") right center no-repeat;
+    size: 30;
+}
+
 #carousel_container {
      position: relative;
      padding-top: 10px;
